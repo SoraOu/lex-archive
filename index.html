@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexArchive — Legislative Document Repository</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f4ef;
+  --bg2: #eee9e0;
+  --bg3: #e5dfd3;
+  --ink: #1a1610;
+  --ink2: #4a4438;
+  --ink3: #7a7060;
+  --rule: #c8bfb0;
+  --rule2: #b0a698;
+  --gold: #8b6914;
+  --gold-light: #c9972e;
+  --res: #1a4a2e;
+  --res-bg: #e8f2ec;
+  --res-border: #7ab894;
+  --ord: #2e1a4a;
+  --ord-bg: #ede8f2;
+  --ord-border: #9478b8;
+  --proc: #1a2e4a;
+  --proc-bg: #e8ecf2;
+  --proc-border: #7894b8;
+  --exec: #4a2e1a;
+  --exec-bg: #f2ece8;
+  --exec-border: #b89478;
+  --active-badge: #1a4a2e;
+  --active-bg: #d4eadb;
+  --amended-badge: #4a3a00;
+  --amended-bg: #f5e9c0;
+  --repealed-badge: #4a1a1a;
+  --repealed-bg: #ead4d4;
+  --pending-badge: #1a2e4a;
+  --pending-bg: #d4dcea;
+  --radius: 4px;
+  --shadow: 0 2px 8px rgba(26,22,16,0.10), 0 1px 2px rgba(26,22,16,0.06);
+  --shadow-lg: 0 8px 32px rgba(26,22,16,0.14), 0 2px 8px rgba(26,22,16,0.08);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+#site-header {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--gold);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 64px;
+}
+
+.site-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--bg);
+}
+
+.brand-sub {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.header-search {
+  flex: 1;
+  position: relative;
+  max-width: 500px;
+}
+
+.header-search input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  padding: 0.45rem 1rem 0.45rem 2.4rem;
+  border-radius: var(--radius);
+  outline: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.header-search input::placeholder { color: rgba(247,244,239,0.45); }
+.header-search input:focus {
+  background: rgba(255,255,255,0.13);
+  border-color: var(--gold-light);
+}
+
+.header-search .search-icon {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.btn-add {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.btn-add:hover { background: var(--gold-light); }
+
+.view-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.view-toggle button {
+  background: none;
+  border: none;
+  color: rgba(247,244,239,0.5);
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s, background 0.15s;
+}
+.view-toggle button:hover { color: var(--bg); }
+.view-toggle button.active { background: rgba(255,255,255,0.15); color: var(--bg); }
+
+/* ── Layout ── */
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ── Sidebar ── */
+#sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+.sidebar-panel {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.panel-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.filter-group { margin-bottom: 0.8rem; }
+.filter-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink2);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.filter-select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--rule2);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 0.35rem 0.6rem;
+  outline: none;
+  cursor: pointer;
+}
+.filter-select:focus { border-color: var(--gold); }
+
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+
+.tag {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  color: var(--ink2);
+  font-family: var(--font-mono);
+}
+.tag:hover { background: var(--bg3); border-color: var(--rule2); }
+.tag.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 0.5rem;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.stat-lbl {
+  font-size: 0.65rem;
+  color: var(--ink3);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+/* ── Main ── */
+#main { min-width: 0; }
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.result-count {
+  font-size: 0.82rem;
+  color: var(--ink3);
+  font-family: var(--font-mono);
+}
+
+.sort-select {
+  background: var(--bg);
+  border: 1px solid var(--rule2);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  padding: 0.3rem 0.6rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ── Document Cards — Grid View ── */
+#doc-grid.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+#doc-grid.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Grid card */
+.doc-card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1rem 1rem 0.85rem;
+  cursor: pointer;
+  transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.doc-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+
+.doc-card[data-type="Resolution"]::before { background: var(--res); }
+.doc-card[data-type="Ordinance"]::before { background: var(--ord); }
+.doc-card[data-type="Proclamation"]::before { background: var(--proc); }
+.doc-card[data-type="Executive Order"]::before { background: var(--exec); }
+
+.doc-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--rule2);
+}
+
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem; }
+
+.type-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.type-badge[data-type="Resolution"] { background: var(--res-bg); color: var(--res); border: 1px solid var(--res-border); }
+.type-badge[data-type="Ordinance"] { background: var(--ord-bg); color: var(--ord); border: 1px solid var(--ord-border); }
+.type-badge[data-type="Proclamation"] { background: var(--proc-bg); color: var(--proc); border: 1px solid var(--proc-border); }
+.type-badge[data-type="Executive Order"] { background: var(--exec-bg); color: var(--exec); border: 1px solid var(--exec-border); }
+
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.status-dot[data-status="Active"] { background: #2a7a4a; }
+.status-dot[data-status="Amended"] { background: #c9971e; }
+.status-dot[data-status="Repealed"] { background: #9a2a2a; }
+.status-dot[data-status="Pending"] { background: #2a4a7a; }
+
+.doc-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink3);
+  margin-bottom: 0.3rem;
+}
+
+.doc-title {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.doc-excerpt {
+  font-size: 0.78rem;
+  color: var(--ink3);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+
+.card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem; }
+
+.doc-date {
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  color: var(--ink3);
+}
+
+.doc-cat {
+  font-size: 0.67rem;
+  background: var(--bg2);
+  color: var(--ink3);
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* List view overrides */
+.list-view .doc-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  align-items: center;
+}
+
+.list-view .doc-card::before { display: none; }
+
+.list-view .card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 80px;
+  border-right: 1px solid var(--rule);
+  padding-right: 0.75rem;
+}
+
+.list-view .card-body { min-width: 0; }
+
+.list-view .doc-title {
+  font-size: 0.88rem;
+  -webkit-line-clamp: 1;
+  margin-bottom: 0.15rem;
+}
+
+.list-view .doc-excerpt { -webkit-line-clamp: 1; margin-bottom: 0; }
+.list-view .card-footer { justify-content: flex-end; flex-direction: column; gap: 0.3rem; align-items: flex-end; }
+.list-view .card-header { display: none; }
+
+/* ── Pagination ── */
+#pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.page-btn {
+  background: #fff;
+  border: 1px solid var(--rule);
+  color: var(--ink2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.page-btn:hover { background: var(--bg2); border-color: var(--rule2); }
+.page-btn.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ── Modal ── */
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,22,16,0.55);
+  z-index: 200;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1rem;
+  overflow-y: auto;
+  backdrop-filter: blur(2px);
+}
+
+#modal-overlay.open { display: flex; }
+
+#modal {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 720px;
+  overflow: hidden;
+  position: relative;
+  animation: modal-in 0.2s ease;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-bar {
+  height: 4px;
+}
+.modal-bar[data-type="Resolution"] { background: var(--res); }
+.modal-bar[data-type="Ordinance"] { background: var(--ord); }
+.modal-bar[data-type="Proclamation"] { background: var(--proc); }
+.modal-bar[data-type="Executive Order"] { background: var(--exec); }
+
+.modal-head {
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.modal-meta { flex: 1; min-width: 0; }
+
+.modal-badges { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.5rem; }
+
+.modal-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink3);
+  margin-bottom: 0.25rem;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.modal-close {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  color: var(--ink2);
+  width: 30px; height: 30px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.modal-close:hover { background: var(--bg3); }
+
+.modal-body { padding: 1.25rem 1.5rem; }
+
+.modal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.info-item {}
+.info-lbl {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 0.2rem;
+}
+
+.info-val {
+  font-size: 0.85rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.modal-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 0.5rem;
+}
+
+.modal-summary {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--ink2);
+  margin-bottom: 1.1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.modal-fulltext {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--ink2);
+  font-family: var(--font-body);
+  white-space: pre-wrap;
+  max-height: 260px;
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--rule); }
+
+.modal-tag {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--ink2);
+}
+
+.modal-actions { display: flex; gap: 0.5rem; }
+
+.btn-action {
+  background: var(--bg);
+  border: 1px solid var(--rule2);
+  color: var(--ink2);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.12s;
+  display: flex; align-items: center; gap: 0.3rem;
+}
+.btn-action:hover { background: var(--bg2); }
+
+.status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.status-badge[data-status="Active"] { background: var(--active-bg); color: var(--active-badge); }
+.status-badge[data-status="Amended"] { background: var(--amended-bg); color: var(--amended-badge); }
+.status-badge[data-status="Repealed"] { background: var(--repealed-bg); color: var(--repealed-badge); }
+.status-badge[data-status="Pending"] { background: var(--pending-bg); color: var(--pending-badge); }
+
+/* ── Add Record Form Drawer ── */
+#form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,22,16,0.5);
+  z-index: 300;
+  display: none;
+  justify-content: flex-end;
+  backdrop-filter: blur(2px);
+}
+#form-overlay.open { display: flex; }
+
+#form-drawer {
+  background: #fff;
+  width: 520px;
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slide-in 0.22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.drawer-head {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+}
+
+.drawer-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.drawer-body { padding: 1.25rem 1.5rem; flex: 1; }
+
+.form-row { margin-bottom: 1rem; }
+.form-row.two { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+.form-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink2);
+  margin-bottom: 0.3rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--rule2);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 0.45rem 0.7rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold);
+  background: #fff;
+}
+
+.form-textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
+
+.drawer-foot {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--ink2); }
+
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--rule2);
+  color: var(--ink2);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.btn-ghost:hover { background: var(--bg2); }
+
+/* ── Empty state ── */
+#empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  display: none;
+}
+
+.empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.35; }
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--ink2);
+  margin-bottom: 0.35rem;
+}
+
+.empty-text { font-size: 0.85rem; color: var(--ink3); }
+
+/* ── Toast ── */
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.85rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  font-family: var(--font-body);
+}
+#toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  #app { grid-template-columns: 1fr; }
+  #sidebar { position: static; }
+}
+
+@media (max-width: 640px) {
+  .header-inner { gap: 0.75rem; }
+  .brand-sub { display: none; }
+  #app { padding: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="site-header">
+  <div class="header-inner">
+    <a class="site-brand" href="#">
+      <span class="brand-name">LexArchive</span>
+      <span class="brand-sub">Legislative Repository</span>
+    </a>
+    <div class="header-search">
+      <svg class="search-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" type="text" placeholder="Search resolutions, ordinances…" autocomplete="off">
+    </div>
+    <div class="header-actions">
+      <button class="btn-add" onclick="openForm()">+ Add Record</button>
+      <div class="view-toggle">
+        <button id="btn-grid" class="active" title="Grid view" onclick="setView('grid')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="0" y="0" width="6" height="6" rx="1" fill="currentColor"/><rect x="8" y="0" width="6" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="6" height="6" rx="1" fill="currentColor"/><rect x="8" y="8" width="6" height="6" rx="1" fill="currentColor"/></svg>
+        </button>
+        <button id="btn-list" title="List view" onclick="setView('list')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="0" y="0" width="14" height="2.5" rx="1" fill="currentColor"/><rect x="0" y="5.5" width="14" height="2.5" rx="1" fill="currentColor"/><rect x="0" y="11" width="14" height="2.5" rx="1" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- App -->
+<div id="app">
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-panel">
+      <div class="panel-title">Filters</div>
+      <div class="filter-group">
+        <label class="filter-label">Year Enacted</label>
+        <select class="filter-select" id="filter-year" onchange="applyFilters()">
+          <option value="">All Years</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Document Type</label>
+        <select class="filter-select" id="filter-type" onchange="applyFilters()">
+          <option value="">All Types</option>
+          <option>Resolution</option>
+          <option>Ordinance</option>
+          <option>Proclamation</option>
+          <option>Executive Order</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Status</label>
+        <select class="filter-select" id="filter-status" onchange="applyFilters()">
+          <option value="">All Statuses</option>
+          <option>Active</option>
+          <option>Amended</option>
+          <option>Repealed</option>
+          <option>Pending</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sidebar-panel">
+      <div class="panel-title">Categories</div>
+      <div class="tag-cloud" id="tag-cloud"></div>
+    </div>
+
+    <div class="sidebar-panel">
+      <div class="panel-title">Collection Stats</div>
+      <div class="stats-grid" id="stats-grid"></div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main id="main">
+    <div class="toolbar">
+      <span class="result-count" id="result-count">Loading…</span>
+      <select class="sort-select" id="sort-select" onchange="applyFilters()">
+        <option value="date-desc">Newest First</option>
+        <option value="date-asc">Oldest First</option>
+        <option value="title-asc">Title A–Z</option>
+        <option value="num-asc">Doc Number</option>
+      </select>
+    </div>
+
+    <div id="doc-grid" class="grid-view"></div>
+    <div id="empty-state">
+      <div class="empty-icon">📄</div>
+      <div class="empty-title">No records found</div>
+      <div class="empty-text">Try adjusting your filters or search query.</div>
+    </div>
+    <div id="pagination"></div>
+  </main>
+</div>
+
+<!-- Document Modal -->
+<div id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div id="modal">
+    <div class="modal-bar" id="modal-bar"></div>
+    <div class="modal-head">
+      <div class="modal-meta">
+        <div class="modal-badges">
+          <span class="type-badge" id="modal-type-badge"></span>
+          <span class="status-badge" id="modal-status-badge"></span>
+        </div>
+        <div class="modal-num" id="modal-num"></div>
+        <div class="modal-title" id="modal-title"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-info-grid">
+        <div class="info-item"><div class="info-lbl">Date Enacted</div><div class="info-val" id="modal-date"></div></div>
+        <div class="info-item"><div class="info-lbl">Category</div><div class="info-val" id="modal-category"></div></div>
+        <div class="info-item"><div class="info-lbl">Sponsored By</div><div class="info-val" id="modal-sponsor"></div></div>
+      </div>
+      <div class="modal-section-title">Summary</div>
+      <div class="modal-summary" id="modal-summary"></div>
+      <div class="modal-section-title">Full Text</div>
+      <div class="modal-fulltext" id="modal-fulltext"></div>
+      <div class="modal-section-title">Tags</div>
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-actions">
+        <button class="btn-action" onclick="printDoc()">🖨 Print</button>
+        <button class="btn-action" onclick="copyLink()">🔗 Copy Link</button>
+        <button class="btn-action" onclick="editDoc()">✏️ Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Record Drawer -->
+<div id="form-overlay" onclick="if(event.target===this)closeForm()">
+  <div id="form-drawer">
+    <div class="drawer-head">
+      <span class="drawer-title" id="drawer-title">Add New Record</span>
+      <button class="modal-close" onclick="closeForm()">✕</button>
+    </div>
+    <div class="drawer-body">
+      <input type="hidden" id="form-edit-id">
+      <div class="form-row two">
+        <div>
+          <label class="form-label">Document Type *</label>
+          <select class="form-select" id="f-type">
+            <option>Resolution</option>
+            <option>Ordinance</option>
+            <option>Proclamation</option>
+            <option>Executive Order</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Document Number *</label>
+          <input class="form-input" id="f-num" type="text" placeholder="e.g. 2024-015">
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Title *</label>
+        <input class="form-input" id="f-title" type="text" placeholder="Full title of the document">
+      </div>
+      <div class="form-row two">
+        <div>
+          <label class="form-label">Date Enacted *</label>
+          <input class="form-input" id="f-date" type="date">
+        </div>
+        <div>
+          <label class="form-label">Status</label>
+          <select class="form-select" id="f-status">
+            <option>Active</option>
+            <option>Amended</option>
+            <option>Repealed</option>
+            <option>Pending</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row two">
+        <div>
+          <label class="form-label">Category</label>
+          <input class="form-input" id="f-category" type="text" placeholder="e.g. Health, Finance">
+        </div>
+        <div>
+          <label class="form-label">Sponsored By</label>
+          <input class="form-input" id="f-sponsor" type="text" placeholder="Author / Sponsor name">
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Summary</label>
+        <textarea class="form-textarea" id="f-summary" placeholder="Brief summary of the document's purpose and provisions…"></textarea>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Full Text</label>
+        <textarea class="form-textarea" id="f-fulltext" style="min-height:120px" placeholder="Paste the full text of the resolution or ordinance here…"></textarea>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Tags (comma-separated)</label>
+        <input class="form-input" id="f-tags" type="text" placeholder="e.g. budget, health, environment">
+      </div>
+    </div>
+    <div class="drawer-foot">
+      <button class="btn-ghost" onclick="closeForm()">Cancel</button>
+      <button class="btn-primary" onclick="saveRecord()">Save Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────────
+const SAMPLE = [
+  {
+    id: 1, type: "Resolution", num: "RES-2024-001", status: "Active",
+    title: "A Resolution Authorizing the Appropriation of Funds for the Municipal Nutrition Program",
+    date: "2024-01-15", category: "Nutrition", sponsor: "Hon. Maria Santos",
+    summary: "Authorizes the allocation of Two Hundred Fifty Thousand Pesos (₱250,000.00) from the General Fund for the implementation of the Municipal Nutrition Program for Fiscal Year 2024, including supplemental feeding and micronutrient supplementation.",
+    fulltext: `WHEREAS, the Municipal Nutrition Council has identified malnutrition as a continuing concern affecting children below 5 years old in several barangays;
+
+WHEREAS, Republic Act No. 8976 and related issuances mandate Local Government Units to prioritize nutrition programs;
+
+NOW, THEREFORE, BE IT RESOLVED, as it is hereby resolved by the Sangguniang Bayan of Mogpog in session assembled that:
+
+Section 1. The amount of TWO HUNDRED FIFTY THOUSAND PESOS (₱250,000.00) is hereby authorized to be appropriated from the Municipal General Fund for the Municipal Nutrition Program for FY 2024.
+
+Section 2. The Municipal Nutrition Office is hereby directed to implement the program in accordance with the approved Work and Financial Plan.
+
+Section 3. This Resolution shall take effect immediately.`,
+    tags: ["nutrition", "health", "budget", "appropriation"]
+  },
+  {
+    id: 2, type: "Ordinance", num: "ORD-2024-001", status: "Active",
+    title: "An Ordinance Establishing a Comprehensive Solid Waste Management Program for the Municipality",
+    date: "2024-01-28", category: "Environment", sponsor: "Hon. Roberto Cruz",
+    summary: "Establishes a comprehensive solid waste management program mandating segregation at source, composting, and proper disposal of household and commercial waste in compliance with RA 9003.",
+    fulltext: `ORDINANCE NO. 2024-001
+
+AN ORDINANCE ESTABLISHING A COMPREHENSIVE SOLID WASTE MANAGEMENT PROGRAM FOR THE MUNICIPALITY OF MOGPOG
+
+Be it ordained by the Sangguniang Bayan of Mogpog, Marinduque:
+
+CHAPTER 1 — GENERAL PROVISIONS
+
+Section 1. Title. This Ordinance shall be known as the "Mogpog Solid Waste Management Ordinance of 2024."
+
+Section 2. Declaration of Policy. It is hereby declared a policy of the Municipality to promote environmental protection through the proper management of solid waste.
+
+Section 3. Coverage. This Ordinance applies to all households, commercial establishments, and institutions within the territorial jurisdiction of Mogpog.
+
+CHAPTER 2 — SEGREGATION AT SOURCE
+
+Section 4. Mandatory Segregation. All waste generators are required to segregate waste into: (a) Biodegradable; (b) Non-biodegradable; (c) Recyclable; (d) Special wastes.
+
+Section 5. Penalties. Violation of Section 4 shall be penalized by a fine of not less than Five Hundred Pesos (₱500.00) and not more than Two Thousand Pesos (₱2,000.00).`,
+    tags: ["environment", "waste management", "ecology", "compliance"]
+  },
+  {
+    id: 3, type: "Proclamation", num: "PROC-2024-001", status: "Active",
+    title: "Proclamation Declaring the Month of January as Nutrition Month in the Municipality of Mogpog",
+    date: "2024-01-05", category: "Nutrition", sponsor: "Mayor Jose Reyes",
+    summary: "Declares January as Nutrition Month and calls upon all barangays, schools, and institutions to actively participate in activities promoting proper nutrition, food security, and healthy lifestyles.",
+    fulltext: `PROCLAMATION NO. 2024-001
+
+DECLARING THE MONTH OF JANUARY AS NUTRITION MONTH IN THE MUNICIPALITY OF MOGPOG, MARINDUQUE
+
+WHEREAS, the Philippine Nutrition Program under EO No. 128 series 1999 designates July as Nutrition Month, but this municipality additionally observes January as a preparatory month for nutrition activities;
+
+NOW, THEREFORE, I, JOSE REYES, Mayor of the Municipality of Mogpog, do hereby proclaim the Month of January as Nutrition Month in the Municipality of Mogpog.
+
+All barangay officials, schools, health workers, and civic organizations are enjoined to support nutrition-related activities during this period.
+
+IN WITNESS WHEREOF, I have hereunto set my hand and caused the seal of the Municipal Government to be affixed.`,
+    tags: ["nutrition", "proclamation", "health", "children"]
+  },
+  {
+    id: 4, type: "Resolution", num: "RES-2024-012", status: "Active",
+    title: "A Resolution Approving the Annual Investment Program for Fiscal Year 2025",
+    date: "2024-06-20", category: "Finance", sponsor: "Hon. Ana Dela Cruz",
+    summary: "Approves the Annual Investment Program (AIP) for FY 2025 totaling ₱18.5 million, covering infrastructure, social services, economic development, and environmental management projects.",
+    fulltext: `RESOLUTION NO. 2024-012
+
+WHEREAS, Section 17 of RA 7160 mandates LGUs to prepare an Annual Investment Program;
+
+WHEREAS, the LDIP and AIP have been prepared by the MPDC and deliberated upon by the Local Development Council;
+
+BE IT RESOLVED, as it is hereby resolved to APPROVE the Annual Investment Program for FY 2025 in the total amount of EIGHTEEN MILLION FIVE HUNDRED THOUSAND PESOS (₱18,500,000.00) broken down as follows:
+
+- Infrastructure Projects: ₱8,200,000.00
+- Social Services: ₱5,300,000.00
+- Economic Development: ₱3,100,000.00
+- Environmental Management: ₱1,900,000.00
+
+This resolution shall take effect immediately.`,
+    tags: ["finance", "investment", "infrastructure", "planning"]
+  },
+  {
+    id: 5, type: "Ordinance", num: "ORD-2023-005", status: "Amended",
+    title: "An Ordinance Regulating the Operation of Tricycles and Motorcycles for Hire",
+    date: "2023-08-14", category: "Transportation", sponsor: "Hon. Pedro Lim",
+    summary: "Regulates the operation of motorized tricycles and motorcycles for hire including franchise requirements, route assignments, fare matrix, and safety standards. Amended in 2024 to update fare rates.",
+    fulltext: `ORDINANCE NO. 2023-005
+
+AN ORDINANCE REGULATING THE OPERATION OF TRICYCLES AND MOTORCYCLES FOR HIRE IN THE MUNICIPALITY OF MOGPOG
+
+Section 1. Coverage. All tricycles and motorcycles operating for hire within the municipality.
+
+Section 2. Franchise Requirement. No person shall operate a tricycle or motorcycle for hire without first securing a franchise from the Sangguniang Bayan.
+
+Section 3. Fare Matrix.
+- Flag-down rate: ₱15.00 for first 2 km
+- Succeeding km: ₱5.00 per km
+- Boundary/zone rate as approved by resolution
+
+Section 4. Safety Standards. All units must comply with LTFRB and LTO regulations.
+
+Section 5. Penalties. Operating without franchise: ₱1,000 first offense; ₱2,000 second; revocation on third.`,
+    tags: ["transportation", "franchise", "livelihood", "regulation"]
+  },
+  {
+    id: 6, type: "Resolution", num: "RES-2023-028", status: "Active",
+    title: "A Resolution Endorsing the Municipal Development Plan 2023–2028",
+    date: "2023-11-10", category: "Planning", sponsor: "Hon. Ligaya Villanueva",
+    summary: "Endorses the 6-year Municipal Development Plan covering key development sectors including agriculture, infrastructure, social services, and environmental protection.",
+    fulltext: `RESOLUTION NO. 2023-028
+
+RESOLUTION ENDORSING THE MUNICIPAL DEVELOPMENT PLAN 2023–2028
+
+WHEREAS, the Local Government Code requires LGUs to prepare a comprehensive development plan;
+
+WHEREAS, the MDP 2023–2028 was formulated through multi-sectoral consultations;
+
+BE IT RESOLVED to ENDORSE the Municipal Development Plan 2023–2028 for submission to the Provincial Development Council and DILG Regional Office.
+
+The MPDC is directed to ensure that all annual budgets and investment programs are aligned with the approved MDP.`,
+    tags: ["planning", "development", "governance", "infrastructure"]
+  },
+  {
+    id: 7, type: "Ordinance", num: "ORD-2024-003", status: "Active",
+    title: "An Ordinance Establishing the Mogpog Municipal Youth Development Code",
+    date: "2024-03-05", category: "Youth", sponsor: "Hon. Carlo Reyes",
+    summary: "Establishes a comprehensive youth development framework for Mogpog, creating the Municipal Youth Development Council, providing for youth welfare programs, and setting standards for youth-related services.",
+    fulltext: `ORDINANCE NO. 2024-003
+
+MOGPOG MUNICIPAL YOUTH DEVELOPMENT CODE
+
+Chapter 1 — General Provisions
+
+Section 1. This code shall be known as the Mogpog Youth Development Code of 2024.
+
+Section 2. The Municipality recognizes the vital role of youth in nation-building and commits to their holistic development.
+
+Chapter 2 — Youth Development Council
+
+Section 3. There is hereby created a Municipal Youth Development Council (MYDC) composed of: (a) SK Federation President; (b) Representatives from youth organizations; (c) Representatives from schools; (d) Representative from DSWD.
+
+Chapter 3 — Youth Programs and Services
+
+Section 4. The MYDC shall develop and implement programs in education, livelihood, sports, arts and culture, and civic engagement.`,
+    tags: ["youth", "SK", "governance", "social services"]
+  },
+  {
+    id: 8, type: "Resolution", num: "RES-2024-019", status: "Pending",
+    title: "A Resolution Requesting the DPWH for the Rehabilitation of Municipal Roads",
+    date: "2024-08-30", category: "Infrastructure", sponsor: "Hon. Maria Santos",
+    summary: "Requests the Department of Public Works and Highways to include in its work program the rehabilitation of five (5) municipal roads totaling 12.4 kilometers identified as critical to economic mobility.",
+    fulltext: `RESOLUTION NO. 2024-019
+
+RESOLUTION REQUESTING THE DPWH FOR THE REHABILITATION OF MUNICIPAL ROADS
+
+WHEREAS, several municipal roads are in a state of disrepair, affecting the mobility of constituents and the delivery of basic services;
+
+WHEREAS, the following roads have been identified as priority for rehabilitation:
+1. Mogpog–Tanza Road (3.2 km)
+2. Bulo–Puting Buhangin Road (2.1 km)
+3. Alobo–Laon Road (1.8 km)
+4. Tamayo–Nangka Road (2.9 km)
+5. Bacongao–Mataas na Bundok Road (2.4 km)
+
+BE IT RESOLVED to respectfully request DPWH–Marinduque to prioritize these roads in its FY 2025 Work Program.
+
+The Municipal Mayor is authorized to sign and transmit this resolution to DPWH.`,
+    tags: ["infrastructure", "roads", "DPWH", "request"]
+  },
+  {
+    id: 9, type: "Executive Order", num: "EO-2024-001", status: "Active",
+    title: "Executive Order Activating the Municipal Disaster Risk Reduction and Management Council",
+    date: "2024-06-01", category: "Disaster Risk", sponsor: "Mayor Jose Reyes",
+    summary: "Activates and reconstitutes the Municipal DRRMC, designates key officials, and directs the preparation of the Municipal Contingency Plan in preparation for the typhoon season.",
+    fulltext: `EXECUTIVE ORDER NO. 2024-001
+
+ACTIVATING THE MUNICIPAL DISASTER RISK REDUCTION AND MANAGEMENT COUNCIL
+
+WHEREAS, RA 10121 mandates LGUs to maintain functional DRRMCs;
+
+WHEREAS, the rainy season and typhoon period necessitates preparedness measures;
+
+NOW, THEREFORE, I, Mayor Jose Reyes, hereby order:
+
+Section 1. The Municipal DRRMC is hereby activated and reconstituted with the following composition as provided under RA 10121.
+
+Section 2. The MDRRMO is directed to prepare and finalize the Municipal Contingency Plan within 30 days.
+
+Section 3. All department heads are directed to submit their emergency action plans.
+
+Section 4. A DRRMC meeting shall be convened monthly during the typhoon season.
+
+This EO shall take effect immediately.`,
+    tags: ["DRRM", "disaster", "emergency", "preparedness"]
+  },
+  {
+    id: 10, type: "Ordinance", num: "ORD-2022-002", status: "Repealed",
+    title: "An Ordinance Imposing a Curfew for Minors",
+    date: "2022-04-20", category: "Public Order", sponsor: "Hon. Roberto Cruz",
+    summary: "Imposed a 10:00 PM curfew for minors below 18 years old in all public places. Repealed in 2024 following amendments to relevant national laws and CHED directives.",
+    fulltext: `ORDINANCE NO. 2022-002
+
+AN ORDINANCE IMPOSING A CURFEW FOR MINORS
+
+[NOTE: THIS ORDINANCE HAS BEEN REPEALED AS OF JUNE 2024]
+
+Section 1. Curfew. No minor below 18 years old shall be found in public places without parental accompaniment between 10:00 PM and 5:00 AM.
+
+Section 2. Exemptions. Minors accompanied by parents, guardians, or in cases of emergency are exempted.
+
+Section 3. Enforcement. The PNP and Barangay Tanod shall enforce this ordinance.
+
+This ordinance was repealed by Ordinance No. 2024-006.`,
+    tags: ["public order", "minors", "curfew", "repealed"]
+  },
+  {
+    id: 11, type: "Resolution", num: "RES-2024-007", status: "Active",
+    title: "A Resolution Authorizing the Mayor to Enter into a Memorandum of Agreement with the Department of Agriculture",
+    date: "2024-04-12", category: "Agriculture", sponsor: "Hon. Ana Dela Cruz",
+    summary: "Authorizes the Municipal Mayor to enter into a MOA with the Department of Agriculture for the implementation of a rice production enhancement program covering 15 barangays.",
+    fulltext: `RESOLUTION NO. 2024-007
+
+RESOLUTION AUTHORIZING THE MAYOR TO ENTER INTO A MOA WITH THE DEPARTMENT OF AGRICULTURE
+
+WHEREAS, the DA has offered technical and material support for a rice production enhancement program;
+
+WHEREAS, the program will benefit farmers in 15 barangays with improved seed varieties, fertilizers, and training;
+
+BE IT RESOLVED to AUTHORIZE the Municipal Mayor to execute a Memorandum of Agreement with the Department of Agriculture for the implementation of the Rice Production Enhancement Program.
+
+The MARO is directed to coordinate implementation and submit progress reports quarterly.`,
+    tags: ["agriculture", "farming", "MOA", "livelihood"]
+  },
+  {
+    id: 12, type: "Proclamation", num: "PROC-2023-003", status: "Active",
+    title: "Proclamation Declaring the Feast of Saint John the Baptist as a Special Non-Working Holiday",
+    date: "2023-06-20", category: "Culture & Heritage", sponsor: "Mayor Jose Reyes",
+    summary: "Declares June 24 as a special non-working holiday in the Municipality of Mogpog in celebration of the Feast of Saint John the Baptist, the town's patron saint.",
+    fulltext: `PROCLAMATION NO. 2023-003
+
+DECLARING JUNE 24 AS A SPECIAL NON-WORKING HOLIDAY
+
+WHEREAS, June 24 is the Feast Day of Saint John the Baptist, patron saint of the Municipality of Mogpog;
+
+WHEREAS, this feast is celebrated annually with religious and cultural activities;
+
+NOW, THEREFORE, I, Mayor Jose Reyes, hereby declare June 24 of every year as a Special Non-Working Holiday in the Municipality of Mogpog.
+
+All government offices, schools, and commercial establishments within the municipality are directed to observe the holiday.
+
+IN WITNESS WHEREOF, I have hereunto set my hand this 20th day of June 2023.`,
+    tags: ["culture", "holiday", "religion", "heritage"]
+  }
+];
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let docs = JSON.parse(localStorage.getItem('lexarchive-docs') || 'null') || [...SAMPLE];
+let filtered = [...docs];
+let currentPage = 1;
+const PAGE_SIZE = 6;
+let viewMode = 'grid';
+let editingId = null;
+let activeTag = null;
+let currentDoc = null;
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+function init() {
+  populateYearFilter();
+  renderTagCloud();
+  renderStats();
+  applyFilters();
+}
+
+function save() {
+  localStorage.setItem('lexarchive-docs', JSON.stringify(docs));
+}
+
+// ── Filters & Search ──────────────────────────────────────────────────────────
+function populateYearFilter() {
+  const years = [...new Set(docs.map(d => d.date.slice(0,4)))].sort((a,b)=>b-a);
+  const sel = document.getElementById('filter-year');
+  years.forEach(y => {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    sel.appendChild(o);
+  });
+}
+
+function applyFilters() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const year = document.getElementById('filter-year').value;
+  const type = document.getElementById('filter-type').value;
+  const status = document.getElementById('filter-status').value;
+  const sort = document.getElementById('sort-select').value;
+
+  filtered = docs.filter(d => {
+    const matchQ = !q || [d.title, d.num, d.summary, d.sponsor, d.category, ...(d.tags||[])].some(f => f && f.toLowerCase().includes(q));
+    const matchY = !year || d.date.startsWith(year);
+    const matchT = !type || d.type === type;
+    const matchS = !status || d.status === status;
+    const matchTag = !activeTag || (d.tags && d.tags.includes(activeTag));
+    return matchQ && matchY && matchT && matchS && matchTag;
+  });
+
+  // Sort
+  filtered.sort((a, b) => {
+    if (sort === 'date-desc') return b.date.localeCompare(a.date);
+    if (sort === 'date-asc') return a.date.localeCompare(b.date);
+    if (sort === 'title-asc') return a.title.localeCompare(b.title);
+    if (sort === 'num-asc') return a.num.localeCompare(b.num);
+    return 0;
+  });
+
+  currentPage = 1;
+  renderDocs();
+  renderStats();
+}
+
+document.getElementById('search-input').addEventListener('input', applyFilters);
+
+// ── Tag Cloud ─────────────────────────────────────────────────────────────────
+function renderTagCloud() {
+  const all = {};
+  docs.forEach(d => (d.tags||[]).forEach(t => { all[t] = (all[t]||0)+1; }));
+  const sorted = Object.entries(all).sort((a,b)=>b[1]-a[1]).slice(0,18);
+  const cloud = document.getElementById('tag-cloud');
+  cloud.innerHTML = sorted.map(([t,c]) =>
+    `<span class="tag${activeTag===t?' active':''}" onclick="filterByTag('${t}')">${t} <span style="opacity:.6">(${c})</span></span>`
+  ).join('');
+}
+
+function filterByTag(tag) {
+  activeTag = activeTag === tag ? null : tag;
+  renderTagCloud();
+  applyFilters();
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+function renderStats() {
+  const total = docs.length;
+  const active = docs.filter(d=>d.status==='Active').length;
+  const res = docs.filter(d=>d.type==='Resolution').length;
+  const ord = docs.filter(d=>d.type==='Ordinance').length;
+  const proc = docs.filter(d=>d.type==='Proclamation').length;
+  const exec = docs.filter(d=>d.type==='Executive Order').length;
+
+  document.getElementById('stats-grid').innerHTML = `
+    <div class="stat-item"><div class="stat-num">${total}</div><div class="stat-lbl">Total</div></div>
+    <div class="stat-item"><div class="stat-num">${active}</div><div class="stat-lbl">Active</div></div>
+    <div class="stat-item"><div class="stat-num">${res}</div><div class="stat-lbl">Resolutions</div></div>
+    <div class="stat-item"><div class="stat-num">${ord}</div><div class="stat-lbl">Ordinances</div></div>
+    <div class="stat-item"><div class="stat-num">${proc}</div><div class="stat-lbl">Proclamations</div></div>
+    <div class="stat-item"><div class="stat-num">${exec}</div><div class="stat-lbl">Exec. Orders</div></div>
+  `;
+}
+
+// ── Render Docs ───────────────────────────────────────────────────────────────
+function renderDocs() {
+  const grid = document.getElementById('doc-grid');
+  const empty = document.getElementById('empty-state');
+  const count = document.getElementById('result-count');
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const page = filtered.slice(start, start + PAGE_SIZE);
+
+  count.textContent = `${filtered.length} record${filtered.length !== 1 ? 's' : ''} found`;
+
+  if (!filtered.length) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    document.getElementById('pagination').innerHTML = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  if (viewMode === 'grid') {
+    grid.innerHTML = page.map(d => gridCard(d)).join('');
+  } else {
+    grid.innerHTML = page.map(d => listCard(d)).join('');
+  }
+
+  renderPagination();
+}
+
+function gridCard(d) {
+  const fmtDate = new Date(d.date+'T00:00:00').toLocaleDateString('en-PH', {year:'numeric',month:'short',day:'numeric'});
+  return `
+    <div class="doc-card" data-type="${d.type}" onclick="openDoc(${d.id})">
+      <div class="card-header">
+        <span class="type-badge" data-type="${d.type}">${d.type}</span>
+        <span class="status-dot" data-status="${d.status}" title="${d.status}"></span>
+      </div>
+      <div class="doc-num">${d.num}</div>
+      <div class="doc-title">${d.title}</div>
+      <div class="doc-excerpt">${d.summary}</div>
+      <div class="card-footer">
+        <span class="doc-date">${fmtDate}</span>
+        <span class="doc-cat">${d.category}</span>
+      </div>
+    </div>`;
+}
+
+function listCard(d) {
+  const fmtDate = new Date(d.date+'T00:00:00').toLocaleDateString('en-PH', {year:'numeric',month:'short',day:'numeric'});
+  return `
+    <div class="doc-card" data-type="${d.type}" onclick="openDoc(${d.id})">
+      <div class="card-meta">
+        <span class="type-badge" data-type="${d.type}" style="font-size:.6rem">${d.type.slice(0,3).toUpperCase()}</span>
+        <span class="status-dot" data-status="${d.status}" title="${d.status}" style="margin-top:4px"></span>
+        <span class="doc-date">${fmtDate}</span>
+      </div>
+      <div class="card-body">
+        <div class="doc-num">${d.num}</div>
+        <div class="doc-title">${d.title}</div>
+        <div class="doc-excerpt">${d.summary}</div>
+      </div>
+      <div class="card-footer">
+        <span class="doc-cat">${d.category}</span>
+        <span class="status-badge" data-status="${d.status}">${d.status}</span>
+      </div>
+    </div>`;
+}
+
+// ── Pagination ────────────────────────────────────────────────────────────────
+function renderPagination() {
+  const total = Math.ceil(filtered.length / PAGE_SIZE);
+  if (total <= 1) { document.getElementById('pagination').innerHTML = ''; return; }
+  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
+  for (let i = 1; i <= total; i++) {
+    html += `<button class="page-btn${i===currentPage?' active':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''}>Next →</button>`;
+  document.getElementById('pagination').innerHTML = html;
+}
+
+function goPage(p) {
+  const total = Math.ceil(filtered.length / PAGE_SIZE);
+  if (p < 1 || p > total) return;
+  currentPage = p;
+  renderDocs();
+  document.getElementById('main').scrollIntoView({behavior:'smooth'});
+}
+
+// ── View Toggle ───────────────────────────────────────────────────────────────
+function setView(v) {
+  viewMode = v;
+  document.getElementById('doc-grid').className = v === 'grid' ? 'grid-view' : 'list-view';
+  document.getElementById('btn-grid').classList.toggle('active', v==='grid');
+  document.getElementById('btn-list').classList.toggle('active', v==='list');
+  renderDocs();
+}
+
+// ── Doc Modal ─────────────────────────────────────────────────────────────────
+function openDoc(id) {
+  const d = docs.find(x => x.id === id);
+  if (!d) return;
+  currentDoc = d;
+  const fmtDate = new Date(d.date+'T00:00:00').toLocaleDateString('en-PH', {year:'numeric',month:'long',day:'numeric'});
+
+  document.getElementById('modal-bar').dataset.type = d.type;
+  document.getElementById('modal-type-badge').textContent = d.type;
+  document.getElementById('modal-type-badge').dataset.type = d.type;
+  document.getElementById('modal-status-badge').textContent = d.status;
+  document.getElementById('modal-status-badge').dataset.status = d.status;
+  document.getElementById('modal-num').textContent = d.num;
+  document.getElementById('modal-title').textContent = d.title;
+  document.getElementById('modal-date').textContent = fmtDate;
+  document.getElementById('modal-category').textContent = d.category;
+  document.getElementById('modal-sponsor').textContent = d.sponsor;
+  document.getElementById('modal-summary').textContent = d.summary;
+  document.getElementById('modal-fulltext').textContent = d.fulltext || '(No full text available.)';
+  document.getElementById('modal-tags').innerHTML = (d.tags||[]).map(t =>
+    `<span class="modal-tag" onclick="filterByTag('${t}');closeModal()">${t}</span>`
+  ).join('');
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function printDoc() {
+  if (!currentDoc) return;
+  const w = window.open('', '_blank');
+  w.document.write(`<html><head><title>${currentDoc.num}</title><style>
+    body{font-family:Georgia,serif;max-width:700px;margin:2rem auto;color:#1a1610;line-height:1.7}
+    h1{font-size:1.1rem;margin-bottom:.5rem}
+    .meta{font-size:.8rem;color:#666;margin-bottom:1rem;border-bottom:1px solid #ccc;padding-bottom:.5rem}
+    pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:.9rem;line-height:1.75}
+    @media print{@page{margin:2cm}}
+  </style></head><body>
+    <div class="meta">${currentDoc.type} No. ${currentDoc.num} &nbsp;·&nbsp; ${currentDoc.date} &nbsp;·&nbsp; Status: ${currentDoc.status}</div>
+    <h1>${currentDoc.title}</h1>
+    <p style="font-size:.88rem;color:#444;margin-bottom:1rem">${currentDoc.summary}</p>
+    <pre>${currentDoc.fulltext || ''}</pre>
+  </body></html>`);
+  w.document.close();
+  w.print();
+}
+
+function copyLink() {
+  if (!currentDoc) return;
+  const url = `${location.origin}${location.pathname}#doc-${currentDoc.id}`;
+  navigator.clipboard.writeText(url).then(() => toast('Link copied to clipboard'));
+}
+
+function editDoc() {
+  if (!currentDoc) return;
+  closeModal();
+  openForm(currentDoc.id);
+}
+
+// ── Add/Edit Form ─────────────────────────────────────────────────────────────
+function openForm(id = null) {
+  editingId = id;
+  document.getElementById('drawer-title').textContent = id ? 'Edit Record' : 'Add New Record';
+  if (id) {
+    const d = docs.find(x => x.id === id);
+    document.getElementById('f-type').value = d.type;
+    document.getElementById('f-num').value = d.num;
+    document.getElementById('f-title').value = d.title;
+    document.getElementById('f-date').value = d.date;
+    document.getElementById('f-status').value = d.status;
+    document.getElementById('f-category').value = d.category;
+    document.getElementById('f-sponsor').value = d.sponsor;
+    document.getElementById('f-summary').value = d.summary;
+    document.getElementById('f-fulltext').value = d.fulltext || '';
+    document.getElementById('f-tags').value = (d.tags||[]).join(', ');
+  } else {
+    ['f-num','f-title','f-date','f-summary','f-fulltext','f-tags','f-category','f-sponsor'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-type').value = 'Resolution';
+    document.getElementById('f-status').value = 'Active';
+  }
+  document.getElementById('form-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeForm() {
+  document.getElementById('form-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  editingId = null;
+}
+
+function saveRecord() {
+  const num = document.getElementById('f-num').value.trim();
+  const title = document.getElementById('f-title').value.trim();
+  const date = document.getElementById('f-date').value;
+  if (!num || !title || !date) { toast('Please fill in required fields (Number, Title, Date)'); return; }
+
+  const rec = {
+    id: editingId || Date.now(),
+    type: document.getElementById('f-type').value,
+    num,
+    title,
+    date,
+    status: document.getElementById('f-status').value,
+    category: document.getElementById('f-category').value.trim() || 'General',
+    sponsor: document.getElementById('f-sponsor').value.trim() || '—',
+    summary: document.getElementById('f-summary').value.trim(),
+    fulltext: document.getElementById('f-fulltext').value.trim(),
+    tags: document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean)
+  };
+
+  if (editingId) {
+    const idx = docs.findIndex(x => x.id === editingId);
+    docs[idx] = rec;
+  } else {
+    docs.unshift(rec);
+  }
+
+  save();
+  closeForm();
+  renderTagCloud();
+  renderStats();
+  populateYearFilterFresh();
+  applyFilters();
+  toast(editingId ? 'Record updated successfully' : 'Record added successfully');
+}
+
+function populateYearFilterFresh() {
+  const sel = document.getElementById('filter-year');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">All Years</option>';
+  const years = [...new Set(docs.map(d => d.date.slice(0,4)))].sort((a,b)=>b-a);
+  years.forEach(y => { const o = document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
+  sel.value = cur;
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+// ── Keyboard ──────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeForm(); }
+});
+
+// ── Start ─────────────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
