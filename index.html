@@ -982,11 +982,18 @@ body {
       <div class="modal-section-title">Tags</div>
       <div class="modal-tags" id="modal-tags"></div>
       <div class="modal-actions">
-        <button class="btn-action" id="modal-pdf-btn" style="display:none">📄 Download PDF</button>
+        <button class="btn-action" id="modal-pdf-btn" style="display:none">📄 View PDF</button>
         <button class="btn-action" onclick="printDoc()">🖨 Print</button>
         <button class="btn-action" onclick="copyLink()">🔗 Copy Link</button>
         <button class="btn-action" onclick="editDoc()">✏️ Edit</button>
         <button class="btn-action" onclick="deleteDoc()" style="color:#9a2a2a;border-color:#e8b4b4;">🗑 Delete</button>
+      </div>
+      <div id="modal-pdf-viewer" style="display:none;margin-top:1rem;">
+        <div class="modal-section-title" style="margin-bottom:.5rem;">Attached Document</div>
+        <iframe id="modal-pdf-frame" src="" style="width:100%;height:500px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--bg)"></iframe>
+        <div style="margin-top:.4rem;text-align:right;">
+          <a id="modal-pdf-download" href="" target="_blank" style="font-size:.78rem;color:var(--gold);font-family:var(--font-mono);text-decoration:none;">↓ Download PDF</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1260,13 +1267,40 @@ function openDoc(id){
   document.getElementById('modal-fulltext').textContent=d.fulltext||'(No full text available.)';
   document.getElementById('modal-tags').innerHTML=(d.tags||[]).map(t=>`<span class="modal-tag" onclick="filterByTag('${t}');closeModal()">${t}</span>`).join('');
   const pdfBtn=document.getElementById('modal-pdf-btn');
-  if(d.pdf_url){pdfBtn.style.display='flex';pdfBtn.onclick=()=>window.open(d.pdf_url,'_blank');}
-  else{pdfBtn.style.display='none';}
+  const pdfViewer=document.getElementById('modal-pdf-viewer');
+  const pdfFrame=document.getElementById('modal-pdf-frame');
+  const pdfDownload=document.getElementById('modal-pdf-download');
+  if(d.pdf_url){
+    pdfBtn.style.display='flex';
+    pdfBtn.onclick=()=>{
+      if(pdfViewer.style.display==='none'){
+        pdfFrame.src=d.pdf_url;
+        pdfDownload.href=d.pdf_url;
+        pdfViewer.style.display='block';
+        pdfBtn.textContent='📄 Hide PDF';
+      } else {
+        pdfViewer.style.display='none';
+        pdfFrame.src='';
+        pdfBtn.textContent='📄 View PDF';
+      }
+    };
+  } else {
+    pdfBtn.style.display='none';
+    pdfViewer.style.display='none';
+    pdfFrame.src='';
+  }
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
 
-function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+  document.getElementById('modal-pdf-viewer').style.display='none';
+  document.getElementById('modal-pdf-frame').src='';
+  const pdfBtn=document.getElementById('modal-pdf-btn');
+  pdfBtn.textContent='📄 View PDF';
+}
 
 function printDoc(){
   if(!currentDoc) return;
