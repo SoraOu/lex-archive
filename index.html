@@ -986,6 +986,7 @@ body {
         <button class="btn-action" onclick="printDoc()">🖨 Print</button>
         <button class="btn-action" onclick="copyLink()">🔗 Copy Link</button>
         <button class="btn-action" onclick="editDoc()">✏️ Edit</button>
+        <button class="btn-action" onclick="deleteDoc()" style="color:#9a2a2a;border-color:#e8b4b4;">🗑 Delete</button>
       </div>
     </div>
   </div>
@@ -1075,7 +1076,7 @@ body {
 
 <script>
 const SUPABASE_URL = 'https://vyrzmuehjwljqajonnkw.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_o1md7n5qNOKa0aLjCH1fIw_rj5Il7uv';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5cnptdWVoandsanFham9ubmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNDIyMjksImV4cCI6MjA5NTkxODIyOX0.guuYb-Lw36sfaRBsCBK25tLktKX0yFt9r4dKAD4-j4E';
 
 const sb = {
   async query(table, opts={}) {
@@ -1277,6 +1278,22 @@ function printDoc(){
 function copyLink(){
   if(!currentDoc) return;
   navigator.clipboard.writeText(location.origin+location.pathname+'#doc-'+currentDoc.id).then(()=>toast('Link copied to clipboard'));
+}
+
+async function deleteDoc(){
+  if(!currentDoc) return;
+  if(!confirm('Delete "'+currentDoc.title+'"? This cannot be undone.')) return;
+  try{
+    await fetch(SUPABASE_URL+'/rest/v1/documents?id=eq.'+currentDoc.id,{method:'DELETE',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}});
+    docs=docs.filter(x=>x.id!==currentDoc.id);
+    filtered=filtered.filter(x=>x.id!==currentDoc.id);
+    closeModal();
+    populateYearFilter();
+    renderTagCloud();
+    renderStats();
+    applyFilters();
+    toast('Record deleted.');
+  }catch(e){toast('Error deleting record.');}
 }
 
 function editDoc(){if(!currentDoc) return;closeModal();openForm(currentDoc.id);}
