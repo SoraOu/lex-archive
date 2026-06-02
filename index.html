@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LexArchive — Legislative Document Repository</title>
+<title>Mogpog Legislative Archive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -863,8 +863,8 @@ body {
 <header id="site-header">
   <div class="header-inner">
     <a class="site-brand" href="#">
-      <span class="brand-name">LexArchive</span>
-      <span class="brand-sub">Legislative Repository</span>
+      <span class="brand-name">Mogpog Legislative Archive</span>
+      <span class="brand-sub">Municipality of Mogpog, Marinduque</span>
     </a>
     <div class="header-search">
       <svg class="search-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -982,6 +982,7 @@ body {
       <div class="modal-section-title">Tags</div>
       <div class="modal-tags" id="modal-tags"></div>
       <div class="modal-actions">
+        <button class="btn-action" id="modal-pdf-btn" style="display:none">📄 Download PDF</button>
         <button class="btn-action" onclick="printDoc()">🖨 Print</button>
         <button class="btn-action" onclick="copyLink()">🔗 Copy Link</button>
         <button class="btn-action" onclick="editDoc()">✏️ Edit</button>
@@ -1052,7 +1053,13 @@ body {
         <textarea class="form-textarea" id="f-fulltext" style="min-height:120px" placeholder="Paste the full text of the resolution or ordinance here…"></textarea>
       </div>
       <div class="form-row">
-        <label class="form-label">Tags (comma-separated)</label>
+        <label class="form-label">Attach PDF <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
+        <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer">
+          <span style="background:var(--bg);border:1px solid var(--rule2);border-radius:var(--radius);padding:.4rem .8rem;font-size:.82rem;color:var(--ink2);white-space:nowrap">Choose file</span>
+          <span id="pdf-file-name" style="font-size:.78rem;color:var(--ink3);font-family:var(--font-mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+          <input type="file" id="f-pdf" accept="application/pdf" style="display:none">
+        </label>
+      </div>
         <input class="form-input" id="f-tags" type="text" placeholder="e.g. budget, health, environment">
       </div>
     </div>
@@ -1067,363 +1074,298 @@ body {
 <div id="toast"></div>
 
 <script>
-// ── Data ──────────────────────────────────────────────────────────────────────
-const SAMPLE = [];
+const SUPABASE_URL = 'https://vyrzmuehywljqajonkw.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5cnptdWVoandsanFham9ubmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNDIyMjksImV4cCI6MjA5NTkxODIyOX0.guuYb-Lw36sfaRBsCBK25tLktKX0yFt9r4dKAD4-j4E';
 
-// ── State ─────────────────────────────────────────────────────────────────────
-let docs = JSON.parse(localStorage.getItem('lexarchive-docs') || 'null') || [...SAMPLE];
-let filtered = [...docs];
-let currentPage = 1;
-const PAGE_SIZE = 6;
-let viewMode = 'grid';
-let editingId = null;
-let activeTag = null;
-let currentDoc = null;
+const sb = {
+  async query(table, opts={}) {
+    let url = SUPABASE_URL+'/rest/v1/'+table+'?';
+    if(opts.select) url+='select='+opts.select+'&';
+    if(opts.order) url+='order='+opts.order+'&';
+    const r = await fetch(url,{headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}});
+    return r.json();
+  },
+  async insert(table,data) {
+    const r = await fetch(SUPABASE_URL+'/rest/v1/'+table,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json',Prefer:'return=representation'},body:JSON.stringify(data)});
+    return r.json();
+  },
+  async update(table,id,data) {
+    const r = await fetch(SUPABASE_URL+'/rest/v1/'+table+'?id=eq.'+id,{method:'PATCH',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json',Prefer:'return=representation'},body:JSON.stringify(data)});
+    return r.json();
+  },
+  async uploadFile(bucket,path,file) {
+    const r = await fetch(SUPABASE_URL+'/storage/v1/object/'+bucket+'/'+path,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':file.type},body:file});
+    return r.json();
+  },
+  fileUrl(bucket,path){return SUPABASE_URL+'/storage/v1/object/public/'+bucket+'/'+path;}
+};
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-function init() {
+let docs=[],filtered=[],currentPage=1,viewMode='grid',editingId=null,activeTag=null,currentDoc=null,isLoading=false;
+const PAGE_SIZE=6;
+
+async function init(){
+  showLoading(true);
+  try{
+    const data=await sb.query('documents',{select:'*',order:'date.desc'});
+    if(Array.isArray(data)) docs=data.map(normalizeDoc);
+    else toast('Could not connect to database.');
+  }catch(e){toast('Network error loading records.');}
+  filtered=[...docs];
+  showLoading(false);
   populateYearFilter();
   renderTagCloud();
   renderStats();
   applyFilters();
 }
 
-function save() {
-  localStorage.setItem('lexarchive-docs', JSON.stringify(docs));
+function normalizeDoc(d){
+  return {...d,tags:typeof d.tags==='string'?d.tags.split(',').map(t=>t.trim()).filter(Boolean):(d.tags||[])};
 }
 
-// PLACEHOLDER to avoid duplicate block below
-
-
-// ── Filters & Search ──────────────────────────────────────────────────────────
-function populateYearFilter() {
-  const years = [...new Set(docs.map(d => d.date.slice(0,4)))].sort((a,b)=>b-a);
-  const sel = document.getElementById('filter-year');
-  years.forEach(y => {
-    const o = document.createElement('option');
-    o.value = y; o.textContent = y;
-    sel.appendChild(o);
-  });
+function showLoading(on){
+  isLoading=on;
+  if(on){
+    document.getElementById('doc-grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--ink3);font-family:var(--font-mono);font-size:.85rem">Loading records\u2026</div>';
+    document.getElementById('empty-state').style.display='none';
+  }
 }
 
-function applyFilters() {
-  const q = document.getElementById('search-input').value.toLowerCase();
-  const year = document.getElementById('filter-year').value;
-  const type = document.getElementById('filter-type').value;
-  const status = document.getElementById('filter-status').value;
-  const sort = document.getElementById('sort-select').value;
+function populateYearFilter(){
+  const years=[...new Set(docs.map(d=>(d.date||'').slice(0,4)).filter(Boolean))].sort((a,b)=>b-a);
+  const sel=document.getElementById('filter-year');
+  sel.innerHTML='<option value="">All Years</option>';
+  years.forEach(y=>{const o=document.createElement('option');o.value=y;o.textContent=y;sel.appendChild(o);});
+}
 
-  filtered = docs.filter(d => {
-    const matchQ = !q || [d.title, d.num, d.summary, d.sponsor, d.category, ...(d.tags||[])].some(f => f && f.toLowerCase().includes(q));
-    const matchY = !year || d.date.startsWith(year);
-    const matchT = !type || d.type === type;
-    const matchS = !status || d.status === status;
-    const matchTag = !activeTag || (d.tags && d.tags.includes(activeTag));
-    return matchQ && matchY && matchT && matchS && matchTag;
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const year=document.getElementById('filter-year').value;
+  const type=document.getElementById('filter-type').value;
+  const status=document.getElementById('filter-status').value;
+  const sort=document.getElementById('sort-select').value;
+  filtered=docs.filter(d=>{
+    const mQ=!q||[d.title,d.num,d.summary,d.sponsor,d.category,...(d.tags||[])].some(f=>f&&f.toLowerCase().includes(q));
+    const mY=!year||(d.date||'').startsWith(year);
+    const mT=!type||d.type===type;
+    const mS=!status||d.status===status;
+    const mTag=!activeTag||(d.tags&&d.tags.includes(activeTag));
+    return mQ&&mY&&mT&&mS&&mTag;
   });
-
-  // Sort
-  filtered.sort((a, b) => {
-    if (sort === 'date-desc') return b.date.localeCompare(a.date);
-    if (sort === 'date-asc') return a.date.localeCompare(b.date);
-    if (sort === 'title-asc') return a.title.localeCompare(b.title);
-    if (sort === 'num-asc') return a.num.localeCompare(b.num);
+  filtered.sort((a,b)=>{
+    if(sort==='date-desc') return (b.date||'').localeCompare(a.date||'');
+    if(sort==='date-asc') return (a.date||'').localeCompare(b.date||'');
+    if(sort==='title-asc') return (a.title||'').localeCompare(b.title||'');
+    if(sort==='num-asc') return (a.num||'').localeCompare(b.num||'');
     return 0;
   });
-
-  currentPage = 1;
+  currentPage=1;
   renderDocs();
   renderStats();
 }
 
-document.getElementById('search-input').addEventListener('input', applyFilters);
+document.getElementById('search-input').addEventListener('input',applyFilters);
 
-// ── Tag Cloud ─────────────────────────────────────────────────────────────────
-function renderTagCloud() {
-  const all = {};
-  docs.forEach(d => (d.tags||[]).forEach(t => { all[t] = (all[t]||0)+1; }));
-  const sorted = Object.entries(all).sort((a,b)=>b[1]-a[1]).slice(0,18);
-  const cloud = document.getElementById('tag-cloud');
-  cloud.innerHTML = sorted.map(([t,c]) =>
-    `<span class="tag${activeTag===t?' active':''}" onclick="filterByTag('${t}')">${t} <span style="opacity:.6">(${c})</span></span>`
-  ).join('');
+function renderTagCloud(){
+  const all={};
+  docs.forEach(d=>(d.tags||[]).forEach(t=>{all[t]=(all[t]||0)+1;}));
+  const sorted=Object.entries(all).sort((a,b)=>b[1]-a[1]).slice(0,18);
+  document.getElementById('tag-cloud').innerHTML=sorted.length?sorted.map(([t,c])=>`<span class="tag${activeTag===t?' active':''}" onclick="filterByTag('${t}')">${t} <span style="opacity:.6">(${c})</span></span>`).join(''):'<span style="font-size:.75rem;color:var(--ink3);font-family:var(--font-mono)">No tags yet</span>';
 }
 
-function filterByTag(tag) {
-  activeTag = activeTag === tag ? null : tag;
-  renderTagCloud();
-  applyFilters();
-}
+function filterByTag(tag){activeTag=activeTag===tag?null:tag;renderTagCloud();applyFilters();}
 
-// ── Stats ─────────────────────────────────────────────────────────────────────
-function renderStats() {
-  const total = docs.length;
-  const active = docs.filter(d=>d.status==='Active').length;
-  const res = docs.filter(d=>d.type==='Resolution').length;
-  const ord = docs.filter(d=>d.type==='Ordinance').length;
-  const proc = docs.filter(d=>d.type==='Proclamation').length;
-  const exec = docs.filter(d=>d.type==='Executive Order').length;
-
-  document.getElementById('stats-grid').innerHTML = `
+function renderStats(){
+  const total=docs.length,active=docs.filter(d=>d.status==='Active').length;
+  const res=docs.filter(d=>d.type==='Resolution').length,ord=docs.filter(d=>d.type==='Ordinance').length;
+  const proc=docs.filter(d=>d.type==='Proclamation').length,exec=docs.filter(d=>d.type==='Executive Order').length;
+  document.getElementById('stats-grid').innerHTML=`
     <div class="stat-item"><div class="stat-num">${total}</div><div class="stat-lbl">Total</div></div>
     <div class="stat-item"><div class="stat-num">${active}</div><div class="stat-lbl">Active</div></div>
     <div class="stat-item"><div class="stat-num">${res}</div><div class="stat-lbl">Resolutions</div></div>
     <div class="stat-item"><div class="stat-num">${ord}</div><div class="stat-lbl">Ordinances</div></div>
     <div class="stat-item"><div class="stat-num">${proc}</div><div class="stat-lbl">Proclamations</div></div>
-    <div class="stat-item"><div class="stat-num">${exec}</div><div class="stat-lbl">Exec. Orders</div></div>
-  `;
+    <div class="stat-item"><div class="stat-num">${exec}</div><div class="stat-lbl">Exec. Orders</div></div>`;
 }
 
-// ── Render Docs ───────────────────────────────────────────────────────────────
-function renderDocs() {
-  const grid = document.getElementById('doc-grid');
-  const empty = document.getElementById('empty-state');
-  const count = document.getElementById('result-count');
-
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const page = filtered.slice(start, start + PAGE_SIZE);
-
-  count.textContent = `${filtered.length} record${filtered.length !== 1 ? 's' : ''} found`;
-
-  if (!filtered.length) {
-    grid.innerHTML = '';
-    empty.style.display = 'block';
-    document.getElementById('pagination').innerHTML = '';
-    return;
-  }
-  empty.style.display = 'none';
-
-  if (viewMode === 'grid') {
-    grid.innerHTML = page.map(d => gridCard(d)).join('');
-  } else {
-    grid.innerHTML = page.map(d => listCard(d)).join('');
-  }
-
+function renderDocs(){
+  if(isLoading) return;
+  const grid=document.getElementById('doc-grid'),empty=document.getElementById('empty-state'),count=document.getElementById('result-count');
+  const start=(currentPage-1)*PAGE_SIZE,page=filtered.slice(start,start+PAGE_SIZE);
+  count.textContent=filtered.length+' record'+(filtered.length!==1?'s':'')+' found';
+  if(!filtered.length){grid.innerHTML='';empty.style.display='block';document.getElementById('pagination').innerHTML='';return;}
+  empty.style.display='none';
+  grid.innerHTML=viewMode==='grid'?page.map(d=>gridCard(d)).join(''):page.map(d=>listCard(d)).join('');
   renderPagination();
 }
 
-function gridCard(d) {
-  const fmtDate = new Date(d.date+'T00:00:00').toLocaleDateString('en-PH', {year:'numeric',month:'short',day:'numeric'});
-  return `
-    <div class="doc-card" data-type="${d.type}" onclick="openDoc(${d.id})">
-      <div class="card-header">
-        <span class="type-badge" data-type="${d.type}">${d.type}</span>
-        <span class="status-dot" data-status="${d.status}" title="${d.status}"></span>
-      </div>
-      <div class="doc-num">${d.num}</div>
-      <div class="doc-title">${d.title}</div>
-      <div class="doc-excerpt">${d.summary}</div>
-      <div class="card-footer">
-        <span class="doc-date">${fmtDate}</span>
-        <span class="doc-cat">${d.category}</span>
-      </div>
-    </div>`;
+function gridCard(d){
+  const fmtDate=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'short',day:'numeric'}):'--';
+  return `<div class="doc-card" data-type="${d.type}" onclick="openDoc(${d.id})">
+    <div class="card-header"><span class="type-badge" data-type="${d.type}">${d.type}</span><span class="status-dot" data-status="${d.status}" title="${d.status}"></span></div>
+    <div class="doc-num">${d.num}</div><div class="doc-title">${d.title}</div>
+    <div class="doc-excerpt">${d.summary||''}</div>
+    <div class="card-footer"><span class="doc-date">${fmtDate}</span><span class="doc-cat">${d.category||''}</span></div>
+  </div>`;
 }
 
-function listCard(d) {
-  const fmtDate = new Date(d.date+'T00:00:00').toLocaleDateString('en-PH', {year:'numeric',month:'short',day:'numeric'});
-  return `
-    <div class="doc-card" data-type="${d.type}" onclick="openDoc(${d.id})">
-      <div class="card-meta">
-        <span class="type-badge" data-type="${d.type}" style="font-size:.6rem">${d.type.slice(0,3).toUpperCase()}</span>
-        <span class="status-dot" data-status="${d.status}" title="${d.status}" style="margin-top:4px"></span>
-        <span class="doc-date">${fmtDate}</span>
-      </div>
-      <div class="card-body">
-        <div class="doc-num">${d.num}</div>
-        <div class="doc-title">${d.title}</div>
-        <div class="doc-excerpt">${d.summary}</div>
-      </div>
-      <div class="card-footer">
-        <span class="doc-cat">${d.category}</span>
-        <span class="status-badge" data-status="${d.status}">${d.status}</span>
-      </div>
-    </div>`;
+function listCard(d){
+  const fmtDate=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'short',day:'numeric'}):'--';
+  return `<div class="doc-card" data-type="${d.type}" onclick="openDoc(${d.id})">
+    <div class="card-meta"><span class="type-badge" data-type="${d.type}" style="font-size:.6rem">${d.type.slice(0,3).toUpperCase()}</span><span class="status-dot" data-status="${d.status}" style="margin-top:4px"></span><span class="doc-date">${fmtDate}</span></div>
+    <div class="card-body"><div class="doc-num">${d.num}</div><div class="doc-title">${d.title}</div><div class="doc-excerpt">${d.summary||''}</div></div>
+    <div class="card-footer"><span class="doc-cat">${d.category||''}</span><span class="status-badge" data-status="${d.status}">${d.status}</span></div>
+  </div>`;
 }
 
-// ── Pagination ────────────────────────────────────────────────────────────────
-function renderPagination() {
-  const total = Math.ceil(filtered.length / PAGE_SIZE);
-  if (total <= 1) { document.getElementById('pagination').innerHTML = ''; return; }
-  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
-  for (let i = 1; i <= total; i++) {
-    html += `<button class="page-btn${i===currentPage?' active':''}" onclick="goPage(${i})">${i}</button>`;
-  }
-  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''}>Next →</button>`;
-  document.getElementById('pagination').innerHTML = html;
+function renderPagination(){
+  const total=Math.ceil(filtered.length/PAGE_SIZE);
+  if(total<=1){document.getElementById('pagination').innerHTML='';return;}
+  let html=`<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
+  for(let i=1;i<=total;i++) html+=`<button class="page-btn${i===currentPage?' active':''}" onclick="goPage(${i})">${i}</button>`;
+  html+=`<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''}>Next →</button>`;
+  document.getElementById('pagination').innerHTML=html;
 }
 
-function goPage(p) {
-  const total = Math.ceil(filtered.length / PAGE_SIZE);
-  if (p < 1 || p > total) return;
-  currentPage = p;
-  renderDocs();
+function goPage(p){
+  const total=Math.ceil(filtered.length/PAGE_SIZE);
+  if(p<1||p>total) return;
+  currentPage=p;renderDocs();
   document.getElementById('main').scrollIntoView({behavior:'smooth'});
 }
 
-// ── View Toggle ───────────────────────────────────────────────────────────────
-function setView(v) {
-  viewMode = v;
-  document.getElementById('doc-grid').className = v === 'grid' ? 'grid-view' : 'list-view';
-  document.getElementById('btn-grid').classList.toggle('active', v==='grid');
-  document.getElementById('btn-list').classList.toggle('active', v==='list');
+function setView(v){
+  viewMode=v;
+  document.getElementById('doc-grid').className=v==='grid'?'grid-view':'list-view';
+  document.getElementById('btn-grid').classList.toggle('active',v==='grid');
+  document.getElementById('btn-list').classList.toggle('active',v==='list');
   renderDocs();
 }
 
-// ── Doc Modal ─────────────────────────────────────────────────────────────────
-function openDoc(id) {
-  const d = docs.find(x => x.id === id);
-  if (!d) return;
-  currentDoc = d;
-  const fmtDate = new Date(d.date+'T00:00:00').toLocaleDateString('en-PH', {year:'numeric',month:'long',day:'numeric'});
-
-  document.getElementById('modal-bar').dataset.type = d.type;
-  document.getElementById('modal-type-badge').textContent = d.type;
-  document.getElementById('modal-type-badge').dataset.type = d.type;
-  document.getElementById('modal-status-badge').textContent = d.status;
-  document.getElementById('modal-status-badge').dataset.status = d.status;
-  document.getElementById('modal-num').textContent = d.num;
-  document.getElementById('modal-title').textContent = d.title;
-  document.getElementById('modal-date').textContent = fmtDate;
-  document.getElementById('modal-category').textContent = d.category;
-  document.getElementById('modal-sponsor').textContent = d.sponsor;
-  document.getElementById('modal-summary').textContent = d.summary;
-  document.getElementById('modal-fulltext').textContent = d.fulltext || '(No full text available.)';
-  document.getElementById('modal-tags').innerHTML = (d.tags||[]).map(t =>
-    `<span class="modal-tag" onclick="filterByTag('${t}');closeModal()">${t}</span>`
-  ).join('');
-
+function openDoc(id){
+  const d=docs.find(x=>x.id===id);if(!d) return;
+  currentDoc=d;
+  const fmtDate=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'--';
+  document.getElementById('modal-bar').dataset.type=d.type;
+  document.getElementById('modal-type-badge').textContent=d.type;
+  document.getElementById('modal-type-badge').dataset.type=d.type;
+  document.getElementById('modal-status-badge').textContent=d.status;
+  document.getElementById('modal-status-badge').dataset.status=d.status;
+  document.getElementById('modal-num').textContent=d.num;
+  document.getElementById('modal-title').textContent=d.title;
+  document.getElementById('modal-date').textContent=fmtDate;
+  document.getElementById('modal-category').textContent=d.category||'--';
+  document.getElementById('modal-sponsor').textContent=d.sponsor||'--';
+  document.getElementById('modal-summary').textContent=d.summary||'';
+  document.getElementById('modal-fulltext').textContent=d.fulltext||'(No full text available.)';
+  document.getElementById('modal-tags').innerHTML=(d.tags||[]).map(t=>`<span class="modal-tag" onclick="filterByTag('${t}');closeModal()">${t}</span>`).join('');
+  const pdfBtn=document.getElementById('modal-pdf-btn');
+  if(d.pdf_url){pdfBtn.style.display='flex';pdfBtn.onclick=()=>window.open(d.pdf_url,'_blank');}
+  else{pdfBtn.style.display='none';}
   document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+
+function printDoc(){
+  if(!currentDoc) return;
+  const w=window.open('','_blank');
+  w.document.write('<html><head><title>'+currentDoc.num+'</title><style>body{font-family:Georgia,serif;max-width:700px;margin:2rem auto;color:#1a1610;line-height:1.7}h1{font-size:1.1rem;margin-bottom:.5rem}.meta{font-size:.8rem;color:#666;margin-bottom:1rem;border-bottom:1px solid #ccc;padding-bottom:.5rem}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:.9rem;line-height:1.75}@media print{@page{margin:2cm}}</style></head><body><div class="meta">'+currentDoc.type+' No. '+currentDoc.num+' &nbsp;&middot;&nbsp; '+currentDoc.date+' &nbsp;&middot;&nbsp; Status: '+currentDoc.status+'</div><h1>'+currentDoc.title+'</h1><p style="font-size:.88rem;color:#444;margin-bottom:1rem">'+(currentDoc.summary||'')+'</p><pre>'+(currentDoc.fulltext||'')+'</pre></body></html>');
+  w.document.close();w.print();
 }
 
-function printDoc() {
-  if (!currentDoc) return;
-  const w = window.open('', '_blank');
-  w.document.write(`<html><head><title>${currentDoc.num}</title><style>
-    body{font-family:Georgia,serif;max-width:700px;margin:2rem auto;color:#1a1610;line-height:1.7}
-    h1{font-size:1.1rem;margin-bottom:.5rem}
-    .meta{font-size:.8rem;color:#666;margin-bottom:1rem;border-bottom:1px solid #ccc;padding-bottom:.5rem}
-    pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:.9rem;line-height:1.75}
-    @media print{@page{margin:2cm}}
-  </style></head><body>
-    <div class="meta">${currentDoc.type} No. ${currentDoc.num} &nbsp;·&nbsp; ${currentDoc.date} &nbsp;·&nbsp; Status: ${currentDoc.status}</div>
-    <h1>${currentDoc.title}</h1>
-    <p style="font-size:.88rem;color:#444;margin-bottom:1rem">${currentDoc.summary}</p>
-    <pre>${currentDoc.fulltext || ''}</pre>
-  </body></html>`);
-  w.document.close();
-  w.print();
+function copyLink(){
+  if(!currentDoc) return;
+  navigator.clipboard.writeText(location.origin+location.pathname+'#doc-'+currentDoc.id).then(()=>toast('Link copied to clipboard'));
 }
 
-function copyLink() {
-  if (!currentDoc) return;
-  const url = `${location.origin}${location.pathname}#doc-${currentDoc.id}`;
-  navigator.clipboard.writeText(url).then(() => toast('Link copied to clipboard'));
-}
+function editDoc(){if(!currentDoc) return;closeModal();openForm(currentDoc.id);}
 
-function editDoc() {
-  if (!currentDoc) return;
-  closeModal();
-  openForm(currentDoc.id);
-}
-
-// ── Add/Edit Form ─────────────────────────────────────────────────────────────
-function openForm(id = null) {
-  editingId = id;
-  document.getElementById('drawer-title').textContent = id ? 'Edit Record' : 'Add New Record';
-  if (id) {
-    const d = docs.find(x => x.id === id);
-    document.getElementById('f-type').value = d.type;
-    document.getElementById('f-num').value = d.num;
-    document.getElementById('f-title').value = d.title;
-    document.getElementById('f-date').value = d.date;
-    document.getElementById('f-status').value = d.status;
-    document.getElementById('f-category').value = d.category;
-    document.getElementById('f-sponsor').value = d.sponsor;
-    document.getElementById('f-summary').value = d.summary;
-    document.getElementById('f-fulltext').value = d.fulltext || '';
-    document.getElementById('f-tags').value = (d.tags||[]).join(', ');
+function openForm(id=null){
+  editingId=id;
+  document.getElementById('drawer-title').textContent=id?'Edit Record':'Add New Record';
+  document.getElementById('pdf-file-name').textContent='';
+  document.getElementById('f-pdf').value='';
+  if(id){
+    const d=docs.find(x=>x.id===id);
+    document.getElementById('f-type').value=d.type;
+    document.getElementById('f-num').value=d.num;
+    document.getElementById('f-title').value=d.title;
+    document.getElementById('f-date').value=d.date;
+    document.getElementById('f-status').value=d.status;
+    document.getElementById('f-category').value=d.category||'';
+    document.getElementById('f-sponsor').value=d.sponsor||'';
+    document.getElementById('f-summary').value=d.summary||'';
+    document.getElementById('f-fulltext').value=d.fulltext||'';
+    document.getElementById('f-tags').value=(d.tags||[]).join(', ');
+    if(d.pdf_url) document.getElementById('pdf-file-name').textContent='Current PDF attached';
   } else {
-    ['f-num','f-title','f-date','f-summary','f-fulltext','f-tags','f-category','f-sponsor'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('f-type').value = 'Resolution';
-    document.getElementById('f-status').value = 'Active';
+    ['f-num','f-title','f-date','f-summary','f-fulltext','f-tags','f-category','f-sponsor'].forEach(fid=>document.getElementById(fid).value='');
+    document.getElementById('f-type').value='Resolution';
+    document.getElementById('f-status').value='Active';
   }
   document.getElementById('form-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 
-function closeForm() {
-  document.getElementById('form-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-  editingId = null;
-}
+function closeForm(){document.getElementById('form-overlay').classList.remove('open');document.body.style.overflow='';editingId=null;}
 
-function saveRecord() {
-  const num = document.getElementById('f-num').value.trim();
-  const title = document.getElementById('f-title').value.trim();
-  const date = document.getElementById('f-date').value;
-  if (!num || !title || !date) { toast('Please fill in required fields (Number, Title, Date)'); return; }
-
-  const rec = {
-    id: editingId || Date.now(),
-    type: document.getElementById('f-type').value,
-    num,
-    title,
-    date,
-    status: document.getElementById('f-status').value,
-    category: document.getElementById('f-category').value.trim() || 'General',
-    sponsor: document.getElementById('f-sponsor').value.trim() || '—',
-    summary: document.getElementById('f-summary').value.trim(),
-    fulltext: document.getElementById('f-fulltext').value.trim(),
-    tags: document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean)
-  };
-
-  if (editingId) {
-    const idx = docs.findIndex(x => x.id === editingId);
-    docs[idx] = rec;
-  } else {
-    docs.unshift(rec);
+async function saveRecord(){
+  const num=document.getElementById('f-num').value.trim();
+  const title=document.getElementById('f-title').value.trim();
+  const date=document.getElementById('f-date').value;
+  if(!num||!title||!date){toast('Please fill in required fields (Number, Title, Date)');return;}
+  const saveBtn=document.querySelector('.drawer-foot .btn-primary');
+  saveBtn.textContent='Saving...';saveBtn.disabled=true;
+  let pdf_url=editingId?(docs.find(x=>x.id===editingId)||{}).pdf_url||null:null;
+  const pdfFile=document.getElementById('f-pdf').files[0];
+  if(pdfFile){
+    try{
+      const safeName=num.replace(/[^a-zA-Z0-9\-_]/g,'_')+'_'+Date.now()+'.pdf';
+      const up=await sb.uploadFile('documents',safeName,pdfFile);
+      if(up.Key||up.path||up.name){
+        const k=(up.Key||up.path||up.name||safeName).split('/').pop();
+        pdf_url=sb.fileUrl('documents',k);
+      } else { toast('PDF upload failed — record saved without PDF'); }
+    }catch(e){toast('PDF upload error — record saved without PDF');}
   }
-
-  save();
-  closeForm();
-  renderTagCloud();
-  renderStats();
-  populateYearFilterFresh();
-  applyFilters();
-  toast(editingId ? 'Record updated successfully' : 'Record added successfully');
+  const rec={type:document.getElementById('f-type').value,num,title,date,
+    status:document.getElementById('f-status').value,
+    category:document.getElementById('f-category').value.trim()||'General',
+    sponsor:document.getElementById('f-sponsor').value.trim()||'--',
+    summary:document.getElementById('f-summary').value.trim(),
+    fulltext:document.getElementById('f-fulltext').value.trim(),
+    tags:document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean).join(','),
+    pdf_url};
+  try{
+    if(editingId){
+      const updated=await sb.update('documents',editingId,rec);
+      const idx=docs.findIndex(x=>x.id===editingId);
+      docs[idx]=normalizeDoc(Array.isArray(updated)&&updated[0]?updated[0]:{...rec,id:editingId});
+    } else {
+      const inserted=await sb.insert('documents',rec);
+      if(Array.isArray(inserted)&&inserted[0]) docs.unshift(normalizeDoc(inserted[0]));
+      else{toast('Error saving record. Check database connection.');saveBtn.textContent='Save Record';saveBtn.disabled=false;return;}
+    }
+    filtered=[...docs];
+    closeForm();populateYearFilter();renderTagCloud();renderStats();applyFilters();
+    toast(editingId?'Record updated successfully':'Record added successfully');
+  }catch(e){toast('Error saving to database.');}
+  saveBtn.textContent='Save Record';saveBtn.disabled=false;
 }
 
-function populateYearFilterFresh() {
-  const sel = document.getElementById('filter-year');
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">All Years</option>';
-  const years = [...new Set(docs.map(d => d.date.slice(0,4)))].sort((a,b)=>b-a);
-  years.forEach(y => { const o = document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
-  sel.value = cur;
-}
-
-// ── Toast ─────────────────────────────────────────────────────────────────────
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2600);
-}
-
-// ── Keyboard ──────────────────────────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeModal(); closeForm(); }
+document.getElementById('f-pdf').addEventListener('change',function(){
+  document.getElementById('pdf-file-name').textContent=this.files[0]?this.files[0].name:'';
 });
 
-// ── Start ─────────────────────────────────────────────────────────────────────
+function toast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeForm();}});
 init();
+
 </script>
 </body>
 </html>
