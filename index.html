@@ -929,6 +929,16 @@ body {
     <div class="sidebar-panel">
       <div class="panel-title">Collection Stats</div>
       <div class="stats-grid" id="stats-grid"></div>
+      <div style="margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--rule)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;">
+          <span style="font-size:.65rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--ink3)">PDF Storage</span>
+          <span id="storage-text" style="font-size:.65rem;font-family:var(--font-mono);color:var(--ink3)">—</span>
+        </div>
+        <div style="background:var(--bg2);border-radius:2px;height:6px;overflow:hidden;">
+          <div id="storage-bar" style="background:var(--gold);height:100%;width:0%;transition:width .4s;border-radius:2px;"></div>
+        </div>
+        <div style="font-size:.6rem;color:var(--ink3);font-family:var(--font-mono);margin-top:.25rem;text-align:right">of 1 GB free</div>
+      </div>
     </div>
   </aside>
 
@@ -1124,6 +1134,7 @@ async function init(){
   renderTagCloud();
   renderStats();
   applyFilters();
+  updateStorageUsage();
 }
 
 function normalizeDoc(d){
@@ -1318,6 +1329,17 @@ async function deleteDoc(){
   if(!currentDoc) return;
   if(!confirm('Delete "'+currentDoc.title+'"? This cannot be undone.')) return;
   try{
+    // Delete PDF from storage if exists
+    if(currentDoc.pdf_url){
+      try{
+        const fileName=currentDoc.pdf_url.split('/').pop();
+        await fetch(SUPABASE_URL+'/storage/v1/object/documents/'+fileName,{
+          method:'DELETE',
+          headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}
+        });
+      }catch(e){}
+    }
+    // Delete record from database
     await fetch(SUPABASE_URL+'/rest/v1/documents?id=eq.'+currentDoc.id,{method:'DELETE',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}});
     docs=docs.filter(x=>x.id!==currentDoc.id);
     filtered=filtered.filter(x=>x.id!==currentDoc.id);
@@ -1326,6 +1348,7 @@ async function deleteDoc(){
     renderTagCloud();
     renderStats();
     applyFilters();
+    updateStorageUsage();
     toast('Record deleted.');
   }catch(e){toast('Error deleting record.');}
 }
@@ -1399,7 +1422,7 @@ async function saveRecord(){
       else{toast('Error saving record. Check database connection.');saveBtn.textContent='Save Record';saveBtn.disabled=false;return;}
     }
     filtered=[...docs];
-    closeForm();populateYearFilter();renderTagCloud();renderStats();applyFilters();
+    closeForm();populateYearFilter();renderTagCloud();renderStats();applyFilters();updateStorageUsage();
     toast(editingId?'Record updated successfully':'Record added successfully');
   }catch(e){toast('Error saving to database.');}
   saveBtn.textContent='Save Record';saveBtn.disabled=false;
@@ -1408,6 +1431,26 @@ async function saveRecord(){
 document.getElementById('f-pdf').addEventListener('change',function(){
   document.getElementById('pdf-file-name').textContent=this.files[0]?this.files[0].name:'';
 });
+
+async function updateStorageUsage(){
+  try{
+    const r=await fetch(SUPABASE_URL+'/storage/v1/object/list/documents',{
+      method:'POST',
+      headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({prefix:'',limit:1000,offset:0})
+    });
+    const files=await r.json();
+    if(!Array.isArray(files)) return;
+    const totalBytes=files.reduce((sum,f)=>sum+(f.metadata?.size||0),0);
+    const totalMB=totalBytes/(1024*1024);
+    const totalGB=totalMB/1024;
+    const pct=Math.min(totalGB/1*100,100);
+    const label=totalMB<1?(totalBytes/1024).toFixed(1)+' KB':totalMB<1024?totalMB.toFixed(1)+' MB':totalGB.toFixed(2)+' GB';
+    document.getElementById('storage-text').textContent=label;
+    document.getElementById('storage-bar').style.width=pct+'%';
+    document.getElementById('storage-bar').style.background=pct>80?'#9a2a2a':pct>60?'#c9971e':'var(--gold)';
+  }catch(e){}
+}
 
 function toast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
