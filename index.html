@@ -123,6 +123,7 @@ header {
   padding:1rem 1.25rem;
   border-bottom:2px solid var(--gold);
   display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:0.4rem;
 }
 .cust-head-title {
   font-family:'Playfair Display',serif;
@@ -136,9 +137,15 @@ header {
 }
 .cust-close:hover { background:rgba(201,148,58,0.2); color:var(--gold); }
 
+#theme-sync-status {
+  font-family:'IBM Plex Mono',monospace; font-size:0.57rem;
+  letter-spacing:0.1em; width:100%;
+  padding:0.3rem 0; transition:color 0.3s;
+  color:#3a8a3a;
+}
+
 .cust-body { padding:1.1rem 1.25rem; flex:1; }
 
-/* Preset themes */
 .cust-section-label {
   font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
   letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia);
@@ -159,7 +166,6 @@ header {
 .preset-swatches { display:flex; gap:2px; }
 .preset-swatch { width:10px; height:10px; border-radius:1px; }
 
-/* Color rows */
 .color-group { margin-bottom:1rem; }
 .color-row {
   display:flex; align-items:center; justify-content:space-between;
@@ -190,33 +196,7 @@ header {
   position:absolute; inset:-4px; width:calc(100% + 8px); height:calc(100% + 8px);
   opacity:0; cursor:pointer; border:none; padding:0;
 }
-.color-preview-bar {
-  width:100%; height:3px;
-  background:linear-gradient(90deg,var(--color-start,#000) 0%,var(--color-end,#fff) 100%);
-  margin:0.5rem 0;
-}
 
-/* Footer actions */
-.cust-foot {
-  position:sticky; bottom:0;
-  background:var(--cream); border-top:1px solid var(--border);
-  padding:0.85rem 1.25rem;
-  display:flex; gap:0.5rem; flex-wrap:wrap;
-}
-.cust-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
-  letter-spacing:0.1em; text-transform:uppercase;
-  padding:0.5rem 0.85rem; border:1px solid; cursor:pointer; transition:all 0.15s; flex:1;
-  text-align:center;
-}
-.cust-btn-primary { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-.cust-btn-primary:hover { background:var(--sepia); border-color:var(--sepia); }
-.cust-btn-secondary { background:transparent; color:var(--muted); border-color:var(--border); }
-.cust-btn-secondary:hover { background:var(--aged); color:var(--ink); }
-.cust-btn-danger { background:transparent; color:#8b2a2a; border-color:#c4a4a4; }
-.cust-btn-danger:hover { background:#8b2a2a; color:var(--parchment); border-color:#8b2a2a; }
-
-/* Live preview strip inside panel */
 .cust-preview-strip {
   display:flex; gap:0.3rem; padding:0.65rem; margin-bottom:0.85rem;
   background:var(--ink); border:1px solid rgba(201,148,58,0.3);
@@ -237,13 +217,31 @@ header {
   align-self:center; margin-left:auto;
 }
 
-/* Divider in panel */
 .cust-divider { border:none; border-top:1px dashed var(--border); margin:0.85rem 0; }
+
+.cust-foot {
+  position:sticky; bottom:0;
+  background:var(--cream); border-top:1px solid var(--border);
+  padding:0.85rem 1.25rem;
+  display:flex; gap:0.5rem; flex-wrap:wrap;
+}
+.cust-btn {
+  font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
+  letter-spacing:0.1em; text-transform:uppercase;
+  padding:0.5rem 0.85rem; border:1px solid; cursor:pointer; transition:all 0.15s; flex:1;
+  text-align:center;
+}
+.cust-btn-primary { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+.cust-btn-primary:hover { background:var(--sepia); border-color:var(--sepia); }
+.cust-btn-secondary { background:transparent; color:var(--muted); border-color:var(--border); }
+.cust-btn-secondary:hover { background:var(--aged); color:var(--ink); }
+.cust-btn-danger { background:transparent; color:#8b2a2a; border-color:#c4a4a4; }
+.cust-btn-danger:hover { background:#8b2a2a; color:var(--parchment); border-color:#8b2a2a; }
 
 /* ─── Hero Search ─── */
 .search-hero {
-  background:linear-gradient(135deg,#1a1612 0%,#2a2018 50%,#1a1612 100%);
-  border-top:1px solid rgba(201,148,58,0.2);
+  background:linear-gradient(135deg,var(--ink) 0%,var(--search-hero-mid,#2a2018) 50%,var(--ink) 100%);
+  border-top:1px solid rgba(var(--gold-rgb,201,148,58),0.2);
   border-bottom:3px solid var(--gold);
   padding:1.5rem 2.5rem 1.75rem;
   position:relative; z-index:10;
@@ -257,7 +255,7 @@ header {
 .search-field-select {
   font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.05em;
   padding:0 1rem;
-  background-color:#7a5a10;
+  background-color:var(--sepia);
   border:1px solid var(--gold); border-right:none;
   color:var(--parchment); outline:none; cursor:pointer; appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23f5f0e8'/%3E%3C/svg%3E");
@@ -282,47 +280,49 @@ header {
 .search-chips { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
 .chips-label {
   font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.15em;
-  text-transform:uppercase; color:rgba(201,148,58,0.6); margin-right:0.25rem;
+  text-transform:uppercase; color:var(--gold); opacity:0.6; margin-right:0.25rem;
 }
 .chip {
   font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.08em;
   padding:0.3rem 0.75rem; background:transparent;
-  border:1px solid rgba(201,148,58,0.35); color:rgba(245,240,232,0.65);
+  border:1px solid var(--border); color:var(--parchment);
+  opacity:0.65;
   cursor:pointer; transition:all 0.15s; white-space:nowrap; text-transform:uppercase;
 }
 .chip:hover, .chip.active {
-  background:rgba(201,148,58,0.2); border-color:var(--gold); color:var(--gold);
+  background:var(--aged); border-color:var(--gold); color:var(--gold); opacity:1;
 }
 .adv-toggle {
   font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.12em;
   text-transform:uppercase; background:none;
-  border:1px solid rgba(201,148,58,0.3); color:rgba(201,148,58,0.6);
+  border:1px solid var(--border); color:var(--gold);
+  opacity:0.6;
   padding:0.3rem 0.75rem; cursor:pointer; transition:all 0.15s; margin-left:auto;
 }
-.adv-toggle:hover { border-color:var(--gold); color:var(--gold); }
-.adv-panel { display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(201,148,58,0.2); }
+.adv-toggle:hover { border-color:var(--gold); color:var(--gold); opacity:1; }
+.adv-panel { display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); }
 .adv-panel.open { display:block; }
 .adv-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.75rem; }
 .adv-group { display:flex; flex-direction:column; gap:0.3rem; }
 .adv-label {
   font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
-  letter-spacing:0.2em; text-transform:uppercase; color:rgba(201,148,58,0.6);
+  letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.6;
 }
 .adv-input, .adv-select {
   font-family:'Crimson Pro',serif; font-size:0.9rem;
   padding:0.45rem 0.65rem;
-  background:rgba(245,240,232,0.08); border:1px solid rgba(201,148,58,0.3);
+  background:var(--ink); opacity:0.85; border:1px solid var(--border);
   color:var(--parchment); outline:none; transition:border-color 0.2s; width:100%;
 }
-.adv-input::placeholder { color:rgba(245,240,232,0.3); font-style:italic; }
-.adv-input:focus, .adv-select:focus { border-color:var(--gold); background:rgba(245,240,232,0.12); }
+.adv-input::placeholder { color:var(--muted); font-style:italic; opacity:0.6; }
+.adv-input:focus, .adv-select:focus { border-color:var(--gold); opacity:1; }
 .adv-select {
   appearance:none; cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9943a'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-position:right 0.6rem center;
-  padding-right:1.8rem; background-color:rgba(245,240,232,0.08);
+  padding-right:1.8rem; background-color:var(--ink);
 }
-.adv-select option { background:#1a1612; color:var(--parchment); }
+.adv-select option { background:var(--ink); color:var(--parchment); }
 .adv-actions { display:flex; gap:0.6rem; margin-top:0.75rem; align-items:center; }
 .adv-search-btn {
   font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.12em;
@@ -334,18 +334,18 @@ header {
 .adv-clear-btn {
   font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.12em;
   text-transform:uppercase; padding:0.5rem 1rem; background:transparent;
-  border:1px solid rgba(201,148,58,0.35); color:rgba(245,240,232,0.5);
+  border:1px solid var(--border); color:var(--parchment); opacity:0.5;
   cursor:pointer; transition:all 0.15s;
 }
-.adv-clear-btn:hover { border-color:var(--gold); color:var(--gold); }
+.adv-clear-btn:hover { border-color:var(--gold); color:var(--gold); opacity:1; }
 .active-filters { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem; }
 .active-filter-pill {
   font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.08em;
   padding:0.25rem 0.6rem;
-  background:rgba(201,148,58,0.15); border:1px solid rgba(201,148,58,0.4);
+  background:var(--aged); border:1px solid var(--border);
   color:var(--gold); display:flex; align-items:center; gap:0.4rem; cursor:pointer;
 }
-.active-filter-pill:hover { background:rgba(201,148,58,0.25); }
+.active-filter-pill:hover { background:var(--sepia); border-color:var(--gold); }
 .active-filter-pill .pill-x { font-size:0.75rem; opacity:0.7; }
 
 /* ─── Nav ─── */
@@ -471,6 +471,11 @@ nav {
   background:var(--cream); border:1px solid var(--border);
   cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;
   position:relative; overflow:hidden;
+  /* FIX #9: keyboard accessibility */
+  outline:none;
+}
+.doc-card:focus-visible {
+  box-shadow:0 0 0 3px var(--gold);
 }
 .doc-card::after {
   content:''; position:absolute;
@@ -526,6 +531,9 @@ nav {
 .doc-list .doc-title { font-size:0.92rem; margin:0; flex:1; min-width:200px; display:block; -webkit-line-clamp:unset; }
 .doc-list .doc-excerpt, .doc-list .doc-meta-pills { display:none; }
 .doc-list .doc-footer { border-top:none; padding:0; flex-shrink:0; }
+
+/* ─── FIX #5: meta-item styling ─── */
+.meta-item { padding:0.2rem 0; }
 
 /* ─── Empty ─── */
 .empty-state {
@@ -754,7 +762,6 @@ nav {
       <div class="logo-sub">Official Digital Repository · Resolutions, Ordinances &amp; Proclamations · Marinduque, Philippines</div>
     </div>
     <div class="header-right">
-      <div class="header-count" id="total-count">Loading records…</div>
       <button class="customizer-toggle-btn" id="cust-toggle-btn" onclick="toggleCustomizer()">🎨 Customize</button>
     </div>
   </div>
@@ -961,10 +968,9 @@ nav {
         <div class="cust-head-title">Color Customizer <span>Live Preview</span></div>
       </div>
       <button class="cust-close" onclick="closeCustomizer()">✕ Close</button>
+      <div id="theme-sync-status">● Synced across devices</div>
     </div>
     <div class="cust-body">
-
-      <!-- Live preview strip -->
       <div class="cust-section-label">Current Palette</div>
       <div class="cust-preview-strip" id="preview-strip">
         <div class="preview-ink-block" title="--ink"></div>
@@ -979,29 +985,20 @@ nav {
         <div class="preview-muted-block" title="--muted"></div>
         <span class="preview-label">10 vars</span>
       </div>
-
-      <!-- Preset themes -->
       <div class="cust-section-label">Preset Themes</div>
       <div class="preset-grid" id="preset-grid"></div>
-
       <hr class="cust-divider">
-
-      <!-- Individual color rows -->
       <div class="cust-section-label">Header &amp; Navigation</div>
       <div class="color-group" id="cg-header"></div>
-
       <hr class="cust-divider">
       <div class="cust-section-label">Page Background &amp; Surfaces</div>
       <div class="color-group" id="cg-bg"></div>
-
       <hr class="cust-divider">
       <div class="cust-section-label">Accents &amp; Highlights</div>
       <div class="color-group" id="cg-accent"></div>
-
       <hr class="cust-divider">
       <div class="cust-section-label">Text &amp; Borders</div>
       <div class="color-group" id="cg-text"></div>
-
     </div>
     <div class="cust-foot">
       <button class="cust-btn cust-btn-secondary" onclick="exportTheme()">↓ Export CSS</button>
@@ -1053,6 +1050,16 @@ const sb = {
   },
   fileUrl(bucket, path) { return SUPABASE_URL+'/storage/v1/object/public/'+bucket+'/'+path; }
 };
+
+// ─── Sanitize helper (FIX #4: prevent XSS in user-supplied strings) ───
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 // ─── Type/Status colors ───
 const TYPE_COLORS = {
@@ -1130,20 +1137,28 @@ function populateBrgyFilter() {
   [...brgys].sort().forEach(b => { const o=document.createElement('option'); o.value=b; o.textContent=b; sel.appendChild(o); });
 }
 
+// FIX #4: renderTagList uses escHtml + data-cat attribute instead of inline onclick string
 function renderTagList() {
   const cats = {};
   docs.forEach(d => { if (d.category) cats[d.category] = (cats[d.category]||0)+1; });
   const colors = ['#3a5a4a','#8b3a1a','#1a3a6a','#5a3a8a','#6a4a00','#2a5a5a','#5a2a2a','#3a4a2a','#8a4a2a'];
   const list = document.getElementById('tag-list');
   const entries = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
-  list.innerHTML = entries.length
-    ? entries.map(([cat,count],i) =>
-        `<div class="tag-item${selectedCategory===cat?' selected':''}" onclick="filterByCategory('${cat.replace(/'/g,"\\'")}')">
-          <span class="tag-name"><span class="tag-dot" style="background:${colors[i%colors.length]}"></span>${cat}</span>
-          <span class="tag-count">${count}</span>
-        </div>`
-      ).join('')
-    : '<div style="font-size:.8rem;color:var(--muted);font-style:italic">No categories yet</div>';
+  if (!entries.length) {
+    list.innerHTML = '<div style="font-size:.8rem;color:var(--muted);font-style:italic">No categories yet</div>';
+    return;
+  }
+  list.innerHTML = entries.map(([cat,count],i) =>
+    `<div class="tag-item${selectedCategory===cat?' selected':''}" data-cat="${escHtml(cat)}" tabindex="0" role="button" aria-pressed="${selectedCategory===cat}">
+      <span class="tag-name"><span class="tag-dot" style="background:${colors[i%colors.length]}"></span>${escHtml(cat)}</span>
+      <span class="tag-count">${count}</span>
+    </div>`
+  ).join('');
+
+  list.querySelectorAll('.tag-item').forEach(el => {
+    el.addEventListener('click', () => filterByCategory(el.dataset.cat));
+    el.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); filterByCategory(el.dataset.cat); } });
+  });
 }
 
 function filterByCategory(cat) {
@@ -1159,7 +1174,6 @@ function renderStats() {
   document.getElementById('stat-proc').textContent   = docs.filter(d=>d.type==='Proclamation').length;
   document.getElementById('stat-exec').textContent   = docs.filter(d=>d.type==='Executive Order').length;
   document.getElementById('stat-active').textContent = docs.filter(d=>d.status==='Active').length;
-  document.getElementById('total-count').textContent = `${docs.length} Records Archived\nMogpog, Marinduque`;
 }
 
 function updateSearchPlaceholder() {
@@ -1227,11 +1241,15 @@ function clearAll() {
 
 function renderFilterPills() {
   const labels = { _q:'Search',title:'Title',number:'No.',person:'Person',barangay:'Barangay',year:'Year',type:'Type',status:'Status',category:'Category',keyword:'Keyword' };
+  // FIX #4: escHtml values in pills
   document.getElementById('active-filters').innerHTML = Object.entries(activeFilters)
     .filter(([,v]) => v)
     .map(([k,v]) =>
-      `<div class="active-filter-pill" onclick="removeFilter('${k}')"><span>${labels[k]||k}: <strong>${v}</strong></span><span class="pill-x">✕</span></div>`
+      `<div class="active-filter-pill" data-key="${escHtml(k)}">${escHtml(labels[k]||k)}: <strong>${escHtml(v)}</strong><span class="pill-x">✕</span></div>`
     ).join('');
+  document.getElementById('active-filters').querySelectorAll('.active-filter-pill').forEach(el => {
+    el.addEventListener('click', () => removeFilter(el.dataset.key));
+  });
 }
 
 function removeFilter(key) { delete activeFilters[key]; renderFilterPills(); applyFilters(); }
@@ -1249,7 +1267,10 @@ function applyFilters() {
     for (const [key, val] of Object.entries(af)) {
       if (!val) continue;
       const v = val.toLowerCase();
-      if (key==='_q') { const hay=[d.title,d.num,d.summary,d.fulltext,d.sponsor,d.category,d.barangay,...(d.tags||[])].join(' ').toLowerCase(); if(!hay.includes(v)) return false; }
+      if (key==='_q') {
+        const hay=[d.title,d.num,d.summary,d.fulltext,d.sponsor,d.category,d.barangay,...(d.tags||[])].join(' ').toLowerCase();
+        if(!hay.includes(v)) return false;
+      }
       else if (key==='title'    && !(d.title   ||'').toLowerCase().includes(v)) return false;
       else if (key==='number'   && !(d.num     ||'').toLowerCase().includes(v)) return false;
       else if (key==='year'     && !(d.date    ||'').startsWith(val))           return false;
@@ -1258,7 +1279,11 @@ function applyFilters() {
       else if (key==='category' && !(d.category||'').toLowerCase().includes(v)) return false;
       else if (key==='type'     && d.type !== val)                              return false;
       else if (key==='status'   && d.status !== val)                            return false;
-      else if (key==='keyword') { const hay=[...(d.tags||[]),d.summary||'',d.fulltext||''].join(' ').toLowerCase(); if(!hay.includes(v)) return false; }
+      // FIX #3: keyword now also searches fulltext, consistent with _q
+      else if (key==='keyword') {
+        const hay=[...(d.tags||[]),d.summary||'',d.fulltext||'',d.title||''].join(' ').toLowerCase();
+        if(!hay.includes(v)) return false;
+      }
     }
     return true;
   });
@@ -1295,8 +1320,17 @@ function renderDocs() {
   if (!filtered.length) { container.innerHTML=''; empty.style.display='block'; document.getElementById('pagination').innerHTML=''; return; }
   empty.style.display='none';
   container.innerHTML = page.map(d => currentView==='grid' ? gridCard(d) : listCard(d)).join('');
+  // FIX #9: add keyboard accessibility to cards after render
+  container.querySelectorAll('.doc-card').forEach(card => {
+    card.setAttribute('tabindex','0');
+    card.setAttribute('role','button');
+    card.addEventListener('keydown', e => {
+      if (e.key==='Enter'||e.key===' ') { e.preventDefault(); card.click(); }
+    });
+  });
 }
 
+// FIX #4: gridCard and listCard use escHtml for all user-supplied text
 function gridCard(d) {
   const tc=TYPE_COLORS[d.type]||TYPE_COLORS['Resolution'], sc=STATUS_COLORS[d.status]||STATUS_COLORS['Active'];
   const dateStr=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'--';
@@ -1306,18 +1340,18 @@ function gridCard(d) {
     <div class="doc-type-bar" style="background:${tc.bar}"></div>
     <div class="doc-body">
       <div class="doc-header-row">
-        <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${d.type}</div>
-        <div class="doc-number"># ${d.num||''}</div>
+        <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${escHtml(d.type)}</div>
+        <div class="doc-number"># ${escHtml(d.num||'')}</div>
       </div>
-      <div class="doc-title">${d.title||''}</div>
-      <div class="doc-excerpt">${excerpt}${excerpt?'…':''}</div>
+      <div class="doc-title">${escHtml(d.title||'')}</div>
+      <div class="doc-excerpt">${escHtml(excerpt)}${excerpt?'…':''}</div>
       <div class="doc-meta-pills">
-        ${brgy?`<span class="doc-meta-pill">📍 ${brgyDisp}</span>`:''}
-        <span class="doc-meta-pill">🗂 ${d.category||'General'}</span>
+        ${brgy?`<span class="doc-meta-pill">📍 ${escHtml(brgyDisp)}</span>`:''}
+        <span class="doc-meta-pill">🗂 ${escHtml(d.category||'General')}</span>
       </div>
       <div class="doc-footer">
-        <div class="doc-date">${dateStr}</div>
-        <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40">${d.status}</div>
+        <div class="doc-date">${escHtml(dateStr)}</div>
+        <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40">${escHtml(d.status)}</div>
       </div>
     </div>
   </div>`;
@@ -1329,10 +1363,10 @@ function listCard(d) {
   return `<div class="doc-card" onclick="openDoc(${d.id})">
     <div class="doc-body">
       <div class="doc-header-row" style="flex-wrap:wrap;align-items:center">
-        <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${d.type.slice(0,3).toUpperCase()}</div>
-        <div class="doc-title" style="flex:1;min-width:200px;margin:0 0.75rem">${d.title||''}</div>
-        <div class="doc-date" style="flex-shrink:0">${dateStr}</div>
-        <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40;margin-left:.5rem;flex-shrink:0">${d.status}</div>
+        <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${escHtml(d.type.slice(0,3).toUpperCase())}</div>
+        <div class="doc-title" style="flex:1;min-width:200px;margin:0 0.75rem">${escHtml(d.title||'')}</div>
+        <div class="doc-date" style="flex-shrink:0">${escHtml(dateStr)}</div>
+        <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40;margin-left:.5rem;flex-shrink:0">${escHtml(d.status)}</div>
       </div>
     </div>
   </div>`;
@@ -1364,16 +1398,23 @@ function openDoc(id) {
   document.getElementById('modal-doc-type').textContent=d.type.toUpperCase()+(d.category?' — '+d.category:'');
   document.getElementById('modal-title').textContent=d.title;
   document.getElementById('modal-meta').innerHTML=`
-    <div class="meta-item"><span class="meta-key">Document No.</span><span class="meta-val">${d.num||'--'}</span></div>
-    <div class="meta-item"><span class="meta-key">Date Enacted</span><span class="meta-val">${fmtDate}</span></div>
-    <div class="meta-item"><span class="meta-key">Status</span><span class="meta-val" style="color:${sc.color}">${d.status}</span></div>
-    <div class="meta-item"><span class="meta-key">Sponsor / Author</span><span class="meta-val">${d.sponsor||'--'}</span></div>
-    <div class="meta-item"><span class="meta-key">Affected Barangay(s)</span><span class="meta-val">${d.barangay||'--'}</span></div>
-    <div class="meta-item"><span class="meta-key">Category</span><span class="meta-val">${d.category||'--'}</span></div>`;
-  document.getElementById('modal-summary').innerHTML=d.summary?`<p>${d.summary}</p>`:'<p style="color:var(--muted);font-style:italic">No summary provided.</p>';
+    <div class="meta-item"><span class="meta-key">Document No.</span><span class="meta-val">${escHtml(d.num||'--')}</span></div>
+    <div class="meta-item"><span class="meta-key">Date Enacted</span><span class="meta-val">${escHtml(fmtDate)}</span></div>
+    <div class="meta-item"><span class="meta-key">Status</span><span class="meta-val" style="color:${sc.color}">${escHtml(d.status)}</span></div>
+    <div class="meta-item"><span class="meta-key">Sponsor / Author</span><span class="meta-val">${escHtml(d.sponsor||'--')}</span></div>
+    <div class="meta-item"><span class="meta-key">Affected Barangay(s)</span><span class="meta-val">${escHtml(d.barangay||'--')}</span></div>
+    <div class="meta-item"><span class="meta-key">Category</span><span class="meta-val">${escHtml(d.category||'--')}</span></div>`;
+  document.getElementById('modal-summary').innerHTML=d.summary?`<p>${escHtml(d.summary)}</p>`:'<p style="color:var(--muted);font-style:italic">No summary provided.</p>';
   const ftSection=document.getElementById('modal-fulltext-section');
-  ftSection.innerHTML=d.fulltext?`<hr class="modal-divider"><div class="modal-section-head">Full Text</div><div class="modal-fulltext">${d.fulltext}</div>`:'';
-  document.getElementById('modal-tags').innerHTML=(d.tags||[]).map(t=>`<span class="modal-tag" onclick="quickChip('${t}','keyword');closeModal()">${t}</span>`).join('');
+  ftSection.innerHTML=d.fulltext?`<hr class="modal-divider"><div class="modal-section-head">Full Text</div><div class="modal-fulltext">${escHtml(d.fulltext)}</div>`:'';
+
+  // FIX #4: modal tags use data-tag + event listeners instead of inline onclick
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = (d.tags||[]).map(t=>`<span class="modal-tag" data-tag="${escHtml(t)}">${escHtml(t)}</span>`).join('');
+  tagsEl.querySelectorAll('.modal-tag').forEach(el => {
+    el.addEventListener('click', () => { quickChip(el.dataset.tag,'keyword'); closeModal(); });
+  });
+
   const pdfSection=document.getElementById('modal-pdf-section'), pdfViewer=document.getElementById('modal-pdf-viewer'), pdfFrame=document.getElementById('modal-pdf-frame'), pdfBtn=document.getElementById('modal-pdf-btn');
   if(d.pdf_url){pdfSection.style.display='block';pdfViewer.style.display='none';pdfFrame.src='';pdfBtn.textContent='📄 View PDF';document.getElementById('modal-pdf-download').href=d.pdf_url;}
   else{pdfSection.style.display='none';}
@@ -1397,7 +1438,7 @@ function closeModal() {
 function printDoc() {
   if(!currentDoc) return;
   const d=currentDoc, w=window.open('','_blank');
-  w.document.write(`<html><head><title>${d.num}</title><style>body{font-family:Georgia,serif;max-width:700px;margin:2rem auto;color:#0f0e0c;line-height:1.7}h1{font-size:1.1rem;margin-bottom:.5rem}.meta{font-size:.8rem;color:#6b5c3e;margin-bottom:1rem;border-bottom:1px solid #c4b48a;padding-bottom:.5rem}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:.9rem;line-height:1.75}@media print{@page{margin:2cm}}</style></head><body><div class="meta">${d.type} No. ${d.num} &middot; ${d.date} &middot; Status: ${d.status}${d.barangay?' &middot; '+d.barangay:''}</div><h1>${d.title}</h1><p style="font-size:.88rem;color:#6b5c3e;margin-bottom:1rem">${d.summary||''}</p><pre>${d.fulltext||''}</pre></body></html>`);
+  w.document.write(`<html><head><title>${escHtml(d.num)}</title><style>body{font-family:Georgia,serif;max-width:700px;margin:2rem auto;color:#0f0e0c;line-height:1.7}h1{font-size:1.1rem;margin-bottom:.5rem}.meta{font-size:.8rem;color:#6b5c3e;margin-bottom:1rem;border-bottom:1px solid #c4b48a;padding-bottom:.5rem}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:.9rem;line-height:1.75}@media print{@page{margin:2cm}}</style></head><body><div class="meta">${escHtml(d.type)} No. ${escHtml(d.num)} &middot; ${escHtml(d.date)} &middot; Status: ${escHtml(d.status)}${d.barangay?' &middot; '+escHtml(d.barangay):''}</div><h1>${escHtml(d.title)}</h1><p style="font-size:.88rem;color:#6b5c3e;margin-bottom:1rem">${escHtml(d.summary||'')}</p><pre>${escHtml(d.fulltext||'')}</pre></body></html>`);
   w.document.close(); w.print();
 }
 
@@ -1406,23 +1447,60 @@ function copyLink() {
   navigator.clipboard.writeText(location.origin+location.pathname+'#doc-'+currentDoc.id).then(()=>toast('Link copied to clipboard'));
 }
 
+// FIX #1: deleteDoc — check response status; only mutate local state on confirmed DB success
 async function deleteDoc() {
   if(!currentDoc) return;
   if(!confirm(`Delete "${currentDoc.title}"? This cannot be undone.`)) return;
+  const docToDelete = currentDoc;
   try {
-    if(currentDoc.pdf_url){try{const fileName=currentDoc.pdf_url.split('/').pop();await fetch(SUPABASE_URL+'/storage/v1/object/documents/'+fileName,{method:'DELETE',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}});}catch(e){}}
-    await fetch(SUPABASE_URL+'/rest/v1/documents?id=eq.'+currentDoc.id,{method:'DELETE',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}});
-    docs=docs.filter(x=>x.id!==currentDoc.id); filtered=filtered.filter(x=>x.id!==currentDoc.id);
-    closeModal(); populateYearFilters(); populateBrgyFilter(); renderTagList(); renderStats(); applyFilters(); updateStorageUsage();
+    // Delete PDF from storage first (best-effort; don't abort doc delete if this fails)
+    if(docToDelete.pdf_url) {
+      try {
+        const fileName = docToDelete.pdf_url.split('/').pop();
+        await fetch(SUPABASE_URL+'/storage/v1/object/documents/'+fileName, {
+          method:'DELETE',
+          headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY }
+        });
+      } catch(e) { /* PDF delete failure is non-fatal */ }
+    }
+
+    // Delete the document record
+    const res = await fetch(SUPABASE_URL+'/rest/v1/documents?id=eq.'+docToDelete.id, {
+      method:'DELETE',
+      headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, Prefer:'return=representation' }
+    });
+
+    // FIX #1: only update UI if server confirmed deletion
+    if (!res.ok) {
+      const errBody = await res.text();
+      console.error('Delete failed:', res.status, errBody);
+      toast('Error: could not delete record (server error).');
+      return;
+    }
+
+    // Server confirmed — now safe to update local state
+    docs = docs.filter(x => x.id !== docToDelete.id);
+    filtered = filtered.filter(x => x.id !== docToDelete.id);
+    closeModal();
+    populateYearFilters();
+    populateBrgyFilter();
+    renderTagList();
+    renderStats();
+    applyFilters();
+    updateStorageUsage();
     toast('Record deleted.');
-  } catch(e){toast('Error deleting record.');}
+  } catch(e) {
+    toast('Network error — record was not deleted.');
+  }
 }
 
 function editDoc() { if(!currentDoc) return; closeModal(); openForm(currentDoc.id); }
 
+// FIX #6: openForm clears the PDF label text immediately before opening the drawer
 function openForm(id=null) {
   editingId=id;
   document.getElementById('drawer-title').textContent=id?'Edit Record':'Add New Record';
+  // Clear PDF label first so stale text never shows
   document.getElementById('pdf-file-name').textContent='';
   document.getElementById('f-pdf').value='';
   if(id){
@@ -1453,21 +1531,40 @@ async function saveRecord() {
   const saveBtn=document.getElementById('save-btn'); saveBtn.textContent='Saving…'; saveBtn.disabled=true;
   let pdf_url=editingId?(docs.find(x=>x.id===editingId)||{}).pdf_url||null:null;
   const pdfFile=document.getElementById('f-pdf').files[0];
+
+  // FIX #2: stricter PDF upload check — verify response has a usable path
   if(pdfFile){
     try{
       const safeName=num.replace(/[^a-zA-Z0-9\-_]/g,'_')+'_'+Date.now()+'.pdf';
       const up=await sb.uploadFile('documents',safeName,pdfFile);
-      if(up.Key||up.path||up.name){const k=(up.Key||up.path||up.name||safeName).split('/').pop();pdf_url=sb.fileUrl('documents',k);}
-      else{toast('PDF upload failed — record saved without PDF');}
-    }catch(e){toast('PDF upload error — record saved without PDF');}
+      const uploadedPath = up.Key || up.path || up.name;
+      if(uploadedPath) {
+        const fileName = uploadedPath.split('/').pop();
+        pdf_url = sb.fileUrl('documents', fileName);
+      } else {
+        console.warn('PDF upload response missing path:', up);
+        toast('PDF upload failed — record will be saved without PDF.');
+      }
+    }catch(e){
+      console.error('PDF upload error:', e);
+      toast('PDF upload error — record saved without PDF.');
+    }
   }
+
   const rec={type:document.getElementById('f-type').value,num,title,date,status:document.getElementById('f-status').value,category:document.getElementById('f-category').value.trim()||'General',sponsor:document.getElementById('f-sponsor').value.trim()||'--',barangay:document.getElementById('f-barangay').value.trim()||'',summary:document.getElementById('f-summary').value.trim(),fulltext:document.getElementById('f-fulltext').value.trim(),tags:document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean).join(','),pdf_url};
   try{
-    if(editingId){const updated=await sb.update('documents',editingId,rec);const idx=docs.findIndex(x=>x.id===editingId);docs[idx]=normalizeDoc(Array.isArray(updated)&&updated[0]?updated[0]:{...rec,id:editingId});}
-    else{const inserted=await sb.insert('documents',rec);if(Array.isArray(inserted)&&inserted[0])docs.unshift(normalizeDoc(inserted[0]));else{toast('Error saving record. Check database connection.');saveBtn.textContent='Save Record';saveBtn.disabled=false;return;}}
+    if(editingId){
+      const updated=await sb.update('documents',editingId,rec);
+      const idx=docs.findIndex(x=>x.id===editingId);
+      docs[idx]=normalizeDoc(Array.isArray(updated)&&updated[0]?updated[0]:{...rec,id:editingId});
+    } else {
+      const inserted=await sb.insert('documents',rec);
+      if(Array.isArray(inserted)&&inserted[0]) docs.unshift(normalizeDoc(inserted[0]));
+      else { toast('Error saving record. Check database connection.'); saveBtn.textContent='Save Record'; saveBtn.disabled=false; return; }
+    }
     filtered=[...docs]; closeForm(); populateYearFilters(); populateBrgyFilter(); renderTagList(); renderStats(); applyFilters(); updateStorageUsage();
     toast(editingId?'Record updated successfully':'Record added successfully');
-  }catch(e){toast('Error saving to database.');}
+  }catch(e){ toast('Error saving to database.'); }
   saveBtn.textContent='Save Record'; saveBtn.disabled=false;
 }
 
@@ -1511,7 +1608,6 @@ const DEFAULT_THEME = {
   '--muted':     '#6b5c3e',
 };
 
-// Each variable's label and description
 const VAR_META = {
   '--ink':       { label:'Ink',       desc:'Header bg, dark buttons, card hover bg', group:'header' },
   '--gold':      { label:'Gold',      desc:'Primary accent — borders, active tabs', group:'header' },
@@ -1526,50 +1622,17 @@ const VAR_META = {
 };
 
 const PRESETS = [
-  {
-    name: 'Classic Parchment', id: 'classic',
-    swatches: ['#0f0e0c','#f5f0e8','#c9943a','#8b6914','#3a5a4a'],
-    vars: { '--ink':'#0f0e0c','--parchment':'#f5f0e8','--aged':'#e8dfc8','--sepia':'#8b6914','--gold':'#c9943a','--rust':'#8b3a1a','--sage':'#3a5a4a','--cream':'#faf7f0','--border':'#c4b48a','--muted':'#6b5c3e' }
-  },
-  {
-    name: 'Night Registry', id: 'night',
-    swatches: ['#1a1a2e','#0d1117','#4a9eff','#2d6a9f','#1e4d6b'],
-    vars: { '--ink':'#1a1a2e','--parchment':'#0d1117','--aged':'#161b22','--sepia':'#2d6a9f','--gold':'#4a9eff','--rust':'#e06c75','--sage':'#98c379','--cream':'#0a0e14','--border':'#30363d','--muted':'#8b949e' }
-  },
-  {
-    name: 'Emerald Court', id: 'emerald',
-    swatches: ['#1a2e1a','#f0f7f0','#3a8a3a','#1e5a1e','#2d6b2d'],
-    vars: { '--ink':'#1a2e1a','--parchment':'#f0f7f0','--aged':'#d8ecd8','--sepia':'#2d6b2d','--gold':'#3a8a3a','--rust':'#8b3a1a','--sage':'#1e5a1e','--cream':'#f5fbf5','--border':'#a8c8a8','--muted':'#4a6b4a' }
-  },
-  {
-    name: 'Royal Navy', id: 'navy',
-    swatches: ['#0a1628','#f0f4f8','#c8a96e','#1a3a6a','#2c5282'],
-    vars: { '--ink':'#0a1628','--parchment':'#f0f4f8','--aged':'#dce4ef','--sepia':'#1a3a6a','--gold':'#c8a96e','--rust':'#9b2335','--sage':'#2c5282','--cream':'#f7f9fc','--border':'#b0c4de','--muted':'#4a6280' }
-  },
-  {
-    name: 'Crimson Ledger', id: 'crimson',
-    swatches: ['#1c0a0a','#fdf6f6','#cc2936','#8b1a1a','#6b2d2d'],
-    vars: { '--ink':'#1c0a0a','--parchment':'#fdf6f6','--aged':'#f5e0e0','--sepia':'#8b1a1a','--gold':'#cc2936','--rust':'#6b2d2d','--sage':'#2d5a2d','--cream':'#fff9f9','--border':'#d4a0a0','--muted':'#6b3c3c' }
-  },
-  {
-    name: 'Manila Sand', id: 'manila',
-    swatches: ['#2c1810','#fef9f0','#d4a853','#8b5e3c','#a0724a'],
-    vars: { '--ink':'#2c1810','--parchment':'#fef9f0','--aged':'#f5e8d0','--sepia':'#8b5e3c','--gold':'#d4a853','--rust':'#a0472a','--sage':'#4a6a3a','--cream':'#fffcf5','--border':'#d4b896','--muted':'#7a5a40' }
-  },
-  {
-    name: 'Slate & Silver', id: 'slate',
-    swatches: ['#1e2530','#f4f6f8','#6ba3be','#3a5a6e','#4a7a8e'],
-    vars: { '--ink':'#1e2530','--parchment':'#f4f6f8','--aged':'#dfe5ec','--sepia':'#3a5a6e','--gold':'#6ba3be','--rust':'#8b4a3a','--sage':'#3a6a5a','--cream':'#f8fafb','--border':'#b0bec8','--muted':'#5a6a7a' }
-  },
-  {
-    name: 'Violet Archive', id: 'violet',
-    swatches: ['#1a0a2e','#f8f4ff','#9b5de5','#5a1e8a','#7a3ab0'],
-    vars: { '--ink':'#1a0a2e','--parchment':'#f8f4ff','--aged':'#ede0ff','--sepia':'#5a1e8a','--gold':'#9b5de5','--rust':'#c45c8a','--sage':'#3a5a8a','--cream':'#fbf8ff','--border':'#c8a8e8','--muted':'#6a4a8a' }
-  },
+  { name:'Classic Parchment', id:'classic', swatches:['#0f0e0c','#f5f0e8','#c9943a','#8b6914','#3a5a4a'], vars:{'--ink':'#0f0e0c','--parchment':'#f5f0e8','--aged':'#e8dfc8','--sepia':'#8b6914','--gold':'#c9943a','--rust':'#8b3a1a','--sage':'#3a5a4a','--cream':'#faf7f0','--border':'#c4b48a','--muted':'#6b5c3e'} },
+  { name:'Night Registry',    id:'night',   swatches:['#1a1a2e','#0d1117','#4a9eff','#2d6a9f','#1e4d6b'], vars:{'--ink':'#1a1a2e','--parchment':'#0d1117','--aged':'#161b22','--sepia':'#2d6a9f','--gold':'#4a9eff','--rust':'#e06c75','--sage':'#98c379','--cream':'#0a0e14','--border':'#30363d','--muted':'#8b949e'} },
+  { name:'Emerald Court',     id:'emerald', swatches:['#1a2e1a','#f0f7f0','#3a8a3a','#1e5a1e','#2d6b2d'], vars:{'--ink':'#1a2e1a','--parchment':'#f0f7f0','--aged':'#d8ecd8','--sepia':'#2d6b2d','--gold':'#3a8a3a','--rust':'#8b3a1a','--sage':'#1e5a1e','--cream':'#f5fbf5','--border':'#a8c8a8','--muted':'#4a6b4a'} },
+  { name:'Royal Navy',        id:'navy',    swatches:['#0a1628','#f0f4f8','#c8a96e','#1a3a6a','#2c5282'], vars:{'--ink':'#0a1628','--parchment':'#f0f4f8','--aged':'#dce4ef','--sepia':'#1a3a6a','--gold':'#c8a96e','--rust':'#9b2335','--sage':'#2c5282','--cream':'#f7f9fc','--border':'#b0c4de','--muted':'#4a6280'} },
+  { name:'Crimson Ledger',    id:'crimson', swatches:['#1c0a0a','#fdf6f6','#cc2936','#8b1a1a','#6b2d2d'], vars:{'--ink':'#1c0a0a','--parchment':'#fdf6f6','--aged':'#f5e0e0','--sepia':'#8b1a1a','--gold':'#cc2936','--rust':'#6b2d2d','--sage':'#2d5a2d','--cream':'#fff9f9','--border':'#d4a0a0','--muted':'#6b3c3c'} },
+  { name:'Manila Sand',       id:'manila',  swatches:['#2c1810','#fef9f0','#d4a853','#8b5e3c','#a0724a'], vars:{'--ink':'#2c1810','--parchment':'#fef9f0','--aged':'#f5e8d0','--sepia':'#8b5e3c','--gold':'#d4a853','--rust':'#a0472a','--sage':'#4a6a3a','--cream':'#fffcf5','--border':'#d4b896','--muted':'#7a5a40'} },
+  { name:'Slate & Silver',    id:'slate',   swatches:['#1e2530','#f4f6f8','#6ba3be','#3a5a6e','#4a7a8e'], vars:{'--ink':'#1e2530','--parchment':'#f4f6f8','--aged':'#dfe5ec','--sepia':'#3a5a6e','--gold':'#6ba3be','--rust':'#8b4a3a','--sage':'#3a6a5a','--cream':'#f8fafb','--border':'#b0bec8','--muted':'#5a6a7a'} },
+  { name:'Violet Archive',    id:'violet',  swatches:['#1a0a2e','#f8f4ff','#9b5de5','#5a1e8a','#7a3ab0'], vars:{'--ink':'#1a0a2e','--parchment':'#f8f4ff','--aged':'#ede0ff','--sepia':'#5a1e8a','--gold':'#9b5de5','--rust':'#c45c8a','--sage':'#3a5a8a','--cream':'#fbf8ff','--border':'#c8a8e8','--muted':'#6a4a8a'} },
 ];
 
 let currentTheme = { ...DEFAULT_THEME };
-let savedTheme = null;
 
 function applyThemeToDOM(vars) {
   const root = document.documentElement;
@@ -1589,7 +1652,6 @@ function syncInputsFromTheme(vars) {
 }
 
 function hexToColor(hex) {
-  // Ensure 6-digit hex for color input
   hex = hex.trim();
   if (hex.startsWith('#') && hex.length === 7) return hex;
   if (hex.startsWith('#') && hex.length === 4) {
@@ -1612,6 +1674,7 @@ function onColorPickerChange(varName, colorInput) {
   if (swatchDiv) swatchDiv.style.background = hex;
   updatePreviewStrip(currentTheme);
   clearPresetActive();
+  saveThemeToStorage();
 }
 
 function onHexInputChange(varName, hexInput) {
@@ -1628,6 +1691,7 @@ function onHexInputChange(varName, hexInput) {
   if (swatchDiv) swatchDiv.style.background = val;
   updatePreviewStrip(currentTheme);
   clearPresetActive();
+  saveThemeToStorage();
 }
 
 function updatePreviewStrip(vars) {
@@ -1653,6 +1717,7 @@ function applyPreset(id) {
   document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
   const btn = document.getElementById('preset-'+id);
   if (btn) btn.classList.add('active');
+  saveThemeToStorage();
 }
 
 function buildColorRow(varName) {
@@ -1679,25 +1744,19 @@ function buildColorRow(varName) {
 }
 
 function buildCustomizerUI() {
-  // Presets
   const presetGrid = document.getElementById('preset-grid');
   presetGrid.innerHTML = PRESETS.map(p =>
-    `<button class="preset-btn${p.id === 'classic' ? ' active' : ''}" id="preset-${p.id}" onclick="applyPreset('${p.id}')">
+    `<button class="preset-btn${p.id==='classic'?' active':''}" id="preset-${p.id}" onclick="applyPreset('${p.id}')">
       <div class="preset-swatches">
-        ${p.swatches.map(c => `<div class="preset-swatch" style="background:${c}"></div>`).join('')}
+        ${p.swatches.map(c=>`<div class="preset-swatch" style="background:${c}"></div>`).join('')}
       </div>
-      ${p.name}
+      ${escHtml(p.name)}
     </button>`
   ).join('');
 
-  // Group vars
-  const headerVars = ['--ink','--gold','--sepia','--rust','--sage'];
-  const bgVars     = ['--parchment','--cream','--aged'];
-  const textVars   = ['--border','--muted'];
-
-  document.getElementById('cg-header').innerHTML = headerVars.map(buildColorRow).join('');
-  document.getElementById('cg-bg').innerHTML      = bgVars.map(buildColorRow).join('');
-  document.getElementById('cg-text').innerHTML    = textVars.map(buildColorRow).join('');
+  document.getElementById('cg-header').innerHTML = ['--ink','--gold','--sepia','--rust','--sage'].map(buildColorRow).join('');
+  document.getElementById('cg-bg').innerHTML      = ['--parchment','--cream','--aged'].map(buildColorRow).join('');
+  document.getElementById('cg-text').innerHTML    = ['--border','--muted'].map(buildColorRow).join('');
 }
 
 function toggleCustomizer() {
@@ -1727,6 +1786,7 @@ function resetTheme() {
   document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
   const classicBtn = document.getElementById('preset-classic');
   if (classicBtn) classicBtn.classList.add('active');
+  saveThemeToStorage();
   toast('Colors reset to default.');
 }
 
@@ -1734,34 +1794,34 @@ function exportTheme() {
   const lines = [':root {'];
   Object.entries(currentTheme).forEach(([k,v]) => lines.push(`  ${k}: ${v};`));
   lines.push('}');
-  const cssText = lines.join('\n');
-  const blob = new Blob([cssText], { type: 'text/css' });
+  const blob = new Blob([lines.join('\n')], { type:'text/css' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'mogpog-archive-theme.css'; a.click();
+  a.href=url; a.download='mogpog-archive-theme.css'; a.click();
   URL.revokeObjectURL(url);
   toast('Theme exported as CSS file.');
 }
 
 function importTheme() {
   const input = document.createElement('input');
-  input.type = 'file'; input.accept = '.css,text/css';
+  input.type='file'; input.accept='.css,text/css';
   input.onchange = e => {
-    const file = e.target.files[0]; if (!file) return;
+    const file = e.target.files[0]; if(!file) return;
     const reader = new FileReader();
     reader.onload = ev => {
       const css = ev.target.result;
       const imported = {};
       Object.keys(DEFAULT_THEME).forEach(varName => {
-        const regex = new RegExp(varName.replace('--','--') + '\\s*:\\s*(#[0-9a-fA-F]{3,6})');
+        const regex = new RegExp(varName.replace('--','--')+'\\s*:\\s*(#[0-9a-fA-F]{3,6})');
         const match = css.match(regex);
-        if (match) imported[varName] = match[1];
+        if(match) imported[varName] = match[1];
       });
-      if (Object.keys(imported).length === 0) { toast('No valid CSS variables found in file.'); return; }
+      if(!Object.keys(imported).length){toast('No valid CSS variables found in file.');return;}
       currentTheme = { ...DEFAULT_THEME, ...imported };
       applyThemeToDOM(currentTheme);
       syncInputsFromTheme(currentTheme);
       clearPresetActive();
+      saveThemeToStorage();
       toast(`Imported ${Object.keys(imported).length} color variables.`);
     };
     reader.readAsText(file);
@@ -1769,40 +1829,106 @@ function importTheme() {
   input.click();
 }
 
-// Load saved theme from localStorage if any
-function loadSavedTheme() {
+
+// ══════════════════════════════════════════════
+//  CROSS-DEVICE THEME SYNC
+// ══════════════════════════════════════════════
+
+const THEME_SETTING_KEY = 'color_theme';
+const THEME_LOCAL_KEY   = 'mogpog-theme';
+
+function setThemeSyncStatus(status) {
+  const el = document.getElementById('theme-sync-status');
+  if (!el) return;
+  const map = {
+    idle:   { text:'● Synced across devices', color:'#3a8a3a' },
+    saving: { text:'↻ Saving…',               color:'#c9943a' },
+    saved:  { text:'✓ Saved to all devices',   color:'#3a8a3a' },
+    error:  { text:'⚠ Saved locally only',     color:'#c04040' },
+    loading:{ text:'↻ Loading saved theme…',   color:'#c9943a' },
+  };
+  const m = map[status] || map.idle;
+  el.textContent = m.text;
+  el.style.color  = m.color;
+}
+
+let _saveTimer = null;
+function debouncedRemoteSave(vars) {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => _doRemoteSave(vars), 800);
+}
+
+async function _doRemoteSave(vars) {
+  setThemeSyncStatus('saving');
   try {
-    const saved = localStorage.getItem('mogpog-theme');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      currentTheme = { ...DEFAULT_THEME, ...parsed };
-      applyThemeToDOM(currentTheme);
+    const valueStr = JSON.stringify(vars);
+    const patchRes = await fetch(
+      SUPABASE_URL+'/rest/v1/site_settings?key=eq.'+THEME_SETTING_KEY,
+      { method:'PATCH', headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' }, body:JSON.stringify({ value:valueStr }) }
+    );
+    const patched = await patchRes.json();
+    if (Array.isArray(patched) && patched.length === 0) {
+      await fetch(SUPABASE_URL+'/rest/v1/site_settings', {
+        method:'POST',
+        headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
+        body:JSON.stringify({ key:THEME_SETTING_KEY, value:valueStr })
+      });
     }
-  } catch(e) {}
+    setThemeSyncStatus('saved');
+    setTimeout(() => setThemeSyncStatus('idle'), 2500);
+  } catch(e) {
+    setThemeSyncStatus('error');
+  }
 }
 
 function saveThemeToStorage() {
-  try { localStorage.setItem('mogpog-theme', JSON.stringify(currentTheme)); } catch(e) {}
+  try { localStorage.setItem(THEME_LOCAL_KEY, JSON.stringify(currentTheme)); } catch(e) {}
+  debouncedRemoteSave(currentTheme);
 }
 
-// Auto-save on any change
-const _origOnColorPickerChange = onColorPickerChange;
-const _origOnHexInputChange = onHexInputChange;
+// FIX #8: load theme only once — removed duplicate inline localStorage read at boot
+async function loadSavedTheme() {
+  try {
+    const local = localStorage.getItem(THEME_LOCAL_KEY);
+    if (local) {
+      currentTheme = { ...DEFAULT_THEME, ...JSON.parse(local) };
+      applyThemeToDOM(currentTheme);
+    }
+  } catch(e) {}
 
-// Override to also save
-window.onColorPickerChange = function(varName, input) {
-  _origOnColorPickerChange(varName, input);
-  saveThemeToStorage();
-};
-window.onHexInputChange = function(varName, input) {
-  _origOnHexInputChange(varName, input);
-  saveThemeToStorage();
-};
+  setThemeSyncStatus('loading');
+  try {
+    const res = await fetch(
+      SUPABASE_URL+'/rest/v1/site_settings?key=eq.'+THEME_SETTING_KEY+'&select=value',
+      { headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY } }
+    );
+    const rows = await res.json();
+    if (Array.isArray(rows) && rows[0] && rows[0].value) {
+      currentTheme = { ...DEFAULT_THEME, ...JSON.parse(rows[0].value) };
+      applyThemeToDOM(currentTheme);
+      try { localStorage.setItem(THEME_LOCAL_KEY, JSON.stringify(currentTheme)); } catch(e) {}
+    }
+    setThemeSyncStatus('idle');
+    return true;
+  } catch(e) {
+    setThemeSyncStatus('error');
+    return false;
+  }
+}
 
-// ── Boot ──
-loadSavedTheme();
+// ── Boot ── FIX #8: single theme load path, no duplicate apply
 buildCustomizerUI();
 syncInputsFromTheme(currentTheme);
+
+loadSavedTheme().then(() => {
+  syncInputsFromTheme(currentTheme);
+  PRESETS.forEach(p => {
+    const matches = Object.entries(p.vars).every(([k,v]) => currentTheme[k] === v);
+    const btn = document.getElementById('preset-'+p.id);
+    if (btn) btn.classList.toggle('active', matches);
+  });
+});
+
 init();
 </script>
 </body>
