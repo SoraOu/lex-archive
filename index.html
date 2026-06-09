@@ -902,7 +902,6 @@
         <hr class="modal-divider">
         <div class="modal-section-head">Summary</div>
         <div class="modal-body-text" id="modal-summary"></div>
-        <div id="modal-fulltext-section"></div>
         <div class="modal-tags" id="modal-tags"></div>
         <div class="modal-pdf-section" id="modal-pdf-section" style="display:none">
           <hr class="modal-divider">
@@ -947,7 +946,6 @@
         </div>
         <div class="form-row"><label class="form-label">Affected Barangay(s)</label><input class="form-input" id="f-barangay" type="text" placeholder="e.g. Isok I, Daig or All Barangays"></div>
         <div class="form-row"><label class="form-label">Summary</label><textarea class="form-textarea" id="f-summary" placeholder="Brief summary of the document's purpose…"></textarea></div>
-        <div class="form-row"><label class="form-label">Full Text</label><textarea class="form-textarea" id="f-fulltext" style="min-height:120px" placeholder="Paste the full text here…"></textarea></div>
         <div class="form-row"><label class="form-label">Tags <span style="font-weight:400;color:var(--muted)">(comma-separated)</span></label><input class="form-input" id="f-tags" type="text" placeholder="e.g. budget, health, environment"></div>
         <div class="form-row">
           <label class="form-label">Attach PDF <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
@@ -1410,9 +1408,7 @@
       <div class="meta-item"><span class="meta-key">Affected Barangay(s)</span><span class="meta-val">${escHtml(d.barangay||'--')}</span></div>
       <div class="meta-item"><span class="meta-key">Category</span><span class="meta-val">${escHtml(d.category||'--')}</span></div>`;
     document.getElementById('modal-summary').innerHTML=d.summary?`<p>${escHtml(d.summary)}</p>`:'<p style="color:var(--muted);font-style:italic">No summary provided.</p>';
-    const ftSection=document.getElementById('modal-fulltext-section');
-    ftSection.innerHTML=d.fulltext?`<hr class="modal-divider"><div class="modal-section-head">Full Text</div><div class="modal-fulltext">${escHtml(d.fulltext)}</div>`:'';
-
+    
     // FIX #4: modal tags use data-tag + event listeners instead of inline onclick
     const tagsEl = document.getElementById('modal-tags');
     tagsEl.innerHTML = (d.tags||[]).map(t=>`<span class="modal-tag" data-tag="${escHtml(t)}">${escHtml(t)}</span>`).join('');
@@ -1518,7 +1514,7 @@
       document.getElementById('f-tags').value=(d.tags||[]).join(', ');
       if(d.pdf_url) document.getElementById('pdf-file-name').textContent='Current PDF attached';
     } else {
-      ['f-num','f-title','f-date','f-summary','f-fulltext','f-tags','f-category','f-sponsor','f-barangay'].forEach(fid=>document.getElementById(fid).value='');
+      ['f-num','f-title','f-date','f-summary','f-tags','f-category','f-sponsor','f-barangay'].forEach(fid=>document.getElementById(fid).value='');
       document.getElementById('f-type').value='Resolution'; document.getElementById('f-status').value='Active';
     }
     document.getElementById('form-overlay').classList.add('open');
@@ -1556,7 +1552,7 @@
       }
     }
 
-    const rec={type:document.getElementById('f-type').value,num,title,date,status:document.getElementById('f-status').value,category:document.getElementById('f-category').value.trim()||'General',sponsor:document.getElementById('f-sponsor').value.trim()||'--',barangay:document.getElementById('f-barangay').value.trim()||'',summary:document.getElementById('f-summary').value.trim(),fulltext:document.getElementById('f-fulltext').value.trim(),tags:document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean).join(','),pdf_url};
+    const rec={type:document.getElementById('f-type').value,num,title,date,status:document.getElementById('f-status').value,category:document.getElementById('f-category').value.trim()||'General',sponsor:document.getElementById('f-sponsor').value.trim()||'--',barangay:document.getElementById('f-barangay').value.trim()||'',summary:document.getElementById('f-summary').value.trim(),tags:document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean).join(','),pdf_url};
     try{
       if(editingId){
         const updated=await sb.update('documents',editingId,rec);
