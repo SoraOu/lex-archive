@@ -1,1935 +1,1943 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Municipality of Mogpog — Legislative Archive</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:ital,opsz,wght@0,6..100,300;0,6..100,400;0,6..100,600;1,6..100,300&display=swap" rel="stylesheet">
-<style>
-:root {
-  --ink: #0f0e0c;
-  --parchment: #f5f0e8;
-  --aged: #e8dfc8;
-  --sepia: #8b6914;
-  --gold: #c9943a;
-  --rust: #8b3a1a;
-  --sage: #3a5a4a;
-  --cream: #faf7f0;
-  --border: #c4b48a;
-  --muted: #6b5c3e;
-  --blue: #1a3a6a;
-  --shadow: rgba(15,14,12,0.12);
-  --radius: 2px;
-}
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipality of Mogpog — Legislative Archive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:ital,opsz,wght@0,6..100,300;0,6..100,400;0,6..100,600;1,6..100,300&display=swap" rel="stylesheet">
+  <style>
+  :root {
+    --ink: #0f0e0c;
+    --parchment: #f5f0e8;
+    --aged: #e8dfc8;
+    --sepia: #8b6914;
+    --gold: #c9943a;
+    --rust: #8b3a1a;
+    --sage: #3a5a4a;
+    --cream: #faf7f0;
+    --border: #c4b48a;
+    --muted: #6b5c3e;
+    --blue: #1a3a6a;
+    --hero-mid: #2a2018;
+    --shadow: rgba(15,14,12,0.12);
+    --radius: 2px;
+  }
 
-*{ margin:0; padding:0; box-sizing:border-box; }
-html { font-size:16px; scroll-behavior:smooth; }
-body {
-  font-family:'Crimson Pro',Georgia,serif;
-  background:var(--parchment);
-  color:var(--ink);
-  min-height:100vh;
-  overflow-x:hidden;
-}
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:
-    repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(139,105,20,0.05) 28px,rgba(139,105,20,0.05) 29px),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;
-  z-index:0;
-}
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html { font-size:16px; scroll-behavior:smooth; }
+  body {
+    font-family:'Crimson Pro',Georgia,serif;
+    background:var(--parchment);
+    color:var(--ink);
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  body::before {
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(139,105,20,0.05) 28px,rgba(139,105,20,0.05) 29px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:0;
+  }
 
-/* ─── Header ─── */
-header {
-  position:relative; z-index:10;
-  background:var(--ink);
-  color:var(--parchment);
-  border-bottom:3px solid var(--gold);
-}
-.header-top {
-  max-width:1280px; margin:0 auto;
-  padding:1.1rem 2.5rem;
-  display:grid; grid-template-columns:auto 1fr auto;
-  align-items:center; gap:1.5rem;
-}
-.header-seal {
-  width:58px; height:58px; border-radius:50%;
-  background:radial-gradient(circle,#c9943a 0%,#8b6914 60%,#5a4010 100%);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.6rem; flex-shrink:0;
-  border:2px solid rgba(201,148,58,0.5);
-  box-shadow:0 0 0 3px rgba(201,148,58,0.15);
-}
-.logo-title {
-  font-family:'Playfair Display',serif;
-  font-size:1.55rem; font-weight:900; letter-spacing:0.02em;
-  color:var(--parchment); line-height:1.1;
-}
-.logo-title span { color:var(--gold); }
-.logo-sub {
-  font-family:'IBM Plex Mono',monospace;
-  font-size:0.58rem; letter-spacing:0.25em;
-  color:var(--border); text-transform:uppercase; margin-top:0.2rem;
-}
-.header-right { text-align:right; display:flex; align-items:center; gap:0.75rem; }
-.header-count {
-  font-family:'IBM Plex Mono',monospace;
-  font-size:0.62rem; color:var(--gold);
-  opacity:0.75; line-height:1.6; white-space:pre-line;
-}
+  /* ─── Header ─── */
+  header {
+    position:relative; z-index:10;
+    background:var(--ink);
+    color:var(--parchment);
+    border-bottom:3px solid var(--gold);
+  }
+  .header-top {
+    max-width:1280px; margin:0 auto;
+    padding:1.1rem 2.5rem;
+    display:grid; grid-template-columns:auto 1fr auto;
+    align-items:center; gap:1.5rem;
+  }
+  .header-seal {
+    width:58px; height:58px; border-radius:50%;
+    background:radial-gradient(circle,#c9943a 0%,#8b6914 60%,#5a4010 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; flex-shrink:0;
+    border:2px solid rgba(201,148,58,0.5);
+    box-shadow:0 0 0 3px rgba(201,148,58,0.15);
+  }
+  .logo-title {
+    font-family:'Playfair Display',serif;
+    font-size:1.55rem; font-weight:900; letter-spacing:0.02em;
+    color:var(--parchment); line-height:1.1;
+  }
+  .logo-title span { color:var(--gold); }
+  .logo-sub {
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.58rem; letter-spacing:0.25em;
+    color:var(--border); text-transform:uppercase; margin-top:0.2rem;
+  }
+  .header-right { text-align:right; display:flex; align-items:center; gap:0.75rem; }
+  .header-count {
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.62rem; color:var(--gold);
+    opacity:0.75; line-height:1.6; white-space:pre-line;
+  }
 
-/* ─── Customizer Toggle Button ─── */
-.customizer-toggle-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.6rem;
-  letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.42rem 0.85rem;
-  background:transparent; border:1px solid rgba(201,148,58,0.4);
-  color:rgba(201,148,58,0.7); cursor:pointer;
-  transition:all 0.2s; white-space:nowrap; flex-shrink:0;
-}
-.customizer-toggle-btn:hover,
-.customizer-toggle-btn.open {
-  background:rgba(201,148,58,0.15); border-color:var(--gold); color:var(--gold);
-}
+  /* ─── Customizer Toggle Button ─── */
+  .customizer-toggle-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.6rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.42rem 0.85rem;
+    background:transparent; border:1px solid rgba(201,148,58,0.4);
+    color:rgba(201,148,58,0.7); cursor:pointer;
+    transition:all 0.2s; white-space:nowrap; flex-shrink:0;
+  }
+  .customizer-toggle-btn:hover,
+  .customizer-toggle-btn.open {
+    background:rgba(201,148,58,0.15); border-color:var(--gold); color:var(--gold);
+  }
 
-/* ─── Color Customizer Panel ─── */
-#customizer-overlay {
-  position:fixed; inset:0;
-  background:rgba(15,14,12,0.5);
-  z-index:2000; display:none; justify-content:flex-end;
-  backdrop-filter:blur(2px);
-}
-#customizer-overlay.open { display:flex; }
+  /* ─── Color Customizer Panel ─── */
+  #customizer-overlay {
+    position:fixed; inset:0;
+    background:rgba(15,14,12,0.5);
+    z-index:2000; display:none; justify-content:flex-end;
+    backdrop-filter:blur(2px);
+  }
+  #customizer-overlay.open { display:flex; }
 
-#customizer-drawer {
-  background:var(--cream); width:380px; max-width:100%;
-  height:100%; overflow-y:auto;
-  box-shadow:-8px 0 32px rgba(15,14,12,0.28);
-  animation:cust-slide-in 0.22s ease;
-  border-left:3px solid var(--gold);
-  display:flex; flex-direction:column;
-}
-@keyframes cust-slide-in {
-  from { transform:translateX(100%); }
-  to   { transform:translateX(0); }
-}
+  #customizer-drawer {
+    background:var(--cream); width:380px; max-width:100%;
+    height:100%; overflow-y:auto;
+    box-shadow:-8px 0 32px rgba(15,14,12,0.28);
+    animation:cust-slide-in 0.22s ease;
+    border-left:3px solid var(--gold);
+    display:flex; flex-direction:column;
+  }
+  @keyframes cust-slide-in {
+    from { transform:translateX(100%); }
+    to   { transform:translateX(0); }
+  }
 
-.cust-head {
-  position:sticky; top:0; z-index:2;
-  background:var(--ink); color:var(--parchment);
-  padding:1rem 1.25rem;
-  border-bottom:2px solid var(--gold);
-  display:flex; justify-content:space-between; align-items:center;
-  flex-wrap:wrap; gap:0.4rem;
-}
-.cust-head-title {
-  font-family:'Playfair Display',serif;
-  font-size:1rem; font-weight:700; font-style:italic;
-}
-.cust-head-title span { color:var(--gold); font-size:0.75rem; font-style:normal; font-weight:400; margin-left:0.5rem; font-family:'IBM Plex Mono',monospace; letter-spacing:0.1em; }
-.cust-close {
-  background:none; border:1px solid rgba(201,148,58,0.4);
-  color:rgba(201,148,58,0.7); font-family:'IBM Plex Mono',monospace;
-  font-size:0.65rem; padding:0.25rem 0.6rem; cursor:pointer; transition:all 0.15s;
-}
-.cust-close:hover { background:rgba(201,148,58,0.2); color:var(--gold); }
+  .cust-head {
+    position:sticky; top:0; z-index:2;
+    background:var(--ink); color:var(--parchment);
+    padding:1rem 1.25rem;
+    border-bottom:2px solid var(--gold);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:0.4rem;
+  }
+  .cust-head-title {
+    font-family:'Playfair Display',serif;
+    font-size:1rem; font-weight:700; font-style:italic;
+  }
+  .cust-head-title span { color:var(--gold); font-size:0.75rem; font-style:normal; font-weight:400; margin-left:0.5rem; font-family:'IBM Plex Mono',monospace; letter-spacing:0.1em; }
+  .cust-close {
+    background:none; border:1px solid rgba(201,148,58,0.4);
+    color:rgba(201,148,58,0.7); font-family:'IBM Plex Mono',monospace;
+    font-size:0.65rem; padding:0.25rem 0.6rem; cursor:pointer; transition:all 0.15s;
+  }
+  .cust-close:hover { background:rgba(201,148,58,0.2); color:var(--gold); }
 
-#theme-sync-status {
-  font-family:'IBM Plex Mono',monospace; font-size:0.57rem;
-  letter-spacing:0.1em; width:100%;
-  padding:0.3rem 0; transition:color 0.3s;
-  color:#3a8a3a;
-}
+  #theme-sync-status {
+    font-family:'IBM Plex Mono',monospace; font-size:0.57rem;
+    letter-spacing:0.1em; width:100%;
+    padding:0.3rem 0; transition:color 0.3s;
+    color:#3a8a3a;
+  }
 
-.cust-body { padding:1.1rem 1.25rem; flex:1; }
+  .cust-body { padding:1.1rem 1.25rem; flex:1; }
 
-.cust-section-label {
-  font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
-  letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia);
-  margin-bottom:0.65rem; display:flex; align-items:center; gap:0.5rem;
-}
-.cust-section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+  .cust-section-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia);
+    margin-bottom:0.65rem; display:flex; align-items:center; gap:0.5rem;
+  }
+  .cust-section-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
-.preset-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.45rem; margin-bottom:1.1rem; }
-.preset-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.08em;
-  text-transform:uppercase; padding:0.55rem 0.5rem; cursor:pointer;
-  border:1px solid var(--border); background:var(--parchment);
-  color:var(--muted); transition:all 0.15s; text-align:center;
-  display:flex; flex-direction:column; gap:0.25rem; align-items:center;
-}
-.preset-btn:hover { border-color:var(--sepia); color:var(--ink); }
-.preset-btn.active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-.preset-swatches { display:flex; gap:2px; }
-.preset-swatch { width:10px; height:10px; border-radius:1px; }
+  .preset-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.45rem; margin-bottom:1.1rem; }
+  .preset-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.08em;
+    text-transform:uppercase; padding:0.55rem 0.5rem; cursor:pointer;
+    border:1px solid var(--border); background:var(--parchment);
+    color:var(--muted); transition:all 0.15s; text-align:center;
+    display:flex; flex-direction:column; gap:0.25rem; align-items:center;
+  }
+  .preset-btn:hover { border-color:var(--sepia); color:var(--ink); }
+  .preset-btn.active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+  .preset-swatches { display:flex; gap:2px; }
+  .preset-swatch { width:10px; height:10px; border-radius:1px; }
 
-.color-group { margin-bottom:1rem; }
-.color-row {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0.4rem 0; border-bottom:1px dashed var(--border); gap:0.5rem;
-}
-.color-row:last-child { border-bottom:none; }
-.color-row-info { flex:1; min-width:0; }
-.color-row-name {
-  font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.1em;
-  text-transform:uppercase; color:var(--ink); display:block;
-}
-.color-row-desc {
-  font-size:0.72rem; color:var(--muted); font-style:italic;
-}
-.color-row-controls { display:flex; align-items:center; gap:0.4rem; flex-shrink:0; }
-.color-hex-input {
-  font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
-  width:80px; padding:0.28rem 0.45rem;
-  background:var(--parchment); border:1px solid var(--border);
-  color:var(--ink); outline:none; text-transform:uppercase; letter-spacing:0.05em;
-}
-.color-hex-input:focus { border-color:var(--sepia); }
-.color-swatch-btn {
-  width:28px; height:28px; border:1px solid var(--border); cursor:pointer;
-  padding:0; overflow:hidden; position:relative; flex-shrink:0;
-}
-.color-swatch-btn input[type=color] {
-  position:absolute; inset:-4px; width:calc(100% + 8px); height:calc(100% + 8px);
-  opacity:0; cursor:pointer; border:none; padding:0;
-}
+  .color-group { margin-bottom:1rem; }
+  .color-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.4rem 0; border-bottom:1px dashed var(--border); gap:0.5rem;
+  }
+  .color-row:last-child { border-bottom:none; }
+  .color-row-info { flex:1; min-width:0; }
+  .color-row-name {
+    font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink); display:block;
+  }
+  .color-row-desc {
+    font-size:0.72rem; color:var(--muted); font-style:italic;
+  }
+  .color-row-controls { display:flex; align-items:center; gap:0.4rem; flex-shrink:0; }
+  .color-hex-input {
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
+    width:80px; padding:0.28rem 0.45rem;
+    background:var(--parchment); border:1px solid var(--border);
+    color:var(--ink); outline:none; text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .color-hex-input:focus { border-color:var(--sepia); }
+  .color-swatch-btn {
+    width:28px; height:28px; border:1px solid var(--border); cursor:pointer;
+    padding:0; overflow:hidden; position:relative; flex-shrink:0;
+  }
+  .color-swatch-btn input[type=color] {
+    position:absolute; inset:-4px; width:calc(100% + 8px); height:calc(100% + 8px);
+    opacity:0; cursor:pointer; border:none; padding:0;
+  }
 
-.cust-preview-strip {
-  display:flex; gap:0.3rem; padding:0.65rem; margin-bottom:0.85rem;
-  background:var(--ink); border:1px solid rgba(201,148,58,0.3);
-}
-.preview-ink-block { width:24px; height:24px; background:var(--ink); border:1px solid rgba(255,255,255,0.1); }
-.preview-parchment-block { width:24px; height:24px; background:var(--parchment); border:1px solid rgba(0,0,0,0.1); }
-.preview-gold-block { width:24px; height:24px; background:var(--gold); }
-.preview-sepia-block { width:24px; height:24px; background:var(--sepia); }
-.preview-rust-block { width:24px; height:24px; background:var(--rust); }
-.preview-sage-block { width:24px; height:24px; background:var(--sage); }
-.preview-border-block { width:24px; height:24px; background:var(--border); }
-.preview-cream-block { width:24px; height:24px; background:var(--cream); border:1px solid rgba(0,0,0,0.1); }
-.preview-muted-block { width:24px; height:24px; background:var(--muted); }
-.preview-aged-block { width:24px; height:24px; background:var(--aged); }
-.preview-label {
-  font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
-  color:rgba(201,148,58,0.5); letter-spacing:0.15em; text-transform:uppercase;
-  align-self:center; margin-left:auto;
-}
+  .cust-preview-strip {
+    display:flex; gap:0.3rem; padding:0.65rem; margin-bottom:0.85rem;
+    background:var(--ink); border:1px solid rgba(201,148,58,0.3);
+  }
+  .preview-ink-block { width:24px; height:24px; background:var(--ink); border:1px solid rgba(255,255,255,0.1); }
+  .preview-parchment-block { width:24px; height:24px; background:var(--parchment); border:1px solid rgba(0,0,0,0.1); }
+  .preview-gold-block { width:24px; height:24px; background:var(--gold); }
+  .preview-sepia-block { width:24px; height:24px; background:var(--sepia); }
+  .preview-rust-block { width:24px; height:24px; background:var(--rust); }
+  .preview-sage-block { width:24px; height:24px; background:var(--sage); }
+  .preview-border-block { width:24px; height:24px; background:var(--border); }
+  .preview-cream-block { width:24px; height:24px; background:var(--cream); border:1px solid rgba(0,0,0,0.1); }
+  .preview-muted-block { width:24px; height:24px; background:var(--muted); }
+  .preview-aged-block { width:24px; height:24px; background:var(--aged); }
+  .preview-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
+    color:rgba(201,148,58,0.5); letter-spacing:0.15em; text-transform:uppercase;
+    align-self:center; margin-left:auto;
+  }
 
-.cust-divider { border:none; border-top:1px dashed var(--border); margin:0.85rem 0; }
+  .cust-divider { border:none; border-top:1px dashed var(--border); margin:0.85rem 0; }
 
-.cust-foot {
-  position:sticky; bottom:0;
-  background:var(--cream); border-top:1px solid var(--border);
-  padding:0.85rem 1.25rem;
-  display:flex; gap:0.5rem; flex-wrap:wrap;
-}
-.cust-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
-  letter-spacing:0.1em; text-transform:uppercase;
-  padding:0.5rem 0.85rem; border:1px solid; cursor:pointer; transition:all 0.15s; flex:1;
-  text-align:center;
-}
-.cust-btn-primary { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-.cust-btn-primary:hover { background:var(--sepia); border-color:var(--sepia); }
-.cust-btn-secondary { background:transparent; color:var(--muted); border-color:var(--border); }
-.cust-btn-secondary:hover { background:var(--aged); color:var(--ink); }
-.cust-btn-danger { background:transparent; color:#8b2a2a; border-color:#c4a4a4; }
-.cust-btn-danger:hover { background:#8b2a2a; color:var(--parchment); border-color:#8b2a2a; }
+  .cust-foot {
+    position:sticky; bottom:0;
+    background:var(--cream); border-top:1px solid var(--border);
+    padding:0.85rem 1.25rem;
+    display:flex; gap:0.5rem; flex-wrap:wrap;
+  }
+  .cust-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    padding:0.5rem 0.85rem; border:1px solid; cursor:pointer; transition:all 0.15s; flex:1;
+    text-align:center;
+  }
+  .cust-btn-primary { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+  .cust-btn-primary:hover { background:var(--sepia); border-color:var(--sepia); }
+  .cust-btn-secondary { background:transparent; color:var(--muted); border-color:var(--border); }
+  .cust-btn-secondary:hover { background:var(--aged); color:var(--ink); }
+  .cust-btn-danger { background:transparent; color:#8b2a2a; border-color:#c4a4a4; }
+  .cust-btn-danger:hover { background:#8b2a2a; color:var(--parchment); border-color:#8b2a2a; }
 
-/* ─── Hero Search ─── */
-.search-hero {
-  background:linear-gradient(135deg,var(--ink) 0%,var(--search-hero-mid,#2a2018) 50%,var(--ink) 100%);
-  border-top:1px solid rgba(var(--gold-rgb,201,148,58),0.2);
-  border-bottom:3px solid var(--gold);
-  padding:1.5rem 2.5rem 1.75rem;
-  position:relative; z-index:10;
-}
-.search-hero-inner { max-width:1280px; margin:0 auto; }
-.search-hero-label {
-  font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.3em;
-  text-transform:uppercase; color:var(--gold); opacity:0.7; margin-bottom:0.75rem;
-}
-.search-main-row { display:flex; gap:0; margin-bottom:0.85rem; }
-.search-field-select {
-  font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.05em;
-  padding:0 1rem;
-  background-color:var(--sepia);
-  border:1px solid var(--gold); border-right:none;
-  color:var(--parchment); outline:none; cursor:pointer; appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23f5f0e8'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 0.6rem center;
-  padding-right:2rem; min-width:140px; flex-shrink:0;
-}
-.search-main-input {
-  flex:1; font-family:'Crimson Pro',serif; font-size:1.05rem;
-  padding:0.75rem 1rem;
-  background:var(--parchment); border:1px solid var(--gold); border-right:none;
-  color:var(--ink); outline:none;
-}
-.search-main-input::placeholder { color:var(--muted); font-style:italic; }
-.search-main-input:focus { background:#fff; }
-.search-main-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.15em;
-  text-transform:uppercase; padding:0 1.5rem;
-  background:var(--gold); border:1px solid var(--gold); color:var(--ink);
-  cursor:pointer; font-weight:500; transition:background 0.15s; white-space:nowrap;
-}
-.search-main-btn:hover { background:#e0a840; }
-.search-chips { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
-.chips-label {
-  font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.15em;
-  text-transform:uppercase; color:var(--gold); opacity:0.6; margin-right:0.25rem;
-}
-.chip {
-  font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.08em;
-  padding:0.3rem 0.75rem; background:transparent;
-  border:1px solid var(--border); color:var(--parchment);
-  opacity:0.65;
-  cursor:pointer; transition:all 0.15s; white-space:nowrap; text-transform:uppercase;
-}
-.chip:hover, .chip.active {
-  background:var(--aged); border-color:var(--gold); color:var(--gold); opacity:1;
-}
-.adv-toggle {
-  font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.12em;
-  text-transform:uppercase; background:none;
-  border:1px solid var(--border); color:var(--gold);
-  opacity:0.6;
-  padding:0.3rem 0.75rem; cursor:pointer; transition:all 0.15s; margin-left:auto;
-}
-.adv-toggle:hover { border-color:var(--gold); color:var(--gold); opacity:1; }
-.adv-panel { display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); }
-.adv-panel.open { display:block; }
-.adv-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.75rem; }
-.adv-group { display:flex; flex-direction:column; gap:0.3rem; }
-.adv-label {
-  font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
-  letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.6;
-}
-.adv-input, .adv-select {
-  font-family:'Crimson Pro',serif; font-size:0.9rem;
-  padding:0.45rem 0.65rem;
-  background:var(--ink); opacity:0.85; border:1px solid var(--border);
-  color:var(--parchment); outline:none; transition:border-color 0.2s; width:100%;
-}
-.adv-input::placeholder { color:var(--muted); font-style:italic; opacity:0.6; }
-.adv-input:focus, .adv-select:focus { border-color:var(--gold); opacity:1; }
-.adv-select {
-  appearance:none; cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9943a'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 0.6rem center;
-  padding-right:1.8rem; background-color:var(--ink);
-}
-.adv-select option { background:var(--ink); color:var(--parchment); }
-.adv-actions { display:flex; gap:0.6rem; margin-top:0.75rem; align-items:center; }
-.adv-search-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.12em;
-  text-transform:uppercase; padding:0.5rem 1.2rem;
-  background:var(--gold); border:1px solid var(--gold);
-  color:var(--ink); cursor:pointer; font-weight:500; transition:background 0.15s;
-}
-.adv-search-btn:hover { background:#e0a840; }
-.adv-clear-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.12em;
-  text-transform:uppercase; padding:0.5rem 1rem; background:transparent;
-  border:1px solid var(--border); color:var(--parchment); opacity:0.5;
-  cursor:pointer; transition:all 0.15s;
-}
-.adv-clear-btn:hover { border-color:var(--gold); color:var(--gold); opacity:1; }
-.active-filters { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem; }
-.active-filter-pill {
-  font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.08em;
-  padding:0.25rem 0.6rem;
-  background:var(--aged); border:1px solid var(--border);
-  color:var(--gold); display:flex; align-items:center; gap:0.4rem; cursor:pointer;
-}
-.active-filter-pill:hover { background:var(--sepia); border-color:var(--gold); }
-.active-filter-pill .pill-x { font-size:0.75rem; opacity:0.7; }
+  /* ─── Hero Search ─── */
+  .search-hero {
+    background:linear-gradient(135deg,var(--ink) 0%,var(--hero-mid) 50%,var(--ink) 100%);
+    border-top:1px solid rgba(var(--gold-rgb,201,148,58),0.2);
+    border-bottom:3px solid var(--gold);
+    padding:1.5rem 2.5rem 1.75rem;
+    position:relative; z-index:10;
+  }
+  .search-hero-inner { max-width:1280px; margin:0 auto; }
+  .search-hero-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.3em;
+    text-transform:uppercase; color:var(--gold); opacity:0.7; margin-bottom:0.75rem;
+  }
+  .search-main-row { display:flex; gap:0; margin-bottom:0.85rem; }
+  .search-field-select {
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.05em;
+    padding:0 1rem;
+    background-color:var(--sepia);
+    border:1px solid var(--gold); border-right:none;
+    color:var(--parchment); outline:none; cursor:pointer; appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23f5f0e8'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 0.6rem center;
+    padding-right:2rem; min-width:140px; flex-shrink:0;
+  }
+  .search-main-input {
+    flex:1; font-family:'Crimson Pro',serif; font-size:1.05rem;
+    padding:0.75rem 1rem;
+    background:var(--parchment); border:1px solid var(--gold); border-right:none;
+    color:var(--ink); outline:none;
+  }
+  .search-main-input::placeholder { color:var(--muted); font-style:italic; }
+  .search-main-input:focus { background:#fff; }
+  .search-main-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.15em;
+    text-transform:uppercase; padding:0 1.5rem;
+    background:var(--gold); border:1px solid var(--gold); color:var(--ink);
+    cursor:pointer; font-weight:500; transition:background 0.15s; white-space:nowrap;
+  }
+  .search-main-btn:hover { background:#e0a840; }
+  .search-chips { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
+  .chips-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.15em;
+    text-transform:uppercase; color:var(--gold); opacity:0.6; margin-right:0.25rem;
+  }
+  .chip {
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.08em;
+    padding:0.3rem 0.75rem; background:transparent;
+    border:1px solid var(--border); color:var(--parchment);
+    opacity:0.65;
+    cursor:pointer; transition:all 0.15s; white-space:nowrap; text-transform:uppercase;
+  }
+  .chip:hover, .chip.active {
+    background:var(--aged); border-color:var(--gold); color:var(--gold); opacity:1;
+  }
+  .adv-toggle {
+    font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.12em;
+    text-transform:uppercase; background:none;
+    border:1px solid var(--border); color:var(--gold);
+    opacity:0.6;
+    padding:0.3rem 0.75rem; cursor:pointer; transition:all 0.15s; margin-left:auto;
+  }
+  .adv-toggle:hover { border-color:var(--gold); color:var(--gold); opacity:1; }
+  .adv-panel { display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); }
+  .adv-panel.open { display:block; }
+  .adv-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.75rem; }
+  .adv-group { display:flex; flex-direction:column; gap:0.3rem; }
+  .adv-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.6;
+  }
+  .adv-input, .adv-select {
+    font-family:'Crimson Pro',serif; font-size:0.9rem;
+    padding:0.45rem 0.65rem;
+    background:var(--ink); opacity:0.85; border:1px solid var(--border);
+    color:var(--parchment); outline:none; transition:border-color 0.2s; width:100%;
+  }
+  .adv-input::placeholder { color:var(--muted); font-style:italic; opacity:0.6; }
+  .adv-input:focus, .adv-select:focus { border-color:var(--gold); opacity:1; }
+  .adv-select {
+    appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9943a'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 0.6rem center;
+    padding-right:1.8rem; background-color:var(--ink);
+  }
+  .adv-select option { background:var(--ink); color:var(--parchment); }
+  .adv-actions { display:flex; gap:0.6rem; margin-top:0.75rem; align-items:center; }
+  .adv-search-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.12em;
+    text-transform:uppercase; padding:0.5rem 1.2rem;
+    background:var(--gold); border:1px solid var(--gold);
+    color:var(--ink); cursor:pointer; font-weight:500; transition:background 0.15s;
+  }
+  .adv-search-btn:hover { background:#e0a840; }
+  .adv-clear-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.12em;
+    text-transform:uppercase; padding:0.5rem 1rem; background:transparent;
+    border:1px solid var(--border); color:var(--parchment); opacity:0.5;
+    cursor:pointer; transition:all 0.15s;
+  }
+  .adv-clear-btn:hover { border-color:var(--gold); color:var(--gold); opacity:1; }
+  .active-filters { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem; }
+  .active-filter-pill {
+    font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.08em;
+    padding:0.25rem 0.6rem;
+    background:var(--aged); border:1px solid var(--border);
+    color:var(--gold); display:flex; align-items:center; gap:0.4rem; cursor:pointer;
+  }
+  .active-filter-pill:hover { background:var(--sepia); border-color:var(--gold); }
+  .active-filter-pill .pill-x { font-size:0.75rem; opacity:0.7; }
 
-/* ─── Nav ─── */
-nav {
-  background:var(--ink); border-bottom:1px solid rgba(201,148,58,0.25);
-  position:sticky; top:0; z-index:100;
-}
-.nav-inner {
-  max-width:1280px; margin:0 auto;
-  display:flex; padding:0 2.5rem; align-items:stretch;
-}
-.nav-tab {
-  font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.15em;
-  text-transform:uppercase; padding:0.8rem 1.3rem;
-  color:var(--border); cursor:pointer;
-  border-bottom:2px solid transparent; transition:all 0.2s; white-space:nowrap;
-}
-.nav-tab:hover { color:var(--gold); }
-.nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
-.nav-add {
-  margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:0.65rem;
-  letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.6rem 1.1rem; background:var(--sepia); color:var(--parchment);
-  border:none; cursor:pointer; transition:background 0.15s; align-self:center;
-  border:1px solid rgba(201,148,58,0.4);
-}
-.nav-add:hover { background:var(--gold); color:var(--ink); }
+  /* ─── Nav ─── */
+  nav {
+    background:var(--ink); border-bottom:1px solid rgba(201,148,58,0.25);
+    position:sticky; top:0; z-index:100;
+  }
+  .nav-inner {
+    max-width:1280px; margin:0 auto;
+    display:flex; padding:0 2.5rem; align-items:stretch;
+  }
+  .nav-tab {
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.15em;
+    text-transform:uppercase; padding:0.8rem 1.3rem;
+    color:var(--border); cursor:pointer;
+    border-bottom:2px solid transparent; transition:all 0.2s; white-space:nowrap;
+  }
+  .nav-tab:hover { color:var(--gold); }
+  .nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+  .nav-add {
+    margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:0.65rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.6rem 1.1rem; background:var(--sepia); color:var(--parchment);
+    border:none; cursor:pointer; transition:background 0.15s; align-self:center;
+    border:1px solid rgba(201,148,58,0.4);
+  }
+  .nav-add:hover { background:var(--gold); color:var(--ink); }
 
-/* ─── Main Layout ─── */
-.main {
-  position:relative; z-index:1;
-  max-width:1280px; margin:0 auto;
-  padding:2rem 2.5rem;
-  display:grid; grid-template-columns:260px 1fr;
-  gap:2rem; min-height:calc(100vh - 200px);
-  align-items:start;
-}
+  /* ─── Main Layout ─── */
+  .main {
+    position:relative; z-index:1;
+    max-width:1280px; margin:0 auto;
+    padding:2rem 2.5rem;
+    display:grid; grid-template-columns:260px 1fr;
+    gap:2rem; min-height:calc(100vh - 200px);
+    align-items:start;
+  }
 
-/* ─── Sidebar ─── */
-.sidebar { display:flex; flex-direction:column; gap:1.25rem; position:sticky; top:56px; }
-.sidebar-card {
-  background:var(--cream); border:1px solid var(--border);
-  padding:1.1rem 1.2rem; position:relative;
-}
-.sidebar-card::before {
-  content:''; position:absolute;
-  top:3px; left:3px; right:-3px; bottom:-3px;
-  border:1px solid var(--border); opacity:0.35; pointer-events:none;
-}
-.sidebar-heading {
-  font-family:'IBM Plex Mono',monospace; font-size:0.58rem;
-  letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia);
-  margin-bottom:0.85rem; display:flex; align-items:center; gap:0.5rem;
-}
-.sidebar-heading::after { content:''; flex:1; height:1px; background:var(--border); }
-.filter-group { margin-bottom:0.65rem; }
-.filter-label {
-  font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
-  letter-spacing:0.2em; text-transform:uppercase; color:var(--muted);
-  display:block; margin-bottom:0.3rem;
-}
-.filter-select {
-  width:100%; font-family:'Crimson Pro',serif; font-size:0.9rem;
-  padding:0.42rem 1.8rem 0.42rem 0.6rem;
-  background:var(--parchment); border:1px solid var(--border);
-  color:var(--ink); outline:none; cursor:pointer; appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b6914'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 0.6rem center;
-}
-.filter-select:focus { border-color:var(--sepia); outline:none; }
-.tag-list { display:flex; flex-direction:column; gap:0.25rem; }
-.tag-item {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:0.35rem 0.55rem; cursor:pointer;
-  border:1px solid transparent; transition:all 0.15s; font-size:0.85rem;
-}
-.tag-item:hover { background:var(--aged); border-color:var(--border); }
-.tag-item.selected { background:var(--ink); color:var(--parchment); }
-.tag-name { display:flex; align-items:center; gap:0.4rem; }
-.tag-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-.tag-count {
-  font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:var(--muted);
-  background:var(--aged); padding:0.1rem 0.35rem;
-}
-.tag-item.selected .tag-count { background:rgba(255,255,255,0.15); color:var(--parchment); }
-.stat-row {
-  display:flex; justify-content:space-between; align-items:baseline;
-  padding:0.32rem 0; border-bottom:1px dashed var(--border); font-size:0.85rem;
-}
-.stat-row:last-of-type { border-bottom:none; }
-.stat-val {
-  font-family:'Playfair Display',serif; font-weight:700; font-size:1.15rem; color:var(--sepia);
-}
+  /* ─── Sidebar ─── */
+  .sidebar { display:flex; flex-direction:column; gap:1.25rem; position:sticky; top:56px; }
+  .sidebar-card {
+    background:var(--cream); border:1px solid var(--border);
+    padding:1.1rem 1.2rem; position:relative;
+  }
+  .sidebar-card::before {
+    content:''; position:absolute;
+    top:3px; left:3px; right:-3px; bottom:-3px;
+    border:1px solid var(--border); opacity:0.35; pointer-events:none;
+  }
+  .sidebar-heading {
+    font-family:'IBM Plex Mono',monospace; font-size:0.58rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia);
+    margin-bottom:0.85rem; display:flex; align-items:center; gap:0.5rem;
+  }
+  .sidebar-heading::after { content:''; flex:1; height:1px; background:var(--border); }
+  .filter-group { margin-bottom:0.65rem; }
+  .filter-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--muted);
+    display:block; margin-bottom:0.3rem;
+  }
+  .filter-select {
+    width:100%; font-family:'Crimson Pro',serif; font-size:0.9rem;
+    padding:0.42rem 1.8rem 0.42rem 0.6rem;
+    background:var(--parchment); border:1px solid var(--border);
+    color:var(--ink); outline:none; cursor:pointer; appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b6914'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 0.6rem center;
+  }
+  .filter-select:focus { border-color:var(--sepia); outline:none; }
+  .tag-list { display:flex; flex-direction:column; gap:0.25rem; }
+  .tag-item {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0.35rem 0.55rem; cursor:pointer;
+    border:1px solid transparent; transition:all 0.15s; font-size:0.85rem;
+  }
+  .tag-item:hover { background:var(--aged); border-color:var(--border); }
+  .tag-item.selected { background:var(--ink); color:var(--parchment); }
+  .tag-name { display:flex; align-items:center; gap:0.4rem; }
+  .tag-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .tag-count {
+    font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:var(--muted);
+    background:var(--aged); padding:0.1rem 0.35rem;
+  }
+  .tag-item.selected .tag-count { background:rgba(255,255,255,0.15); color:var(--parchment); }
+  .stat-row {
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:0.32rem 0; border-bottom:1px dashed var(--border); font-size:0.85rem;
+  }
+  .stat-row:last-of-type { border-bottom:none; }
+  .stat-val {
+    font-family:'Playfair Display',serif; font-weight:700; font-size:1.15rem; color:var(--sepia);
+  }
 
-/* ─── Content ─── */
-.content { min-width:0; }
-.content-header {
-  display:flex; align-items:baseline; justify-content:space-between;
-  margin-bottom:1.25rem; padding-bottom:0.65rem;
-  border-bottom:2px solid var(--ink); gap:1rem; flex-wrap:wrap;
-}
-.content-title {
-  font-family:'Playfair Display',serif; font-size:1.5rem;
-  font-weight:700; font-style:italic;
-}
-.content-meta {
-  font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted);
-}
-.view-toggle { display:flex; border:1px solid var(--border); }
-.view-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
-  padding:0.38rem 0.75rem; cursor:pointer;
-  background:var(--cream); border:none; border-right:1px solid var(--border);
-  color:var(--muted); transition:all 0.15s;
-}
-.view-btn:last-child { border-right:none; }
-.view-btn.active { background:var(--ink); color:var(--gold); }
+  /* ─── Content ─── */
+  .content { min-width:0; }
+  .content-header {
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:1.25rem; padding-bottom:0.65rem;
+    border-bottom:2px solid var(--ink); gap:1rem; flex-wrap:wrap;
+  }
+  .content-title {
+    font-family:'Playfair Display',serif; font-size:1.5rem;
+    font-weight:700; font-style:italic;
+  }
+  .content-meta {
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted);
+  }
+  .view-toggle { display:flex; border:1px solid var(--border); }
+  .view-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
+    padding:0.38rem 0.75rem; cursor:pointer;
+    background:var(--cream); border:none; border-right:1px solid var(--border);
+    color:var(--muted); transition:all 0.15s;
+  }
+  .view-btn:last-child { border-right:none; }
+  .view-btn.active { background:var(--ink); color:var(--gold); }
 
-/* ─── Cards ─── */
-.doc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:1.1rem; }
-.doc-list { display:flex; flex-direction:column; }
-.doc-card {
-  background:var(--cream); border:1px solid var(--border);
-  cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;
-  position:relative; overflow:hidden;
-  /* FIX #9: keyboard accessibility */
-  outline:none;
-}
-.doc-card:focus-visible {
-  box-shadow:0 0 0 3px var(--gold);
-}
-.doc-card::after {
-  content:''; position:absolute;
-  top:4px; left:4px; right:-4px; bottom:-4px;
-  border:1px solid var(--border); opacity:0.45;
-  pointer-events:none; z-index:-1; transition:opacity 0.15s;
-}
-.doc-card:hover { transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--border); }
-.doc-card:hover::after { opacity:0; }
-.doc-type-bar { height:4px; }
-.doc-body { padding:1rem 1.15rem 1.1rem; }
-.doc-header-row {
-  display:flex; justify-content:space-between; align-items:flex-start;
-  gap:0.5rem; margin-bottom:0.55rem;
-}
-.doc-badge {
-  font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
-  letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.18rem 0.45rem; border:1px solid currentColor;
-  white-space:nowrap; flex-shrink:0;
-}
-.doc-number { font-family:'IBM Plex Mono',monospace; font-size:0.67rem; color:var(--muted); }
-.doc-title {
-  font-family:'Playfair Display',serif; font-size:0.97rem; font-weight:700;
-  line-height:1.35; margin-bottom:0.4rem;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-}
-.doc-excerpt {
-  font-size:0.82rem; line-height:1.6; color:var(--muted);
-  margin-bottom:0.75rem; font-style:italic;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-}
-.doc-meta-pills { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:0.65rem; }
-.doc-meta-pill {
-  font-family:'IBM Plex Mono',monospace; font-size:0.56rem; letter-spacing:0.07em;
-  padding:0.15rem 0.45rem; background:var(--aged); color:var(--muted);
-  border:1px solid var(--border);
-}
-.doc-footer {
-  display:flex; justify-content:space-between; align-items:center;
-  padding-top:0.65rem; border-top:1px dashed var(--border);
-}
-.doc-date { font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted); }
-.doc-status {
-  font-family:'IBM Plex Mono',monospace; font-size:0.57rem;
-  letter-spacing:0.08em; text-transform:uppercase; padding:0.14rem 0.45rem;
-}
-.doc-list .doc-card::after { display:none; }
-.doc-list .doc-card:hover { transform:none; box-shadow:none; background:var(--aged); }
-.doc-list .doc-card .doc-type-bar { display:none; }
-.doc-list .doc-body { padding:0.75rem 1.15rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
-.doc-list .doc-header-row { margin:0; flex-shrink:0; }
-.doc-list .doc-title { font-size:0.92rem; margin:0; flex:1; min-width:200px; display:block; -webkit-line-clamp:unset; }
-.doc-list .doc-excerpt, .doc-list .doc-meta-pills { display:none; }
-.doc-list .doc-footer { border-top:none; padding:0; flex-shrink:0; }
+  /* ─── Cards ─── */
+  .doc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:1.1rem; }
+  .doc-list { display:flex; flex-direction:column; }
+  .doc-card {
+    background:var(--cream); border:1px solid var(--border);
+    cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;
+    position:relative; overflow:hidden;
+    /* FIX #9: keyboard accessibility */
+    outline:none;
+  }
+  .doc-card:focus-visible {
+    box-shadow:0 0 0 3px var(--gold);
+  }
+  .doc-card::after {
+    content:''; position:absolute;
+    top:4px; left:4px; right:-4px; bottom:-4px;
+    border:1px solid var(--border); opacity:0.45;
+    pointer-events:none; z-index:-1; transition:opacity 0.15s;
+  }
+  .doc-card:hover { transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--border); }
+  .doc-card:hover::after { opacity:0; }
+  .doc-type-bar { height:4px; }
+  .doc-body { padding:1rem 1.15rem 1.1rem; }
+  .doc-header-row {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:0.5rem; margin-bottom:0.55rem;
+  }
+  .doc-badge {
+    font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.18rem 0.45rem; border:1px solid currentColor;
+    white-space:nowrap; flex-shrink:0;
+  }
+  .doc-number { font-family:'IBM Plex Mono',monospace; font-size:0.67rem; color:var(--muted); }
+  .doc-title {
+    font-family:'Playfair Display',serif; font-size:0.97rem; font-weight:700;
+    line-height:1.35; margin-bottom:0.4rem;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .doc-excerpt {
+    font-size:0.82rem; line-height:1.6; color:var(--muted);
+    margin-bottom:0.75rem; font-style:italic;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .doc-meta-pills { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:0.65rem; }
+  .doc-meta-pill {
+    font-family:'IBM Plex Mono',monospace; font-size:0.56rem; letter-spacing:0.07em;
+    padding:0.15rem 0.45rem; background:var(--aged); color:var(--muted);
+    border:1px solid var(--border);
+  }
+  .doc-footer {
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:0.65rem; border-top:1px dashed var(--border);
+  }
+  .doc-date { font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted); }
+  .doc-status {
+    font-family:'IBM Plex Mono',monospace; font-size:0.57rem;
+    letter-spacing:0.08em; text-transform:uppercase; padding:0.14rem 0.45rem;
+  }
+  .doc-list .doc-card::after { display:none; }
+  .doc-list .doc-card:hover { transform:none; box-shadow:none; background:var(--aged); }
+  .doc-list .doc-card .doc-type-bar { display:none; }
+  .doc-list .doc-body { padding:0.75rem 1.15rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .doc-list .doc-header-row { margin:0; flex-shrink:0; }
+  .doc-list .doc-title { font-size:0.92rem; margin:0; flex:1; min-width:200px; display:block; -webkit-line-clamp:unset; }
+  .doc-list .doc-excerpt, .doc-list .doc-meta-pills { display:none; }
+  .doc-list .doc-footer { border-top:none; padding:0; flex-shrink:0; }
 
-/* ─── FIX #5: meta-item styling ─── */
-.meta-item { padding:0.2rem 0; }
+  /* ─── FIX #5: meta-item styling ─── */
+  .meta-item { padding:0.2rem 0; }
 
-/* ─── Empty ─── */
-.empty-state {
-  text-align:center; padding:3.5rem 2rem;
-  color:var(--muted); font-style:italic; font-size:1rem; display:none;
-}
+  /* ─── Empty ─── */
+  .empty-state {
+    text-align:center; padding:3.5rem 2rem;
+    color:var(--muted); font-style:italic; font-size:1rem; display:none;
+  }
 
-/* ─── Pagination ─── */
-.pagination {
-  display:flex; align-items:center; justify-content:center;
-  gap:0.3rem; margin-top:2rem; padding-top:1.25rem; border-top:1px solid var(--border);
-}
-.page-btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
-  width:30px; height:30px; display:flex; align-items:center; justify-content:center;
-  border:1px solid var(--border); cursor:pointer;
-  background:var(--cream); color:var(--muted); transition:all 0.15s;
-}
-.page-btn-wide { width:auto; padding:0 0.75rem; }
-.page-btn:hover, .page-btn.active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-.page-btn:disabled { opacity:0.35; cursor:not-allowed; }
+  /* ─── Pagination ─── */
+  .pagination {
+    display:flex; align-items:center; justify-content:center;
+    gap:0.3rem; margin-top:2rem; padding-top:1.25rem; border-top:1px solid var(--border);
+  }
+  .page-btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--border); cursor:pointer;
+    background:var(--cream); color:var(--muted); transition:all 0.15s;
+  }
+  .page-btn-wide { width:auto; padding:0 0.75rem; }
+  .page-btn:hover, .page-btn.active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+  .page-btn:disabled { opacity:0.35; cursor:not-allowed; }
 
-/* ─── Modal ─── */
-.modal-overlay {
-  position:fixed; inset:0; background:rgba(15,14,12,0.78);
-  z-index:1000; display:flex; align-items:flex-start; justify-content:center;
-  padding:2rem; opacity:0; pointer-events:none; transition:opacity 0.25s; overflow-y:auto;
-}
-.modal-overlay.open { opacity:1; pointer-events:all; }
-.modal {
-  background:var(--cream); border:1px solid var(--border);
-  max-width:700px; width:100%; position:relative;
-  transform:translateY(18px); transition:transform 0.25s; margin:auto;
-}
-.modal-overlay.open .modal { transform:translateY(0); }
-.modal-top-bar { height:5px; }
-.modal-inner { padding:1.75rem 2.25rem; }
-.modal-close-btn {
-  position:absolute; top:0.85rem; right:0.85rem;
-  background:none; border:1px solid var(--border);
-  font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
-  padding:0.28rem 0.65rem; cursor:pointer; color:var(--muted);
-  z-index:10; transition:all 0.15s;
-}
-.modal-close-btn:hover { background:var(--ink); color:var(--parchment); border-color:var(--ink); }
-.modal-doc-type {
-  font-family:'IBM Plex Mono',monospace; font-size:0.6rem;
-  letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.4rem;
-}
-.modal-title {
-  font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:900;
-  line-height:1.25; margin-bottom:1.25rem; padding-right:4rem;
-}
-.modal-meta-grid {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:0.65rem; margin-bottom:1.25rem;
-  padding:1.1rem; background:var(--parchment); border:1px solid var(--border);
-}
-.meta-key {
-  font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
-  letter-spacing:0.2em; text-transform:uppercase; color:var(--muted);
-  display:block; margin-bottom:0.18rem;
-}
-.meta-val { font-size:0.92rem; font-weight:600; }
-.modal-divider { border:none; border-top:2px solid var(--ink); margin:1.25rem 0; }
-.modal-section-head {
-  font-family:'IBM Plex Mono',monospace; font-size:0.6rem;
-  letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia); margin-bottom:0.6rem;
-}
-.modal-body-text { font-size:0.97rem; line-height:1.85; }
-.modal-body-text p { margin-bottom:0.85rem; }
-.modal-fulltext {
-  font-size:0.88rem; line-height:1.8; color:var(--muted);
-  white-space:pre-wrap; max-height:260px; overflow-y:auto;
-  background:var(--parchment); border:1px solid var(--border);
-  padding:0.9rem 1rem; margin-bottom:1rem; font-family:'Crimson Pro',serif;
-}
-.modal-tags { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:1.25rem; }
-.modal-tag {
-  font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.08em;
-  padding:0.22rem 0.55rem; border:1px solid var(--border); color:var(--muted);
-  text-transform:uppercase; cursor:pointer; transition:all 0.15s;
-}
-.modal-tag:hover { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-.modal-pdf-section { margin-top:1.25rem; }
-.modal-pdf-viewer { margin-top:0.75rem; display:none; }
-.modal-pdf-viewer iframe { width:100%; height:480px; border:1px solid var(--border); background:var(--parchment); }
-.pdf-download-link {
-  display:block; margin-top:0.35rem; text-align:right;
-  font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
-  color:var(--sepia); text-decoration:none; letter-spacing:0.08em;
-}
-.pdf-download-link:hover { color:var(--gold); }
-.modal-actions {
-  display:flex; gap:0.65rem; margin-top:1.5rem;
-  padding-top:1.1rem; border-top:1px dashed var(--border); flex-wrap:wrap;
-}
+  /* ─── Modal ─── */
+  .modal-overlay {
+    position:fixed; inset:0; background:rgba(15,14,12,0.78);
+    z-index:1000; display:flex; align-items:flex-start; justify-content:center;
+    padding:2rem; opacity:0; pointer-events:none; transition:opacity 0.25s; overflow-y:auto;
+  }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal {
+    background:var(--cream); border:1px solid var(--border);
+    max-width:700px; width:100%; position:relative;
+    transform:translateY(18px); transition:transform 0.25s; margin:auto;
+  }
+  .modal-overlay.open .modal { transform:translateY(0); }
+  .modal-top-bar { height:5px; }
+  .modal-inner { padding:1.75rem 2.25rem; }
+  .modal-close-btn {
+    position:absolute; top:0.85rem; right:0.85rem;
+    background:none; border:1px solid var(--border);
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
+    padding:0.28rem 0.65rem; cursor:pointer; color:var(--muted);
+    z-index:10; transition:all 0.15s;
+  }
+  .modal-close-btn:hover { background:var(--ink); color:var(--parchment); border-color:var(--ink); }
+  .modal-doc-type {
+    font-family:'IBM Plex Mono',monospace; font-size:0.6rem;
+    letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.4rem;
+  }
+  .modal-title {
+    font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:900;
+    line-height:1.25; margin-bottom:1.25rem; padding-right:4rem;
+  }
+  .modal-meta-grid {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:0.65rem; margin-bottom:1.25rem;
+    padding:1.1rem; background:var(--parchment); border:1px solid var(--border);
+  }
+  .meta-key {
+    font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--muted);
+    display:block; margin-bottom:0.18rem;
+  }
+  .meta-val { font-size:0.92rem; font-weight:600; }
+  .modal-divider { border:none; border-top:2px solid var(--ink); margin:1.25rem 0; }
+  .modal-section-head {
+    font-family:'IBM Plex Mono',monospace; font-size:0.6rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia); margin-bottom:0.6rem;
+  }
+  .modal-body-text { font-size:0.97rem; line-height:1.85; }
+  .modal-body-text p { margin-bottom:0.85rem; }
+  .modal-fulltext {
+    font-size:0.88rem; line-height:1.8; color:var(--muted);
+    white-space:pre-wrap; max-height:260px; overflow-y:auto;
+    background:var(--parchment); border:1px solid var(--border);
+    padding:0.9rem 1rem; margin-bottom:1rem; font-family:'Crimson Pro',serif;
+  }
+  .modal-tags { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:1.25rem; }
+  .modal-tag {
+    font-family:'IBM Plex Mono',monospace; font-size:0.58rem; letter-spacing:0.08em;
+    padding:0.22rem 0.55rem; border:1px solid var(--border); color:var(--muted);
+    text-transform:uppercase; cursor:pointer; transition:all 0.15s;
+  }
+  .modal-tag:hover { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+  .modal-pdf-section { margin-top:1.25rem; }
+  .modal-pdf-viewer { margin-top:0.75rem; display:none; }
+  .modal-pdf-viewer iframe { width:100%; height:480px; border:1px solid var(--border); background:var(--parchment); }
+  .pdf-download-link {
+    display:block; margin-top:0.35rem; text-align:right;
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
+    color:var(--sepia); text-decoration:none; letter-spacing:0.08em;
+  }
+  .pdf-download-link:hover { color:var(--gold); }
+  .modal-actions {
+    display:flex; gap:0.65rem; margin-top:1.5rem;
+    padding-top:1.1rem; border-top:1px dashed var(--border); flex-wrap:wrap;
+  }
 
-/* Buttons */
-.btn {
-  font-family:'IBM Plex Mono',monospace; font-size:0.66rem;
-  letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.6rem 1.15rem; border:1px solid; cursor:pointer; transition:all 0.15s;
-}
-.btn-primary { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-.btn-primary:hover { background:var(--sepia); border-color:var(--sepia); }
-.btn-secondary { background:transparent; color:var(--muted); border-color:var(--border); }
-.btn-secondary:hover { background:var(--aged); color:var(--ink); }
-.btn-danger { background:transparent; color:#8b2a2a; border-color:#c4a4a4; }
-.btn-danger:hover { background:#8b2a2a; color:var(--parchment); border-color:#8b2a2a; }
+  /* Buttons */
+  .btn {
+    font-family:'IBM Plex Mono',monospace; font-size:0.66rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.6rem 1.15rem; border:1px solid; cursor:pointer; transition:all 0.15s;
+  }
+  .btn-primary { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+  .btn-primary:hover { background:var(--sepia); border-color:var(--sepia); }
+  .btn-secondary { background:transparent; color:var(--muted); border-color:var(--border); }
+  .btn-secondary:hover { background:var(--aged); color:var(--ink); }
+  .btn-danger { background:transparent; color:#8b2a2a; border-color:#c4a4a4; }
+  .btn-danger:hover { background:#8b2a2a; color:var(--parchment); border-color:#8b2a2a; }
 
-/* ─── Form Drawer ─── */
-#form-overlay {
-  position:fixed; inset:0; background:rgba(15,14,12,0.55);
-  z-index:1100; display:none; justify-content:flex-end;
-  backdrop-filter:blur(2px);
-}
-#form-overlay.open { display:flex; }
-#form-drawer {
-  background:var(--cream); width:520px; max-width:100%;
-  height:100%; overflow-y:auto;
-  box-shadow:-8px 0 32px rgba(15,14,12,0.22);
-  animation:slide-in 0.22s ease;
-  display:flex; flex-direction:column;
-  border-left:3px solid var(--gold);
-}
-@keyframes slide-in {
-  from { transform:translateX(100%); }
-  to   { transform:translateX(0); }
-}
-.drawer-head {
-  padding:1.25rem 1.5rem; border-bottom:1px solid var(--border);
-  display:flex; justify-content:space-between; align-items:center;
-  position:sticky; top:0; background:var(--cream); z-index:2;
-}
-.drawer-head-bar { height:4px; background:var(--gold); position:absolute; top:0; left:0; right:0; }
-.drawer-title {
-  font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; font-style:italic;
-}
-.drawer-body { padding:1.25rem 1.5rem; flex:1; }
-.form-row { margin-bottom:1rem; }
-.form-row.two { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
-.form-label {
-  font-family:'IBM Plex Mono',monospace; font-size:0.57rem;
-  letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:0.3rem;
-}
-.form-req { color:var(--rust); }
-.form-input, .form-select, .form-textarea {
-  width:100%; font-family:'Crimson Pro',serif; font-size:0.93rem;
-  padding:0.52rem 0.7rem; background:var(--parchment);
-  border:1px solid var(--border); color:var(--ink); outline:none; transition:border-color 0.2s;
-}
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--sepia); }
-.form-textarea { resize:vertical; min-height:80px; line-height:1.55; }
-.form-select {
-  appearance:none; cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b6914'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 0.7rem center; padding-right:1.8rem;
-}
-.pdf-choose-row { display:flex; align-items:center; gap:0.6rem; cursor:pointer; }
-.pdf-choose-label {
-  background:var(--parchment); border:1px solid var(--border);
-  padding:0.4rem 0.8rem; font-family:'IBM Plex Mono',monospace;
-  font-size:0.7rem; letter-spacing:0.08em; color:var(--muted);
-  cursor:pointer; white-space:nowrap; transition:all 0.15s;
-}
-.pdf-choose-label:hover { border-color:var(--sepia); color:var(--ink); }
-.pdf-file-name {
-  font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted);
-  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-}
-.drawer-foot {
-  padding:1rem 1.5rem; border-top:1px solid var(--border);
-  display:flex; gap:0.5rem; justify-content:flex-end;
-  position:sticky; bottom:0; background:var(--cream);
-}
+  /* ─── Form Drawer ─── */
+  #form-overlay {
+    position:fixed; inset:0; background:rgba(15,14,12,0.55);
+    z-index:1100; display:none; justify-content:flex-end;
+    backdrop-filter:blur(2px);
+  }
+  #form-overlay.open { display:flex; }
+  #form-drawer {
+    background:var(--cream); width:520px; max-width:100%;
+    height:100%; overflow-y:auto;
+    box-shadow:-8px 0 32px rgba(15,14,12,0.22);
+    animation:slide-in 0.22s ease;
+    display:flex; flex-direction:column;
+    border-left:3px solid var(--gold);
+  }
+  @keyframes slide-in {
+    from { transform:translateX(100%); }
+    to   { transform:translateX(0); }
+  }
+  .drawer-head {
+    padding:1.25rem 1.5rem; border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    position:sticky; top:0; background:var(--cream); z-index:2;
+  }
+  .drawer-head-bar { height:4px; background:var(--gold); position:absolute; top:0; left:0; right:0; }
+  .drawer-title {
+    font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; font-style:italic;
+  }
+  .drawer-body { padding:1.25rem 1.5rem; flex:1; }
+  .form-row { margin-bottom:1rem; }
+  .form-row.two { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
+  .form-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.57rem;
+    letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:0.3rem;
+  }
+  .form-req { color:var(--rust); }
+  .form-input, .form-select, .form-textarea {
+    width:100%; font-family:'Crimson Pro',serif; font-size:0.93rem;
+    padding:0.52rem 0.7rem; background:var(--parchment);
+    border:1px solid var(--border); color:var(--ink); outline:none; transition:border-color 0.2s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--sepia); }
+  .form-textarea { resize:vertical; min-height:80px; line-height:1.55; }
+  .form-select {
+    appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b6914'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 0.7rem center; padding-right:1.8rem;
+  }
+  .pdf-choose-row { display:flex; align-items:center; gap:0.6rem; cursor:pointer; }
+  .pdf-choose-label {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:0.4rem 0.8rem; font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem; letter-spacing:0.08em; color:var(--muted);
+    cursor:pointer; white-space:nowrap; transition:all 0.15s;
+  }
+  .pdf-choose-label:hover { border-color:var(--sepia); color:var(--ink); }
+  .pdf-file-name {
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .drawer-foot {
+    padding:1rem 1.5rem; border-top:1px solid var(--border);
+    display:flex; gap:0.5rem; justify-content:flex-end;
+    position:sticky; bottom:0; background:var(--cream);
+  }
 
-/* ─── Toast ─── */
-#toast {
-  position:fixed; bottom:1.75rem; right:1.75rem;
-  background:var(--ink); color:var(--parchment);
-  font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.08em;
-  padding:0.7rem 1.2rem; border-left:3px solid var(--gold);
-  z-index:9999; opacity:0; transform:translateY(1rem); transition:all 0.25s; pointer-events:none;
-}
-#toast.show { opacity:1; transform:translateY(0); }
+  /* ─── Toast ─── */
+  #toast {
+    position:fixed; bottom:1.75rem; right:1.75rem;
+    background:var(--ink); color:var(--parchment);
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.08em;
+    padding:0.7rem 1.2rem; border-left:3px solid var(--gold);
+    z-index:9999; opacity:0; transform:translateY(1rem); transition:all 0.25s; pointer-events:none;
+  }
+  #toast.show { opacity:1; transform:translateY(0); }
 
-/* ─── Loading ─── */
-.loading-row {
-  grid-column:1/-1; text-align:center; padding:3rem;
-  color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:0.8rem; font-style:italic;
-}
+  /* ─── Loading ─── */
+  .loading-row {
+    grid-column:1/-1; text-align:center; padding:3rem;
+    color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:0.8rem; font-style:italic;
+  }
 
-/* ─── Responsive ─── */
-@media(max-width:900px){
-  .main { grid-template-columns:1fr; }
-  .sidebar { position:static; display:none; }
-  .header-top { grid-template-columns:auto 1fr; }
-  .header-right { display:none; }
-  .doc-grid { grid-template-columns:1fr; }
-  .modal-meta-grid { grid-template-columns:1fr; }
-  .adv-grid { grid-template-columns:1fr 1fr; }
-  .search-hero { padding:1rem 1.25rem 1.25rem; }
-  .main { padding:1.5rem 1.25rem; }
-  .nav-inner { padding:0 1rem; overflow-x:auto; }
-}
-@media(max-width:640px){
-  .header-top { padding:0.85rem 1.25rem; }
-  .logo-sub { display:none; }
-  .form-row.two { grid-template-columns:1fr; }
-  #form-drawer { width:100%; }
-  .modal-actions { flex-wrap:wrap; }
-  .search-field-select { min-width:110px; }
-  #customizer-drawer { width:100%; }
-}
-</style>
-</head>
-<body>
+  /* ─── Responsive ─── */
+  @media(max-width:900px){
+    .main { grid-template-columns:1fr; }
+    .sidebar { position:static; display:none; }
+    .header-top { grid-template-columns:auto 1fr; }
+    .header-right { display:none; }
+    .doc-grid { grid-template-columns:1fr; }
+    .modal-meta-grid { grid-template-columns:1fr; }
+    .adv-grid { grid-template-columns:1fr 1fr; }
+    .search-hero { padding:1rem 1.25rem 1.25rem; }
+    .main { padding:1.5rem 1.25rem; }
+    .nav-inner { padding:0 1rem; overflow-x:auto; }
+  }
+  @media(max-width:640px){
+    .header-top { padding:0.85rem 1.25rem; }
+    .logo-sub { display:none; }
+    .form-row.two { grid-template-columns:1fr; }
+    #form-drawer { width:100%; }
+    .modal-actions { flex-wrap:wrap; }
+    .search-field-select { min-width:110px; }
+    #customizer-drawer { width:100%; }
+  }
+  </style>
+  </head>
+  <body>
 
-<!-- ─── Header ─── -->
-<header>
-  <div class="header-top">
-    <div class="header-seal">⚖</div>
-    <div class="logo">
-      <div class="logo-title">Municipality of <span>Mogpog</span> — Legislative Archive</div>
-      <div class="logo-sub">Official Digital Repository · Resolutions, Ordinances &amp; Proclamations · Marinduque, Philippines</div>
+  <!-- ─── Header ─── -->
+  <header>
+    <div class="header-top">
+      <div class="header-seal">
+        <img src="https://raw.githubusercontent.com/SoraOu/lex-archive/main/mogpog-seal.jpeg" 
+            alt="Mogpog Seal" 
+            style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+      </div>
+      <div class="logo">
+        <div class="logo-title">Municipality of <span>Mogpog</span> — Legislative Archive</div>
+        <div class="logo-sub">Official Digital Repository · Resolutions, Ordinances &amp; Proclamations · Marinduque, Philippines</div>
+      </div>
+      <div class="header-right">
+        <button class="customizer-toggle-btn" id="cust-toggle-btn" onclick="toggleCustomizer()">🎨 Customize</button>
+      </div>
     </div>
-    <div class="header-right">
-      <button class="customizer-toggle-btn" id="cust-toggle-btn" onclick="toggleCustomizer()">🎨 Customize</button>
+  </header>
+
+  <!-- ─── Hero Search ─── -->
+  <div class="search-hero">
+    <div class="search-hero-inner">
+      <div class="search-hero-label">Search the Repository</div>
+      <div class="search-main-row">
+        <select class="search-field-select" id="search-field" onchange="updateSearchPlaceholder()">
+          <option value="all">All Fields</option>
+          <option value="title">Title</option>
+          <option value="number">Doc. Number</option>
+          <option value="year">Year</option>
+          <option value="person">Person / Sponsor</option>
+          <option value="barangay">Barangay</option>
+          <option value="keyword">Keyword / Tag</option>
+          <option value="category">Category</option>
+        </select>
+        <input type="text" class="search-main-input" id="main-search"
+          placeholder="Search all fields…"
+          onkeydown="if(event.key==='Enter')doSearch()">
+        <button class="search-main-btn" onclick="doSearch()">Search ⌕</button>
+      </div>
+      <div class="search-chips">
+        <span class="chips-label">Quick:</span>
+        <div class="chip" onclick="quickChip('Resolution','type')">Resolutions</div>
+        <div class="chip" onclick="quickChip('Ordinance','type')">Ordinances</div>
+        <div class="chip" onclick="quickChip('Proclamation','type')">Proclamations</div>
+        <div class="chip" onclick="quickChip('Executive Order','type')">Exec. Orders</div>
+        <div class="chip" onclick="quickChip('Active','status')">Active</div>
+        <div class="chip" onclick="quickChip('Pending','status')">Pending</div>
+        <button class="adv-toggle" id="adv-toggle-btn" onclick="toggleAdv()">⊞ Advanced Search</button>
+      </div>
+      <div class="adv-panel" id="adv-panel">
+        <div class="adv-grid">
+          <div class="adv-group"><label class="adv-label">Title contains</label><input type="text" class="adv-input" id="adv-title" placeholder="e.g. solid waste"></div>
+          <div class="adv-group"><label class="adv-label">Document Number</label><input type="text" class="adv-input" id="adv-number" placeholder="e.g. 2024-007"></div>
+          <div class="adv-group"><label class="adv-label">Person / Sponsor</label><input type="text" class="adv-input" id="adv-person" placeholder="e.g. Santos"></div>
+          <div class="adv-group">
+            <label class="adv-label">Barangay</label>
+            <select class="adv-select" id="adv-barangay">
+              <option value="">All Barangays</option>
+              <option>Anapog-Sibucao</option><option>Argao</option><option>Aturan</option><option>Baging</option><option>Bahi</option><option>Bamban</option><option>Bangbangalon</option><option>Bantad</option><option>Bantigue</option><option>Barangas</option><option>Bolo</option><option>Bonliw</option><option>Buangan</option><option>Caganhao</option><option>Canat</option><option>Catubugan</option><option>Cawit</option><option>Daig</option><option>Daypay</option><option>Duyay</option><option>Gatbo</option><option>Hinapulan</option><option>Ihatub</option><option>Isok I (Poblacion)</option><option>Isok II (Poblacion)</option><option>Laylay</option><option>Lupac</option><option>Mahinhin</option><option>Mainit</option><option>Malbog</option><option>Malusak</option><option>Mansiwat</option><option>Mataas Na Bayan</option><option>Nangka</option><option>Narra</option><option>Pawa</option><option>Pili</option><option>Put-Agawin</option><option>Sabong</option><option>San Antonio</option><option>San Isidro</option><option>Santol</option><option>Sawi</option><option>Tabi</option><option>Tabigue</option><option>Tagwak</option><option>Tambunan</option><option>Tikiwan</option><option>Tinago</option><option>Tumagabok</option><option>Tumapon</option>
+            </select>
+          </div>
+          <div class="adv-group"><label class="adv-label">Year Enacted</label><select class="adv-select" id="adv-year"><option value="">All Years</option></select></div>
+          <div class="adv-group"><label class="adv-label">Document Type</label><select class="adv-select" id="adv-type"><option value="">All Types</option><option>Resolution</option><option>Ordinance</option><option>Proclamation</option><option>Executive Order</option></select></div>
+          <div class="adv-group"><label class="adv-label">Status</label><select class="adv-select" id="adv-status"><option value="">All Statuses</option><option>Active</option><option>Amended</option><option>Repealed</option><option>Pending</option></select></div>
+          <div class="adv-group"><label class="adv-label">Category</label><input type="text" class="adv-input" id="adv-category" placeholder="e.g. Health, Finance"></div>
+          <div class="adv-group"><label class="adv-label">Keyword / Tag</label><input type="text" class="adv-input" id="adv-keyword" placeholder="e.g. procurement"></div>
+        </div>
+        <div class="adv-actions">
+          <button class="adv-search-btn" onclick="doAdvSearch()">Apply Filters</button>
+          <button class="adv-clear-btn" onclick="clearAll()">Clear All</button>
+        </div>
+      </div>
+      <div class="active-filters" id="active-filters"></div>
     </div>
   </div>
-</header>
 
-<!-- ─── Hero Search ─── -->
-<div class="search-hero">
-  <div class="search-hero-inner">
-    <div class="search-hero-label">Search the Repository</div>
-    <div class="search-main-row">
-      <select class="search-field-select" id="search-field" onchange="updateSearchPlaceholder()">
-        <option value="all">All Fields</option>
-        <option value="title">Title</option>
-        <option value="number">Doc. Number</option>
-        <option value="year">Year</option>
-        <option value="person">Person / Sponsor</option>
-        <option value="barangay">Barangay</option>
-        <option value="keyword">Keyword / Tag</option>
-        <option value="category">Category</option>
-      </select>
-      <input type="text" class="search-main-input" id="main-search"
-        placeholder="Search all fields…"
-        onkeydown="if(event.key==='Enter')doSearch()">
-      <button class="search-main-btn" onclick="doSearch()">Search ⌕</button>
+  <!-- ─── Nav Tabs ─── -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-tab active" onclick="setTab('all',this)">All Records</div>
+      <div class="nav-tab" onclick="setTab('resolution',this)">Resolutions</div>
+      <div class="nav-tab" onclick="setTab('ordinance',this)">Ordinances</div>
+      <div class="nav-tab" onclick="setTab('proclamation',this)">Proclamations</div>
+      <div class="nav-tab" onclick="setTab('executive order',this)">Exec. Orders</div>
+      <button class="nav-add" onclick="openForm()">+ Add Record</button>
     </div>
-    <div class="search-chips">
-      <span class="chips-label">Quick:</span>
-      <div class="chip" onclick="quickChip('Resolution','type')">Resolutions</div>
-      <div class="chip" onclick="quickChip('Ordinance','type')">Ordinances</div>
-      <div class="chip" onclick="quickChip('Proclamation','type')">Proclamations</div>
-      <div class="chip" onclick="quickChip('Executive Order','type')">Exec. Orders</div>
-      <div class="chip" onclick="quickChip('Active','status')">Active</div>
-      <div class="chip" onclick="quickChip('Pending','status')">Pending</div>
-      <button class="adv-toggle" id="adv-toggle-btn" onclick="toggleAdv()">⊞ Advanced Search</button>
-    </div>
-    <div class="adv-panel" id="adv-panel">
-      <div class="adv-grid">
-        <div class="adv-group"><label class="adv-label">Title contains</label><input type="text" class="adv-input" id="adv-title" placeholder="e.g. solid waste"></div>
-        <div class="adv-group"><label class="adv-label">Document Number</label><input type="text" class="adv-input" id="adv-number" placeholder="e.g. 2024-007"></div>
-        <div class="adv-group"><label class="adv-label">Person / Sponsor</label><input type="text" class="adv-input" id="adv-person" placeholder="e.g. Santos"></div>
-        <div class="adv-group">
-          <label class="adv-label">Barangay</label>
-          <select class="adv-select" id="adv-barangay">
-            <option value="">All Barangays</option>
-            <option>Anapog-Sibucao</option><option>Argao</option><option>Aturan</option><option>Baging</option><option>Bahi</option><option>Bamban</option><option>Bangbangalon</option><option>Bantad</option><option>Bantigue</option><option>Barangas</option><option>Bolo</option><option>Bonliw</option><option>Buangan</option><option>Caganhao</option><option>Canat</option><option>Catubugan</option><option>Cawit</option><option>Daig</option><option>Daypay</option><option>Duyay</option><option>Gatbo</option><option>Hinapulan</option><option>Ihatub</option><option>Isok I (Poblacion)</option><option>Isok II (Poblacion)</option><option>Laylay</option><option>Lupac</option><option>Mahinhin</option><option>Mainit</option><option>Malbog</option><option>Malusak</option><option>Mansiwat</option><option>Mataas Na Bayan</option><option>Nangka</option><option>Narra</option><option>Pawa</option><option>Pili</option><option>Put-Agawin</option><option>Sabong</option><option>San Antonio</option><option>San Isidro</option><option>Santol</option><option>Sawi</option><option>Tabi</option><option>Tabigue</option><option>Tagwak</option><option>Tambunan</option><option>Tikiwan</option><option>Tinago</option><option>Tumagabok</option><option>Tumapon</option>
-          </select>
+  </nav>
+
+  <!-- ─── Main Layout ─── -->
+  <div class="main">
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-heading">Filters</div>
+        <div class="filter-group"><label class="filter-label">Year Enacted</label><select class="filter-select" id="year-filter" onchange="applyFilters()"><option value="">All Years</option></select></div>
+        <div class="filter-group"><label class="filter-label">Status</label><select class="filter-select" id="status-filter" onchange="applyFilters()"><option value="">All Statuses</option><option>Active</option><option>Amended</option><option>Repealed</option><option>Pending</option></select></div>
+        <div class="filter-group"><label class="filter-label">Barangay</label><select class="filter-select" id="brgy-filter" onchange="applyFilters()"><option value="">All Barangays</option></select></div>
+        <div class="filter-group"><label class="filter-label">Sort By</label><select class="filter-select" id="sort-filter" onchange="applyFilters()"><option value="date-desc">Newest First</option><option value="date-asc">Oldest First</option><option value="alpha">Alphabetical</option><option value="number">By Number</option></select></div>
+      </div>
+      <div class="sidebar-card"><div class="sidebar-heading">Categories</div><div class="tag-list" id="tag-list"></div></div>
+      <div class="sidebar-card">
+        <div class="sidebar-heading">Repository Stats</div>
+        <div class="stat-row"><span>Total Records</span><span class="stat-val" id="stat-total">—</span></div>
+        <div class="stat-row"><span>Resolutions</span><span class="stat-val" id="stat-res">—</span></div>
+        <div class="stat-row"><span>Ordinances</span><span class="stat-val" id="stat-ord">—</span></div>
+        <div class="stat-row"><span>Proclamations</span><span class="stat-val" id="stat-proc">—</span></div>
+        <div class="stat-row"><span>Exec. Orders</span><span class="stat-val" id="stat-exec">—</span></div>
+        <div class="stat-row"><span>Active</span><span class="stat-val" id="stat-active">—</span></div>
+        <div style="margin-top:.75rem;padding-top:.75rem;border-top:1px dashed var(--border)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+            <span class="filter-label" style="margin:0">PDF Storage</span>
+            <span id="storage-text" style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--muted)">—</span>
+          </div>
+          <div style="background:var(--aged);border:1px solid var(--border);height:6px;overflow:hidden">
+            <div id="storage-bar" style="background:var(--sepia);height:100%;width:0%;transition:width .4s"></div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.2rem;text-align:right">of 1 GB free</div>
         </div>
-        <div class="adv-group"><label class="adv-label">Year Enacted</label><select class="adv-select" id="adv-year"><option value="">All Years</option></select></div>
-        <div class="adv-group"><label class="adv-label">Document Type</label><select class="adv-select" id="adv-type"><option value="">All Types</option><option>Resolution</option><option>Ordinance</option><option>Proclamation</option><option>Executive Order</option></select></div>
-        <div class="adv-group"><label class="adv-label">Status</label><select class="adv-select" id="adv-status"><option value="">All Statuses</option><option>Active</option><option>Amended</option><option>Repealed</option><option>Pending</option></select></div>
-        <div class="adv-group"><label class="adv-label">Category</label><input type="text" class="adv-input" id="adv-category" placeholder="e.g. Health, Finance"></div>
-        <div class="adv-group"><label class="adv-label">Keyword / Tag</label><input type="text" class="adv-input" id="adv-keyword" placeholder="e.g. procurement"></div>
       </div>
-      <div class="adv-actions">
-        <button class="adv-search-btn" onclick="doAdvSearch()">Apply Filters</button>
-        <button class="adv-clear-btn" onclick="clearAll()">Clear All</button>
+    </aside>
+
+    <main class="content">
+      <div class="content-header">
+        <div>
+          <div class="content-title" id="content-title">All Legislative Records</div>
+          <div class="content-meta" id="content-meta"></div>
+        </div>
+        <div class="view-toggle">
+          <button class="view-btn active" id="btn-grid" onclick="setView('grid',this)">⊞ Grid</button>
+          <button class="view-btn" id="btn-list" onclick="setView('list',this)">☰ List</button>
+        </div>
       </div>
-    </div>
-    <div class="active-filters" id="active-filters"></div>
+      <div class="doc-grid" id="doc-container"></div>
+      <div class="empty-state" id="empty-state">No records match the current search and filters.</div>
+      <div class="pagination" id="pagination"></div>
+    </main>
   </div>
-</div>
 
-<!-- ─── Nav Tabs ─── -->
-<nav>
-  <div class="nav-inner">
-    <div class="nav-tab active" onclick="setTab('all',this)">All Records</div>
-    <div class="nav-tab" onclick="setTab('resolution',this)">Resolutions</div>
-    <div class="nav-tab" onclick="setTab('ordinance',this)">Ordinances</div>
-    <div class="nav-tab" onclick="setTab('proclamation',this)">Proclamations</div>
-    <div class="nav-tab" onclick="setTab('executive order',this)">Exec. Orders</div>
-    <button class="nav-add" onclick="openForm()">+ Add Record</button>
-  </div>
-</nav>
-
-<!-- ─── Main Layout ─── -->
-<div class="main">
-  <aside class="sidebar">
-    <div class="sidebar-card">
-      <div class="sidebar-heading">Filters</div>
-      <div class="filter-group"><label class="filter-label">Year Enacted</label><select class="filter-select" id="year-filter" onchange="applyFilters()"><option value="">All Years</option></select></div>
-      <div class="filter-group"><label class="filter-label">Status</label><select class="filter-select" id="status-filter" onchange="applyFilters()"><option value="">All Statuses</option><option>Active</option><option>Amended</option><option>Repealed</option><option>Pending</option></select></div>
-      <div class="filter-group"><label class="filter-label">Barangay</label><select class="filter-select" id="brgy-filter" onchange="applyFilters()"><option value="">All Barangays</option></select></div>
-      <div class="filter-group"><label class="filter-label">Sort By</label><select class="filter-select" id="sort-filter" onchange="applyFilters()"><option value="date-desc">Newest First</option><option value="date-asc">Oldest First</option><option value="alpha">Alphabetical</option><option value="number">By Number</option></select></div>
-    </div>
-    <div class="sidebar-card"><div class="sidebar-heading">Categories</div><div class="tag-list" id="tag-list"></div></div>
-    <div class="sidebar-card">
-      <div class="sidebar-heading">Repository Stats</div>
-      <div class="stat-row"><span>Total Records</span><span class="stat-val" id="stat-total">—</span></div>
-      <div class="stat-row"><span>Resolutions</span><span class="stat-val" id="stat-res">—</span></div>
-      <div class="stat-row"><span>Ordinances</span><span class="stat-val" id="stat-ord">—</span></div>
-      <div class="stat-row"><span>Proclamations</span><span class="stat-val" id="stat-proc">—</span></div>
-      <div class="stat-row"><span>Exec. Orders</span><span class="stat-val" id="stat-exec">—</span></div>
-      <div class="stat-row"><span>Active</span><span class="stat-val" id="stat-active">—</span></div>
-      <div style="margin-top:.75rem;padding-top:.75rem;border-top:1px dashed var(--border)">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
-          <span class="filter-label" style="margin:0">PDF Storage</span>
-          <span id="storage-text" style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--muted)">—</span>
-        </div>
-        <div style="background:var(--aged);border:1px solid var(--border);height:6px;overflow:hidden">
-          <div id="storage-bar" style="background:var(--sepia);height:100%;width:0%;transition:width .4s"></div>
-        </div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.2rem;text-align:right">of 1 GB free</div>
-      </div>
-    </div>
-  </aside>
-
-  <main class="content">
-    <div class="content-header">
-      <div>
-        <div class="content-title" id="content-title">All Legislative Records</div>
-        <div class="content-meta" id="content-meta"></div>
-      </div>
-      <div class="view-toggle">
-        <button class="view-btn active" id="btn-grid" onclick="setView('grid',this)">⊞ Grid</button>
-        <button class="view-btn" id="btn-list" onclick="setView('list',this)">☰ List</button>
-      </div>
-    </div>
-    <div class="doc-grid" id="doc-container"></div>
-    <div class="empty-state" id="empty-state">No records match the current search and filters.</div>
-    <div class="pagination" id="pagination"></div>
-  </main>
-</div>
-
-<!-- ─── Document Modal ─── -->
-<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close-btn" onclick="closeModal()">✕ Close</button>
-    <div class="modal-top-bar" id="modal-top-bar"></div>
-    <div class="modal-inner">
-      <div class="modal-doc-type" id="modal-doc-type"></div>
-      <div class="modal-title" id="modal-title"></div>
-      <div class="modal-meta-grid" id="modal-meta"></div>
-      <hr class="modal-divider">
-      <div class="modal-section-head">Summary</div>
-      <div class="modal-body-text" id="modal-summary"></div>
-      <div id="modal-fulltext-section"></div>
-      <div class="modal-tags" id="modal-tags"></div>
-      <div class="modal-pdf-section" id="modal-pdf-section" style="display:none">
+  <!-- ─── Document Modal ─── -->
+  <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <button class="modal-close-btn" onclick="closeModal()">✕ Close</button>
+      <div class="modal-top-bar" id="modal-top-bar"></div>
+      <div class="modal-inner">
+        <div class="modal-doc-type" id="modal-doc-type"></div>
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-meta-grid" id="modal-meta"></div>
         <hr class="modal-divider">
-        <div class="modal-section-head">Attached Document</div>
-        <button class="btn btn-secondary" id="modal-pdf-btn" onclick="togglePdfViewer()">📄 View PDF</button>
-        <div class="modal-pdf-viewer" id="modal-pdf-viewer">
-          <iframe id="modal-pdf-frame" src=""></iframe>
-          <a id="modal-pdf-download" href="" target="_blank" class="pdf-download-link">↓ Download PDF</a>
+        <div class="modal-section-head">Summary</div>
+        <div class="modal-body-text" id="modal-summary"></div>
+        <div id="modal-fulltext-section"></div>
+        <div class="modal-tags" id="modal-tags"></div>
+        <div class="modal-pdf-section" id="modal-pdf-section" style="display:none">
+          <hr class="modal-divider">
+          <div class="modal-section-head">Attached Document</div>
+          <button class="btn btn-secondary" id="modal-pdf-btn" onclick="togglePdfViewer()">📄 View PDF</button>
+          <div class="modal-pdf-viewer" id="modal-pdf-viewer">
+            <iframe id="modal-pdf-frame" src=""></iframe>
+            <a id="modal-pdf-download" href="" target="_blank" class="pdf-download-link">↓ Download PDF</a>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="copyLink()">⎘ Copy Link</button>
+          <button class="btn btn-secondary" onclick="printDoc()">⎙ Print</button>
+          <button class="btn btn-primary" onclick="editDoc()">✎ Edit</button>
+          <button class="btn btn-danger" onclick="deleteDoc()">⌫ Delete</button>
         </div>
       </div>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" onclick="copyLink()">⎘ Copy Link</button>
-        <button class="btn btn-secondary" onclick="printDoc()">⎙ Print</button>
-        <button class="btn btn-primary" onclick="editDoc()">✎ Edit</button>
-        <button class="btn btn-danger" onclick="deleteDoc()">⌫ Delete</button>
+    </div>
+  </div>
+
+  <!-- ─── Add / Edit Drawer ─── -->
+  <div id="form-overlay" onclick="if(event.target===this)closeForm()">
+    <div id="form-drawer">
+      <div class="drawer-head">
+        <div class="drawer-head-bar"></div>
+        <span class="drawer-title" id="drawer-title">Add New Record</span>
+        <button class="btn btn-secondary" style="padding:.28rem .65rem;font-size:.68rem" onclick="closeForm()">✕</button>
+      </div>
+      <div class="drawer-body">
+        <div class="form-row two">
+          <div><label class="form-label">Document Type <span class="form-req">*</span></label><select class="form-select" id="f-type"><option>Resolution</option><option>Ordinance</option><option>Proclamation</option><option>Executive Order</option></select></div>
+          <div><label class="form-label">Document Number <span class="form-req">*</span></label><input class="form-input" id="f-num" type="text" placeholder="e.g. 2024-015"></div>
+        </div>
+        <div class="form-row"><label class="form-label">Title <span class="form-req">*</span></label><input class="form-input" id="f-title" type="text" placeholder="Full official title of the document"></div>
+        <div class="form-row two">
+          <div><label class="form-label">Date Enacted <span class="form-req">*</span></label><input class="form-input" id="f-date" type="date"></div>
+          <div><label class="form-label">Status</label><select class="form-select" id="f-status"><option>Active</option><option>Amended</option><option>Repealed</option><option>Pending</option></select></div>
+        </div>
+        <div class="form-row two">
+          <div><label class="form-label">Category</label><input class="form-input" id="f-category" type="text" placeholder="e.g. Health, Finance"></div>
+          <div><label class="form-label">Sponsored By</label><input class="form-input" id="f-sponsor" type="text" placeholder="Author / Sponsor name"></div>
+        </div>
+        <div class="form-row"><label class="form-label">Affected Barangay(s)</label><input class="form-input" id="f-barangay" type="text" placeholder="e.g. Isok I, Daig or All Barangays"></div>
+        <div class="form-row"><label class="form-label">Summary</label><textarea class="form-textarea" id="f-summary" placeholder="Brief summary of the document's purpose…"></textarea></div>
+        <div class="form-row"><label class="form-label">Full Text</label><textarea class="form-textarea" id="f-fulltext" style="min-height:120px" placeholder="Paste the full text here…"></textarea></div>
+        <div class="form-row"><label class="form-label">Tags <span style="font-weight:400;color:var(--muted)">(comma-separated)</span></label><input class="form-input" id="f-tags" type="text" placeholder="e.g. budget, health, environment"></div>
+        <div class="form-row">
+          <label class="form-label">Attach PDF <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+          <label class="pdf-choose-row">
+            <span class="pdf-choose-label">Choose file</span>
+            <span class="pdf-file-name" id="pdf-file-name"></span>
+            <input type="file" id="f-pdf" accept="application/pdf" style="display:none">
+          </label>
+        </div>
+      </div>
+      <div class="drawer-foot">
+        <button class="btn btn-secondary" onclick="closeForm()">Cancel</button>
+        <button class="btn btn-primary" id="save-btn" onclick="saveRecord()">Save Record</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ─── Add / Edit Drawer ─── -->
-<div id="form-overlay" onclick="if(event.target===this)closeForm()">
-  <div id="form-drawer">
-    <div class="drawer-head">
-      <div class="drawer-head-bar"></div>
-      <span class="drawer-title" id="drawer-title">Add New Record</span>
-      <button class="btn btn-secondary" style="padding:.28rem .65rem;font-size:.68rem" onclick="closeForm()">✕</button>
-    </div>
-    <div class="drawer-body">
-      <div class="form-row two">
-        <div><label class="form-label">Document Type <span class="form-req">*</span></label><select class="form-select" id="f-type"><option>Resolution</option><option>Ordinance</option><option>Proclamation</option><option>Executive Order</option></select></div>
-        <div><label class="form-label">Document Number <span class="form-req">*</span></label><input class="form-input" id="f-num" type="text" placeholder="e.g. 2024-015"></div>
+  <!-- ─── COLOR CUSTOMIZER DRAWER ─── -->
+  <div id="customizer-overlay" onclick="if(event.target===this)closeCustomizer()">
+    <div id="customizer-drawer">
+      <div class="cust-head">
+        <div>
+          <div class="cust-head-title">Color Customizer <span>Live Preview</span></div>
+        </div>
+        <button class="cust-close" onclick="closeCustomizer()">✕ Close</button>
+        <div id="theme-sync-status">● Synced across devices</div>
       </div>
-      <div class="form-row"><label class="form-label">Title <span class="form-req">*</span></label><input class="form-input" id="f-title" type="text" placeholder="Full official title of the document"></div>
-      <div class="form-row two">
-        <div><label class="form-label">Date Enacted <span class="form-req">*</span></label><input class="form-input" id="f-date" type="date"></div>
-        <div><label class="form-label">Status</label><select class="form-select" id="f-status"><option>Active</option><option>Amended</option><option>Repealed</option><option>Pending</option></select></div>
+      <div class="cust-body">
+        <div class="cust-section-label">Current Palette</div>
+        <div class="cust-preview-strip" id="preview-strip">
+          <div class="preview-ink-block" title="--ink"></div>
+          <div class="preview-parchment-block" title="--parchment"></div>
+          <div class="preview-cream-block" title="--cream"></div>
+          <div class="preview-aged-block" title="--aged"></div>
+          <div class="preview-gold-block" title="--gold"></div>
+          <div class="preview-sepia-block" title="--sepia"></div>
+          <div class="preview-rust-block" title="--rust"></div>
+          <div class="preview-sage-block" title="--sage"></div>
+          <div class="preview-border-block" title="--border"></div>
+          <div class="preview-muted-block" title="--muted"></div>
+          <span class="preview-label">10 vars</span>
+        </div>
+        <div class="cust-section-label">Preset Themes</div>
+        <div class="preset-grid" id="preset-grid"></div>
+        <hr class="cust-divider">
+        <div class="cust-section-label">Header &amp; Navigation</div>
+        <div class="color-group" id="cg-header"></div>
+        <hr class="cust-divider">
+        <div class="cust-section-label">Page Background &amp; Surfaces</div>
+        <div class="color-group" id="cg-bg"></div>
+        <hr class="cust-divider">
+        <div class="cust-section-label">Accents &amp; Highlights</div>
+        <div class="color-group" id="cg-accent"></div>
+        <hr class="cust-divider">
+        <div class="cust-section-label">Text &amp; Borders</div>
+        <div class="color-group" id="cg-text"></div>
       </div>
-      <div class="form-row two">
-        <div><label class="form-label">Category</label><input class="form-input" id="f-category" type="text" placeholder="e.g. Health, Finance"></div>
-        <div><label class="form-label">Sponsored By</label><input class="form-input" id="f-sponsor" type="text" placeholder="Author / Sponsor name"></div>
+      <div class="cust-foot">
+        <button class="cust-btn cust-btn-secondary" onclick="exportTheme()">↓ Export CSS</button>
+        <button class="cust-btn cust-btn-secondary" onclick="importTheme()">↑ Import CSS</button>
+        <button class="cust-btn cust-btn-danger" onclick="resetTheme()">↺ Reset</button>
       </div>
-      <div class="form-row"><label class="form-label">Affected Barangay(s)</label><input class="form-input" id="f-barangay" type="text" placeholder="e.g. Isok I, Daig or All Barangays"></div>
-      <div class="form-row"><label class="form-label">Summary</label><textarea class="form-textarea" id="f-summary" placeholder="Brief summary of the document's purpose…"></textarea></div>
-      <div class="form-row"><label class="form-label">Full Text</label><textarea class="form-textarea" id="f-fulltext" style="min-height:120px" placeholder="Paste the full text here…"></textarea></div>
-      <div class="form-row"><label class="form-label">Tags <span style="font-weight:400;color:var(--muted)">(comma-separated)</span></label><input class="form-input" id="f-tags" type="text" placeholder="e.g. budget, health, environment"></div>
-      <div class="form-row">
-        <label class="form-label">Attach PDF <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
-        <label class="pdf-choose-row">
-          <span class="pdf-choose-label">Choose file</span>
-          <span class="pdf-file-name" id="pdf-file-name"></span>
-          <input type="file" id="f-pdf" accept="application/pdf" style="display:none">
-        </label>
-      </div>
-    </div>
-    <div class="drawer-foot">
-      <button class="btn btn-secondary" onclick="closeForm()">Cancel</button>
-      <button class="btn btn-primary" id="save-btn" onclick="saveRecord()">Save Record</button>
-    </div>
-  </div>
-</div>
-
-<!-- ─── COLOR CUSTOMIZER DRAWER ─── -->
-<div id="customizer-overlay" onclick="if(event.target===this)closeCustomizer()">
-  <div id="customizer-drawer">
-    <div class="cust-head">
-      <div>
-        <div class="cust-head-title">Color Customizer <span>Live Preview</span></div>
-      </div>
-      <button class="cust-close" onclick="closeCustomizer()">✕ Close</button>
-      <div id="theme-sync-status">● Synced across devices</div>
-    </div>
-    <div class="cust-body">
-      <div class="cust-section-label">Current Palette</div>
-      <div class="cust-preview-strip" id="preview-strip">
-        <div class="preview-ink-block" title="--ink"></div>
-        <div class="preview-parchment-block" title="--parchment"></div>
-        <div class="preview-cream-block" title="--cream"></div>
-        <div class="preview-aged-block" title="--aged"></div>
-        <div class="preview-gold-block" title="--gold"></div>
-        <div class="preview-sepia-block" title="--sepia"></div>
-        <div class="preview-rust-block" title="--rust"></div>
-        <div class="preview-sage-block" title="--sage"></div>
-        <div class="preview-border-block" title="--border"></div>
-        <div class="preview-muted-block" title="--muted"></div>
-        <span class="preview-label">10 vars</span>
-      </div>
-      <div class="cust-section-label">Preset Themes</div>
-      <div class="preset-grid" id="preset-grid"></div>
-      <hr class="cust-divider">
-      <div class="cust-section-label">Header &amp; Navigation</div>
-      <div class="color-group" id="cg-header"></div>
-      <hr class="cust-divider">
-      <div class="cust-section-label">Page Background &amp; Surfaces</div>
-      <div class="color-group" id="cg-bg"></div>
-      <hr class="cust-divider">
-      <div class="cust-section-label">Accents &amp; Highlights</div>
-      <div class="color-group" id="cg-accent"></div>
-      <hr class="cust-divider">
-      <div class="cust-section-label">Text &amp; Borders</div>
-      <div class="color-group" id="cg-text"></div>
-    </div>
-    <div class="cust-foot">
-      <button class="cust-btn cust-btn-secondary" onclick="exportTheme()">↓ Export CSS</button>
-      <button class="cust-btn cust-btn-secondary" onclick="importTheme()">↑ Import CSS</button>
-      <button class="cust-btn cust-btn-danger" onclick="resetTheme()">↺ Reset</button>
     </div>
   </div>
-</div>
 
-<!-- ─── Toast ─── -->
-<div id="toast"></div>
+  <!-- ─── Toast ─── -->
+  <div id="toast"></div>
 
-<script>
-// ─── Supabase ───
-const SUPABASE_URL = 'https://vyrzmuehjwljqajonnkw.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5cnptdWVoandsanFham9ubmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNDIyMjksImV4cCI6MjA5NTkxODIyOX0.guuYb-Lw36sfaRBsCBK25tLktKX0yFt9r4dKAD4-j4E';
+  <script>
+  // ─── Supabase ───
+  const SUPABASE_URL = 'https://vyrzmuehjwljqajonnkw.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5cnptdWVoandsanFham9ubmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNDIyMjksImV4cCI6MjA5NTkxODIyOX0.guuYb-Lw36sfaRBsCBK25tLktKX0yFt9r4dKAD4-j4E';
 
-const sb = {
-  async query(table, opts={}) {
-    let url = SUPABASE_URL+'/rest/v1/'+table+'?';
-    if (opts.select) url += 'select='+opts.select+'&';
-    if (opts.order)  url += 'order='+opts.order+'&';
-    const r = await fetch(url, { headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY } });
-    return r.json();
-  },
-  async insert(table, data) {
-    const r = await fetch(SUPABASE_URL+'/rest/v1/'+table, {
-      method:'POST',
-      headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
-      body:JSON.stringify(data)
-    });
-    return r.json();
-  },
-  async update(table, id, data) {
-    const r = await fetch(SUPABASE_URL+'/rest/v1/'+table+'?id=eq.'+id, {
-      method:'PATCH',
-      headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
-      body:JSON.stringify(data)
-    });
-    return r.json();
-  },
-  async uploadFile(bucket, path, file) {
-    const r = await fetch(SUPABASE_URL+'/storage/v1/object/'+bucket+'/'+path, {
-      method:'POST',
-      headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':file.type },
-      body:file
-    });
-    return r.json();
-  },
-  fileUrl(bucket, path) { return SUPABASE_URL+'/storage/v1/object/public/'+bucket+'/'+path; }
-};
-
-// ─── Sanitize helper (FIX #4: prevent XSS in user-supplied strings) ───
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-// ─── Type/Status colors ───
-const TYPE_COLORS = {
-  'Resolution':      { bar:'#3a5a4a', badge:'#3a5a4a' },
-  'Ordinance':       { bar:'#8b3a1a', badge:'#8b3a1a' },
-  'Proclamation':    { bar:'#1a3a6a', badge:'#1a3a6a' },
-  'Executive Order': { bar:'#5a3a8a', badge:'#5a3a8a' },
-};
-const STATUS_COLORS = {
-  'Active':   { bg:'#eef5ee', color:'#2a5a2a' },
-  'Amended':  { bg:'#f5f0e0', color:'#6a4a00' },
-  'Repealed': { bg:'#f5eeee', color:'#6a1a1a' },
-  'Pending':  { bg:'#eef0f5', color:'#1a2a6a' },
-};
-
-// ─── State ───
-let docs = [], filtered = [];
-let currentPage = 1, currentView = 'grid', currentTab = 'all';
-let editingId = null, currentDoc = null, isLoading = false;
-let activeFilters = {}, selectedCategory = '', activeTag = null;
-const PAGE_SIZE = 6;
-
-// ─── Init ───
-async function init() {
-  showLoading(true);
-  try {
-    const data = await sb.query('documents', { select:'*', order:'date.desc' });
-    if (Array.isArray(data)) docs = data.map(normalizeDoc);
-    else toast('Could not connect to database.');
-  } catch(e) { toast('Network error loading records.'); }
-  filtered = [...docs];
-  showLoading(false);
-  populateYearFilters();
-  populateBrgyFilter();
-  renderTagList();
-  renderStats();
-  applyFilters();
-  updateStorageUsage();
-}
-
-function normalizeDoc(d) {
-  return {
-    ...d,
-    barangay: d.barangay || '',
-    tags: typeof d.tags === 'string'
-      ? d.tags.split(',').map(t => t.trim()).filter(Boolean)
-      : (d.tags || [])
+  const sb = {
+    async query(table, opts={}) {
+      let url = SUPABASE_URL+'/rest/v1/'+table+'?';
+      if (opts.select) url += 'select='+opts.select+'&';
+      if (opts.order)  url += 'order='+opts.order+'&';
+      const r = await fetch(url, { headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY } });
+      return r.json();
+    },
+    async insert(table, data) {
+      const r = await fetch(SUPABASE_URL+'/rest/v1/'+table, {
+        method:'POST',
+        headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
+        body:JSON.stringify(data)
+      });
+      return r.json();
+    },
+    async update(table, id, data) {
+      const r = await fetch(SUPABASE_URL+'/rest/v1/'+table+'?id=eq.'+id, {
+        method:'PATCH',
+        headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
+        body:JSON.stringify(data)
+      });
+      return r.json();
+    },
+    async uploadFile(bucket, path, file) {
+      const r = await fetch(SUPABASE_URL+'/storage/v1/object/'+bucket+'/'+path, {
+        method:'POST',
+        headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':file.type },
+        body:file
+      });
+      return r.json();
+    },
+    fileUrl(bucket, path) { return SUPABASE_URL+'/storage/v1/object/public/'+bucket+'/'+path; }
   };
-}
 
-function showLoading(on) {
-  isLoading = on;
-  const container = document.getElementById('doc-container');
-  if (on) {
-    container.innerHTML = '<div class="loading-row">Loading records from archive…</div>';
-    document.getElementById('empty-state').style.display = 'none';
+  // ─── Sanitize helper (FIX #4: prevent XSS in user-supplied strings) ───
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
-}
 
-function populateYearFilters() {
-  const years = [...new Set(docs.map(d => (d.date||'').slice(0,4)).filter(Boolean))].sort((a,b)=>b-a);
-  ['year-filter','adv-year'].forEach(id => {
-    const sel = document.getElementById(id);
-    if (!sel) return;
-    while (sel.options.length > 1) sel.remove(1);
-    years.forEach(y => { const o = document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
-  });
-}
+  // ─── Type/Status colors ───
+  const TYPE_COLORS = {
+    'Resolution':      { bar:'#3a5a4a', badge:'#3a5a4a' },
+    'Ordinance':       { bar:'#8b3a1a', badge:'#8b3a1a' },
+    'Proclamation':    { bar:'#1a3a6a', badge:'#1a3a6a' },
+    'Executive Order': { bar:'#5a3a8a', badge:'#5a3a8a' },
+  };
+  const STATUS_COLORS = {
+    'Active':   { bg:'#eef5ee', color:'#2a5a2a' },
+    'Amended':  { bg:'#f5f0e0', color:'#6a4a00' },
+    'Repealed': { bg:'#f5eeee', color:'#6a1a1a' },
+    'Pending':  { bg:'#eef0f5', color:'#1a2a6a' },
+  };
 
-function populateBrgyFilter() {
-  const brgys = new Set();
-  docs.forEach(d => { (d.barangay||'').split(',').forEach(b => { const t=b.trim(); if(t && t!=='All Barangays') brgys.add(t); }); });
-  const sel = document.getElementById('brgy-filter');
-  while (sel.options.length > 1) sel.remove(1);
-  [...brgys].sort().forEach(b => { const o=document.createElement('option'); o.value=b; o.textContent=b; sel.appendChild(o); });
-}
+  // ─── State ───
+  let docs = [], filtered = [];
+  let currentPage = 1, currentView = 'grid', currentTab = 'all';
+  let editingId = null, currentDoc = null, isLoading = false;
+  let activeFilters = {}, selectedCategory = '', activeTag = null;
+  const PAGE_SIZE = 6;
 
-// FIX #4: renderTagList uses escHtml + data-cat attribute instead of inline onclick string
-function renderTagList() {
-  const cats = {};
-  docs.forEach(d => { if (d.category) cats[d.category] = (cats[d.category]||0)+1; });
-  const colors = ['#3a5a4a','#8b3a1a','#1a3a6a','#5a3a8a','#6a4a00','#2a5a5a','#5a2a2a','#3a4a2a','#8a4a2a'];
-  const list = document.getElementById('tag-list');
-  const entries = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
-  if (!entries.length) {
-    list.innerHTML = '<div style="font-size:.8rem;color:var(--muted);font-style:italic">No categories yet</div>';
-    return;
-  }
-  list.innerHTML = entries.map(([cat,count],i) =>
-    `<div class="tag-item${selectedCategory===cat?' selected':''}" data-cat="${escHtml(cat)}" tabindex="0" role="button" aria-pressed="${selectedCategory===cat}">
-      <span class="tag-name"><span class="tag-dot" style="background:${colors[i%colors.length]}"></span>${escHtml(cat)}</span>
-      <span class="tag-count">${count}</span>
-    </div>`
-  ).join('');
-
-  list.querySelectorAll('.tag-item').forEach(el => {
-    el.addEventListener('click', () => filterByCategory(el.dataset.cat));
-    el.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); filterByCategory(el.dataset.cat); } });
-  });
-}
-
-function filterByCategory(cat) {
-  selectedCategory = selectedCategory === cat ? '' : cat;
-  renderTagList();
-  applyFilters();
-}
-
-function renderStats() {
-  document.getElementById('stat-total').textContent  = docs.length;
-  document.getElementById('stat-res').textContent    = docs.filter(d=>d.type==='Resolution').length;
-  document.getElementById('stat-ord').textContent    = docs.filter(d=>d.type==='Ordinance').length;
-  document.getElementById('stat-proc').textContent   = docs.filter(d=>d.type==='Proclamation').length;
-  document.getElementById('stat-exec').textContent   = docs.filter(d=>d.type==='Executive Order').length;
-  document.getElementById('stat-active').textContent = docs.filter(d=>d.status==='Active').length;
-}
-
-function updateSearchPlaceholder() {
-  const map = { all:'Search all fields…', title:'Search by title…', number:'Enter document number, e.g. 2024-007', year:'Enter year, e.g. 2024', person:'Enter sponsor or author name…', barangay:'Enter barangay name…', keyword:'Enter tag or keyword…', category:'Enter category name…' };
-  document.getElementById('main-search').placeholder = map[document.getElementById('search-field').value] || 'Search…';
-}
-
-function doSearch() {
-  const q = document.getElementById('main-search').value.trim();
-  const field = document.getElementById('search-field').value;
-  if (!q) { clearAll(); return; }
-  activeFilters = {};
-  activeFilters[field === 'all' ? '_q' : field] = q;
-  renderFilterPills();
-  applyFilters();
-}
-
-function quickChip(val, field) {
-  activeFilters[field] = activeFilters[field] === val ? '' : val;
-  document.querySelectorAll('.chip').forEach(c => {
-    const txt = c.textContent.trim();
-    const chipVals = { 'Resolutions':'Resolution','Ordinances':'Ordinance','Proclamations':'Proclamation','Exec. Orders':'Executive Order','Active':'Active','Pending':'Pending' };
-    if (chipVals[txt] === val && field === 'type') c.classList.toggle('active', activeFilters.type === val);
-    if (txt === val && field === 'status') c.classList.toggle('active', activeFilters.status === val);
-  });
-  renderFilterPills();
-  applyFilters();
-}
-
-function toggleAdv() {
-  const panel = document.getElementById('adv-panel');
-  panel.classList.toggle('open');
-  document.getElementById('adv-toggle-btn').textContent = panel.classList.contains('open') ? '✕ Close Advanced' : '⊞ Advanced Search';
-}
-
-function doAdvSearch() {
-  activeFilters = {};
-  const get = id => document.getElementById(id)?.value?.trim() || '';
-  const title=get('adv-title'),number=get('adv-number'),person=get('adv-person'),
-        barangay=document.getElementById('adv-barangay').value,
-        year=document.getElementById('adv-year').value,
-        type=document.getElementById('adv-type').value,
-        status=document.getElementById('adv-status').value,
-        category=get('adv-category'),keyword=get('adv-keyword');
-  if(title) activeFilters.title=title; if(number) activeFilters.number=number;
-  if(person) activeFilters.person=person; if(barangay) activeFilters.barangay=barangay;
-  if(year) activeFilters.year=year; if(type) activeFilters.type=type;
-  if(status) activeFilters.status=status; if(category) activeFilters.category=category;
-  if(keyword) activeFilters.keyword=keyword;
-  renderFilterPills();
-  applyFilters();
-}
-
-function clearAll() {
-  activeFilters = {}; selectedCategory = '';
-  document.getElementById('main-search').value = '';
-  ['adv-title','adv-number','adv-person','adv-keyword','adv-category'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  ['adv-barangay','adv-year','adv-type','adv-status'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  document.getElementById('year-filter').value='';
-  document.getElementById('status-filter').value='';
-  document.getElementById('brgy-filter').value='';
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-  renderFilterPills(); renderTagList(); applyFilters();
-}
-
-function renderFilterPills() {
-  const labels = { _q:'Search',title:'Title',number:'No.',person:'Person',barangay:'Barangay',year:'Year',type:'Type',status:'Status',category:'Category',keyword:'Keyword' };
-  // FIX #4: escHtml values in pills
-  document.getElementById('active-filters').innerHTML = Object.entries(activeFilters)
-    .filter(([,v]) => v)
-    .map(([k,v]) =>
-      `<div class="active-filter-pill" data-key="${escHtml(k)}">${escHtml(labels[k]||k)}: <strong>${escHtml(v)}</strong><span class="pill-x">✕</span></div>`
-    ).join('');
-  document.getElementById('active-filters').querySelectorAll('.active-filter-pill').forEach(el => {
-    el.addEventListener('click', () => removeFilter(el.dataset.key));
-  });
-}
-
-function removeFilter(key) { delete activeFilters[key]; renderFilterPills(); applyFilters(); }
-
-function applyFilters() {
-  const year=document.getElementById('year-filter').value, status=document.getElementById('status-filter').value;
-  const brgy=document.getElementById('brgy-filter').value, sort=document.getElementById('sort-filter').value;
-  const af=activeFilters;
-  filtered = docs.filter(d => {
-    if (currentTab !== 'all' && d.type.toLowerCase() !== currentTab) return false;
-    if (year   && !(d.date||'').startsWith(year))  return false;
-    if (status && d.status !== status)             return false;
-    if (brgy   && !(d.barangay||'').toLowerCase().includes(brgy.toLowerCase())) return false;
-    if (selectedCategory && d.category !== selectedCategory) return false;
-    for (const [key, val] of Object.entries(af)) {
-      if (!val) continue;
-      const v = val.toLowerCase();
-      if (key==='_q') {
-        const hay=[d.title,d.num,d.summary,d.fulltext,d.sponsor,d.category,d.barangay,...(d.tags||[])].join(' ').toLowerCase();
-        if(!hay.includes(v)) return false;
-      }
-      else if (key==='title'    && !(d.title   ||'').toLowerCase().includes(v)) return false;
-      else if (key==='number'   && !(d.num     ||'').toLowerCase().includes(v)) return false;
-      else if (key==='year'     && !(d.date    ||'').startsWith(val))           return false;
-      else if (key==='person'   && !(d.sponsor ||'').toLowerCase().includes(v)) return false;
-      else if (key==='barangay' && !(d.barangay||'').toLowerCase().includes(v)) return false;
-      else if (key==='category' && !(d.category||'').toLowerCase().includes(v)) return false;
-      else if (key==='type'     && d.type !== val)                              return false;
-      else if (key==='status'   && d.status !== val)                            return false;
-      // FIX #3: keyword now also searches fulltext, consistent with _q
-      else if (key==='keyword') {
-        const hay=[...(d.tags||[]),d.summary||'',d.fulltext||'',d.title||''].join(' ').toLowerCase();
-        if(!hay.includes(v)) return false;
-      }
-    }
-    return true;
-  });
-  if (sort==='date-desc') filtered.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  else if (sort==='date-asc')  filtered.sort((a,b)=>(a.date||'').localeCompare(b.date||''));
-  else if (sort==='alpha')     filtered.sort((a,b)=>(a.title||'').localeCompare(b.title||''));
-  else if (sort==='number')    filtered.sort((a,b)=>(a.num||'').localeCompare(b.num||''));
-  currentPage=1;
-  const tabNames={all:'All Legislative Records',resolution:'Resolutions',ordinance:'Ordinances',proclamation:'Proclamations','executive order':'Executive Orders'};
-  document.getElementById('content-title').textContent = tabNames[currentTab] || 'All Legislative Records';
-  document.getElementById('content-meta').textContent = `${filtered.length} record${filtered.length!==1?'s':''} found`;
-  renderDocs(); renderPagination(); renderStats();
-}
-
-function setTab(tab, el) {
-  currentTab=tab;
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  currentPage=1; applyFilters();
-}
-
-function setView(view, el) {
-  currentView=view;
-  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  renderDocs();
-}
-
-function renderDocs() {
-  if (isLoading) return;
-  const container=document.getElementById('doc-container'), empty=document.getElementById('empty-state');
-  const start=(currentPage-1)*PAGE_SIZE, page=filtered.slice(start,start+PAGE_SIZE);
-  container.className = currentView==='grid' ? 'doc-grid' : 'doc-list';
-  if (!filtered.length) { container.innerHTML=''; empty.style.display='block'; document.getElementById('pagination').innerHTML=''; return; }
-  empty.style.display='none';
-  container.innerHTML = page.map(d => currentView==='grid' ? gridCard(d) : listCard(d)).join('');
-  // FIX #9: add keyboard accessibility to cards after render
-  container.querySelectorAll('.doc-card').forEach(card => {
-    card.setAttribute('tabindex','0');
-    card.setAttribute('role','button');
-    card.addEventListener('keydown', e => {
-      if (e.key==='Enter'||e.key===' ') { e.preventDefault(); card.click(); }
-    });
-  });
-}
-
-// FIX #4: gridCard and listCard use escHtml for all user-supplied text
-function gridCard(d) {
-  const tc=TYPE_COLORS[d.type]||TYPE_COLORS['Resolution'], sc=STATUS_COLORS[d.status]||STATUS_COLORS['Active'];
-  const dateStr=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'--';
-  const excerpt=(d.summary||'').substring(0,115);
-  const brgy=(d.barangay||''), brgyDisp=brgy.length>35?brgy.substring(0,32)+'…':brgy;
-  return `<div class="doc-card" onclick="openDoc(${d.id})">
-    <div class="doc-type-bar" style="background:${tc.bar}"></div>
-    <div class="doc-body">
-      <div class="doc-header-row">
-        <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${escHtml(d.type)}</div>
-        <div class="doc-number"># ${escHtml(d.num||'')}</div>
-      </div>
-      <div class="doc-title">${escHtml(d.title||'')}</div>
-      <div class="doc-excerpt">${escHtml(excerpt)}${excerpt?'…':''}</div>
-      <div class="doc-meta-pills">
-        ${brgy?`<span class="doc-meta-pill">📍 ${escHtml(brgyDisp)}</span>`:''}
-        <span class="doc-meta-pill">🗂 ${escHtml(d.category||'General')}</span>
-      </div>
-      <div class="doc-footer">
-        <div class="doc-date">${escHtml(dateStr)}</div>
-        <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40">${escHtml(d.status)}</div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function listCard(d) {
-  const tc=TYPE_COLORS[d.type]||TYPE_COLORS['Resolution'], sc=STATUS_COLORS[d.status]||STATUS_COLORS['Active'];
-  const dateStr=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'short',day:'numeric'}):'--';
-  return `<div class="doc-card" onclick="openDoc(${d.id})">
-    <div class="doc-body">
-      <div class="doc-header-row" style="flex-wrap:wrap;align-items:center">
-        <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${escHtml(d.type.slice(0,3).toUpperCase())}</div>
-        <div class="doc-title" style="flex:1;min-width:200px;margin:0 0.75rem">${escHtml(d.title||'')}</div>
-        <div class="doc-date" style="flex-shrink:0">${escHtml(dateStr)}</div>
-        <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40;margin-left:.5rem;flex-shrink:0">${escHtml(d.status)}</div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function renderPagination() {
-  const total=Math.ceil(filtered.length/PAGE_SIZE), pag=document.getElementById('pagination');
-  if(total<=1){pag.innerHTML='';return;}
-  let html=`<button class="page-btn page-btn-wide" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
-  for(let i=1;i<=total;i++) html+=`<button class="page-btn${i===currentPage?' active':''}" onclick="goPage(${i})">${i}</button>`;
-  html+=`<button class="page-btn page-btn-wide" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''}>Next →</button>`;
-  pag.innerHTML=html;
-}
-
-function goPage(p) {
-  const total=Math.ceil(filtered.length/PAGE_SIZE);
-  if(p<1||p>total) return;
-  currentPage=p; renderDocs(); renderPagination();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function openDoc(id) {
-  const d=docs.find(x=>x.id===id); if(!d) return;
-  currentDoc=d;
-  const tc=TYPE_COLORS[d.type]||TYPE_COLORS['Resolution'], sc=STATUS_COLORS[d.status]||STATUS_COLORS['Active'];
-  const fmtDate=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'--';
-  document.getElementById('modal-top-bar').style.background=tc.bar;
-  document.getElementById('modal-doc-type').style.color=tc.badge;
-  document.getElementById('modal-doc-type').textContent=d.type.toUpperCase()+(d.category?' — '+d.category:'');
-  document.getElementById('modal-title').textContent=d.title;
-  document.getElementById('modal-meta').innerHTML=`
-    <div class="meta-item"><span class="meta-key">Document No.</span><span class="meta-val">${escHtml(d.num||'--')}</span></div>
-    <div class="meta-item"><span class="meta-key">Date Enacted</span><span class="meta-val">${escHtml(fmtDate)}</span></div>
-    <div class="meta-item"><span class="meta-key">Status</span><span class="meta-val" style="color:${sc.color}">${escHtml(d.status)}</span></div>
-    <div class="meta-item"><span class="meta-key">Sponsor / Author</span><span class="meta-val">${escHtml(d.sponsor||'--')}</span></div>
-    <div class="meta-item"><span class="meta-key">Affected Barangay(s)</span><span class="meta-val">${escHtml(d.barangay||'--')}</span></div>
-    <div class="meta-item"><span class="meta-key">Category</span><span class="meta-val">${escHtml(d.category||'--')}</span></div>`;
-  document.getElementById('modal-summary').innerHTML=d.summary?`<p>${escHtml(d.summary)}</p>`:'<p style="color:var(--muted);font-style:italic">No summary provided.</p>';
-  const ftSection=document.getElementById('modal-fulltext-section');
-  ftSection.innerHTML=d.fulltext?`<hr class="modal-divider"><div class="modal-section-head">Full Text</div><div class="modal-fulltext">${escHtml(d.fulltext)}</div>`:'';
-
-  // FIX #4: modal tags use data-tag + event listeners instead of inline onclick
-  const tagsEl = document.getElementById('modal-tags');
-  tagsEl.innerHTML = (d.tags||[]).map(t=>`<span class="modal-tag" data-tag="${escHtml(t)}">${escHtml(t)}</span>`).join('');
-  tagsEl.querySelectorAll('.modal-tag').forEach(el => {
-    el.addEventListener('click', () => { quickChip(el.dataset.tag,'keyword'); closeModal(); });
-  });
-
-  const pdfSection=document.getElementById('modal-pdf-section'), pdfViewer=document.getElementById('modal-pdf-viewer'), pdfFrame=document.getElementById('modal-pdf-frame'), pdfBtn=document.getElementById('modal-pdf-btn');
-  if(d.pdf_url){pdfSection.style.display='block';pdfViewer.style.display='none';pdfFrame.src='';pdfBtn.textContent='📄 View PDF';document.getElementById('modal-pdf-download').href=d.pdf_url;}
-  else{pdfSection.style.display='none';}
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function togglePdfViewer() {
-  const viewer=document.getElementById('modal-pdf-viewer'), frame=document.getElementById('modal-pdf-frame'), btn=document.getElementById('modal-pdf-btn');
-  if(viewer.style.display==='none'){frame.src=currentDoc.pdf_url;viewer.style.display='block';btn.textContent='📄 Hide PDF';}
-  else{viewer.style.display='none';frame.src='';btn.textContent='📄 View PDF';}
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow='';
-  document.getElementById('modal-pdf-viewer').style.display='none';
-  document.getElementById('modal-pdf-frame').src='';
-}
-
-function printDoc() {
-  if(!currentDoc) return;
-  const d=currentDoc, w=window.open('','_blank');
-  w.document.write(`<html><head><title>${escHtml(d.num)}</title><style>body{font-family:Georgia,serif;max-width:700px;margin:2rem auto;color:#0f0e0c;line-height:1.7}h1{font-size:1.1rem;margin-bottom:.5rem}.meta{font-size:.8rem;color:#6b5c3e;margin-bottom:1rem;border-bottom:1px solid #c4b48a;padding-bottom:.5rem}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:.9rem;line-height:1.75}@media print{@page{margin:2cm}}</style></head><body><div class="meta">${escHtml(d.type)} No. ${escHtml(d.num)} &middot; ${escHtml(d.date)} &middot; Status: ${escHtml(d.status)}${d.barangay?' &middot; '+escHtml(d.barangay):''}</div><h1>${escHtml(d.title)}</h1><p style="font-size:.88rem;color:#6b5c3e;margin-bottom:1rem">${escHtml(d.summary||'')}</p><pre>${escHtml(d.fulltext||'')}</pre></body></html>`);
-  w.document.close(); w.print();
-}
-
-function copyLink() {
-  if(!currentDoc) return;
-  navigator.clipboard.writeText(location.origin+location.pathname+'#doc-'+currentDoc.id).then(()=>toast('Link copied to clipboard'));
-}
-
-// FIX #1: deleteDoc — check response status; only mutate local state on confirmed DB success
-async function deleteDoc() {
-  if(!currentDoc) return;
-  if(!confirm(`Delete "${currentDoc.title}"? This cannot be undone.`)) return;
-  const docToDelete = currentDoc;
-  try {
-    // Delete PDF from storage first (best-effort; don't abort doc delete if this fails)
-    if(docToDelete.pdf_url) {
-      try {
-        const fileName = docToDelete.pdf_url.split('/').pop();
-        await fetch(SUPABASE_URL+'/storage/v1/object/documents/'+fileName, {
-          method:'DELETE',
-          headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY }
-        });
-      } catch(e) { /* PDF delete failure is non-fatal */ }
-    }
-
-    // Delete the document record
-    const res = await fetch(SUPABASE_URL+'/rest/v1/documents?id=eq.'+docToDelete.id, {
-      method:'DELETE',
-      headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, Prefer:'return=representation' }
-    });
-
-    // FIX #1: only update UI if server confirmed deletion
-    if (!res.ok) {
-      const errBody = await res.text();
-      console.error('Delete failed:', res.status, errBody);
-      toast('Error: could not delete record (server error).');
-      return;
-    }
-
-    // Server confirmed — now safe to update local state
-    docs = docs.filter(x => x.id !== docToDelete.id);
-    filtered = filtered.filter(x => x.id !== docToDelete.id);
-    closeModal();
+  // ─── Init ───
+  async function init() {
+    showLoading(true);
+    try {
+      const data = await sb.query('documents', { select:'*', order:'date.desc' });
+      if (Array.isArray(data)) docs = data.map(normalizeDoc);
+      else toast('Could not connect to database.');
+    } catch(e) { toast('Network error loading records.'); }
+    filtered = [...docs];
+    showLoading(false);
     populateYearFilters();
     populateBrgyFilter();
     renderTagList();
     renderStats();
     applyFilters();
     updateStorageUsage();
-    toast('Record deleted.');
-  } catch(e) {
-    toast('Network error — record was not deleted.');
   }
-}
 
-function editDoc() { if(!currentDoc) return; closeModal(); openForm(currentDoc.id); }
-
-// FIX #6: openForm clears the PDF label text immediately before opening the drawer
-function openForm(id=null) {
-  editingId=id;
-  document.getElementById('drawer-title').textContent=id?'Edit Record':'Add New Record';
-  // Clear PDF label first so stale text never shows
-  document.getElementById('pdf-file-name').textContent='';
-  document.getElementById('f-pdf').value='';
-  if(id){
-    const d=docs.find(x=>x.id===id);
-    document.getElementById('f-type').value=d.type; document.getElementById('f-num').value=d.num;
-    document.getElementById('f-title').value=d.title; document.getElementById('f-date').value=d.date;
-    document.getElementById('f-status').value=d.status; document.getElementById('f-category').value=d.category||'';
-    document.getElementById('f-sponsor').value=d.sponsor||''; document.getElementById('f-barangay').value=d.barangay||'';
-    document.getElementById('f-summary').value=d.summary||''; document.getElementById('f-fulltext').value=d.fulltext||'';
-    document.getElementById('f-tags').value=(d.tags||[]).join(', ');
-    if(d.pdf_url) document.getElementById('pdf-file-name').textContent='Current PDF attached';
-  } else {
-    ['f-num','f-title','f-date','f-summary','f-fulltext','f-tags','f-category','f-sponsor','f-barangay'].forEach(fid=>document.getElementById(fid).value='');
-    document.getElementById('f-type').value='Resolution'; document.getElementById('f-status').value='Active';
+  function normalizeDoc(d) {
+    return {
+      ...d,
+      barangay: d.barangay || '',
+      tags: typeof d.tags === 'string'
+        ? d.tags.split(',').map(t => t.trim()).filter(Boolean)
+        : (d.tags || [])
+    };
   }
-  document.getElementById('form-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
 
-function closeForm() {
-  document.getElementById('form-overlay').classList.remove('open');
-  document.body.style.overflow=''; editingId=null;
-}
+  function showLoading(on) {
+    isLoading = on;
+    const container = document.getElementById('doc-container');
+    if (on) {
+      container.innerHTML = '<div class="loading-row">Loading records from archive…</div>';
+      document.getElementById('empty-state').style.display = 'none';
+    }
+  }
 
-async function saveRecord() {
-  const num=document.getElementById('f-num').value.trim(), title=document.getElementById('f-title').value.trim(), date=document.getElementById('f-date').value;
-  if(!num||!title||!date){toast('Please fill in required fields (Number, Title, Date)');return;}
-  const saveBtn=document.getElementById('save-btn'); saveBtn.textContent='Saving…'; saveBtn.disabled=true;
-  let pdf_url=editingId?(docs.find(x=>x.id===editingId)||{}).pdf_url||null:null;
-  const pdfFile=document.getElementById('f-pdf').files[0];
+  function populateYearFilters() {
+    const years = [...new Set(docs.map(d => (d.date||'').slice(0,4)).filter(Boolean))].sort((a,b)=>b-a);
+    ['year-filter','adv-year'].forEach(id => {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      while (sel.options.length > 1) sel.remove(1);
+      years.forEach(y => { const o = document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
+    });
+  }
 
-  // FIX #2: stricter PDF upload check — verify response has a usable path
-  if(pdfFile){
-    try{
-      const safeName=num.replace(/[^a-zA-Z0-9\-_]/g,'_')+'_'+Date.now()+'.pdf';
-      const up=await sb.uploadFile('documents',safeName,pdfFile);
-      const uploadedPath = up.Key || up.path || up.name;
-      if(uploadedPath) {
-        const fileName = uploadedPath.split('/').pop();
-        pdf_url = sb.fileUrl('documents', fileName);
-      } else {
-        console.warn('PDF upload response missing path:', up);
-        toast('PDF upload failed — record will be saved without PDF.');
+  function populateBrgyFilter() {
+    const brgys = new Set();
+    docs.forEach(d => { (d.barangay||'').split(',').forEach(b => { const t=b.trim(); if(t && t!=='All Barangays') brgys.add(t); }); });
+    const sel = document.getElementById('brgy-filter');
+    while (sel.options.length > 1) sel.remove(1);
+    [...brgys].sort().forEach(b => { const o=document.createElement('option'); o.value=b; o.textContent=b; sel.appendChild(o); });
+  }
+
+  // FIX #4: renderTagList uses escHtml + data-cat attribute instead of inline onclick string
+  function renderTagList() {
+    const cats = {};
+    docs.forEach(d => { if (d.category) cats[d.category] = (cats[d.category]||0)+1; });
+    const colors = ['#3a5a4a','#8b3a1a','#1a3a6a','#5a3a8a','#6a4a00','#2a5a5a','#5a2a2a','#3a4a2a','#8a4a2a'];
+    const list = document.getElementById('tag-list');
+    const entries = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
+    if (!entries.length) {
+      list.innerHTML = '<div style="font-size:.8rem;color:var(--muted);font-style:italic">No categories yet</div>';
+      return;
+    }
+    list.innerHTML = entries.map(([cat,count],i) =>
+      `<div class="tag-item${selectedCategory===cat?' selected':''}" data-cat="${escHtml(cat)}" tabindex="0" role="button" aria-pressed="${selectedCategory===cat}">
+        <span class="tag-name"><span class="tag-dot" style="background:${colors[i%colors.length]}"></span>${escHtml(cat)}</span>
+        <span class="tag-count">${count}</span>
+      </div>`
+    ).join('');
+
+    list.querySelectorAll('.tag-item').forEach(el => {
+      el.addEventListener('click', () => filterByCategory(el.dataset.cat));
+      el.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); filterByCategory(el.dataset.cat); } });
+    });
+  }
+
+  function filterByCategory(cat) {
+    selectedCategory = selectedCategory === cat ? '' : cat;
+    renderTagList();
+    applyFilters();
+  }
+
+  function renderStats() {
+    document.getElementById('stat-total').textContent  = docs.length;
+    document.getElementById('stat-res').textContent    = docs.filter(d=>d.type==='Resolution').length;
+    document.getElementById('stat-ord').textContent    = docs.filter(d=>d.type==='Ordinance').length;
+    document.getElementById('stat-proc').textContent   = docs.filter(d=>d.type==='Proclamation').length;
+    document.getElementById('stat-exec').textContent   = docs.filter(d=>d.type==='Executive Order').length;
+    document.getElementById('stat-active').textContent = docs.filter(d=>d.status==='Active').length;
+  }
+
+  function updateSearchPlaceholder() {
+    const map = { all:'Search all fields…', title:'Search by title…', number:'Enter document number, e.g. 2024-007', year:'Enter year, e.g. 2024', person:'Enter sponsor or author name…', barangay:'Enter barangay name…', keyword:'Enter tag or keyword…', category:'Enter category name…' };
+    document.getElementById('main-search').placeholder = map[document.getElementById('search-field').value] || 'Search…';
+  }
+
+  function doSearch() {
+    const q = document.getElementById('main-search').value.trim();
+    const field = document.getElementById('search-field').value;
+    if (!q) { clearAll(); return; }
+    activeFilters = {};
+    activeFilters[field === 'all' ? '_q' : field] = q;
+    renderFilterPills();
+    applyFilters();
+  }
+
+  function quickChip(val, field) {
+    activeFilters[field] = activeFilters[field] === val ? '' : val;
+    document.querySelectorAll('.chip').forEach(c => {
+      const txt = c.textContent.trim();
+      const chipVals = { 'Resolutions':'Resolution','Ordinances':'Ordinance','Proclamations':'Proclamation','Exec. Orders':'Executive Order','Active':'Active','Pending':'Pending' };
+      if (chipVals[txt] === val && field === 'type') c.classList.toggle('active', activeFilters.type === val);
+      if (txt === val && field === 'status') c.classList.toggle('active', activeFilters.status === val);
+    });
+    renderFilterPills();
+    applyFilters();
+  }
+
+  function toggleAdv() {
+    const panel = document.getElementById('adv-panel');
+    panel.classList.toggle('open');
+    document.getElementById('adv-toggle-btn').textContent = panel.classList.contains('open') ? '✕ Close Advanced' : '⊞ Advanced Search';
+  }
+
+  function doAdvSearch() {
+    activeFilters = {};
+    const get = id => document.getElementById(id)?.value?.trim() || '';
+    const title=get('adv-title'),number=get('adv-number'),person=get('adv-person'),
+          barangay=document.getElementById('adv-barangay').value,
+          year=document.getElementById('adv-year').value,
+          type=document.getElementById('adv-type').value,
+          status=document.getElementById('adv-status').value,
+          category=get('adv-category'),keyword=get('adv-keyword');
+    if(title) activeFilters.title=title; if(number) activeFilters.number=number;
+    if(person) activeFilters.person=person; if(barangay) activeFilters.barangay=barangay;
+    if(year) activeFilters.year=year; if(type) activeFilters.type=type;
+    if(status) activeFilters.status=status; if(category) activeFilters.category=category;
+    if(keyword) activeFilters.keyword=keyword;
+    renderFilterPills();
+    applyFilters();
+  }
+
+  function clearAll() {
+    activeFilters = {}; selectedCategory = '';
+    document.getElementById('main-search').value = '';
+    ['adv-title','adv-number','adv-person','adv-keyword','adv-category'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+    ['adv-barangay','adv-year','adv-type','adv-status'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+    document.getElementById('year-filter').value='';
+    document.getElementById('status-filter').value='';
+    document.getElementById('brgy-filter').value='';
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    renderFilterPills(); renderTagList(); applyFilters();
+  }
+
+  function renderFilterPills() {
+    const labels = { _q:'Search',title:'Title',number:'No.',person:'Person',barangay:'Barangay',year:'Year',type:'Type',status:'Status',category:'Category',keyword:'Keyword' };
+    // FIX #4: escHtml values in pills
+    document.getElementById('active-filters').innerHTML = Object.entries(activeFilters)
+      .filter(([,v]) => v)
+      .map(([k,v]) =>
+        `<div class="active-filter-pill" data-key="${escHtml(k)}">${escHtml(labels[k]||k)}: <strong>${escHtml(v)}</strong><span class="pill-x">✕</span></div>`
+      ).join('');
+    document.getElementById('active-filters').querySelectorAll('.active-filter-pill').forEach(el => {
+      el.addEventListener('click', () => removeFilter(el.dataset.key));
+    });
+  }
+
+  function removeFilter(key) { delete activeFilters[key]; renderFilterPills(); applyFilters(); }
+
+  function applyFilters() {
+    const year=document.getElementById('year-filter').value, status=document.getElementById('status-filter').value;
+    const brgy=document.getElementById('brgy-filter').value, sort=document.getElementById('sort-filter').value;
+    const af=activeFilters;
+    filtered = docs.filter(d => {
+      if (currentTab !== 'all' && d.type.toLowerCase() !== currentTab) return false;
+      if (year   && !(d.date||'').startsWith(year))  return false;
+      if (status && d.status !== status)             return false;
+      if (brgy   && !(d.barangay||'').toLowerCase().includes(brgy.toLowerCase())) return false;
+      if (selectedCategory && d.category !== selectedCategory) return false;
+      for (const [key, val] of Object.entries(af)) {
+        if (!val) continue;
+        const v = val.toLowerCase();
+        if (key==='_q') {
+          const hay=[d.title,d.num,d.summary,d.fulltext,d.sponsor,d.category,d.barangay,...(d.tags||[])].join(' ').toLowerCase();
+          if(!hay.includes(v)) return false;
+        }
+        else if (key==='title'    && !(d.title   ||'').toLowerCase().includes(v)) return false;
+        else if (key==='number'   && !(d.num     ||'').toLowerCase().includes(v)) return false;
+        else if (key==='year'     && !(d.date    ||'').startsWith(val))           return false;
+        else if (key==='person'   && !(d.sponsor ||'').toLowerCase().includes(v)) return false;
+        else if (key==='barangay' && !(d.barangay||'').toLowerCase().includes(v)) return false;
+        else if (key==='category' && !(d.category||'').toLowerCase().includes(v)) return false;
+        else if (key==='type'     && d.type !== val)                              return false;
+        else if (key==='status'   && d.status !== val)                            return false;
+        // FIX #3: keyword now also searches fulltext, consistent with _q
+        else if (key==='keyword') {
+          const hay=[...(d.tags||[]),d.summary||'',d.fulltext||'',d.title||''].join(' ').toLowerCase();
+          if(!hay.includes(v)) return false;
+        }
       }
-    }catch(e){
-      console.error('PDF upload error:', e);
-      toast('PDF upload error — record saved without PDF.');
+      return true;
+    });
+    if (sort==='date-desc') filtered.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+    else if (sort==='date-asc')  filtered.sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+    else if (sort==='alpha')     filtered.sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+    else if (sort==='number')    filtered.sort((a,b)=>(a.num||'').localeCompare(b.num||''));
+    currentPage=1;
+    const tabNames={all:'All Legislative Records',resolution:'Resolutions',ordinance:'Ordinances',proclamation:'Proclamations','executive order':'Executive Orders'};
+    document.getElementById('content-title').textContent = tabNames[currentTab] || 'All Legislative Records';
+    document.getElementById('content-meta').textContent = `${filtered.length} record${filtered.length!==1?'s':''} found`;
+    renderDocs(); renderPagination(); renderStats();
+  }
+
+  function setTab(tab, el) {
+    currentTab=tab;
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    currentPage=1; applyFilters();
+  }
+
+  function setView(view, el) {
+    currentView=view;
+    document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    renderDocs();
+  }
+
+  function renderDocs() {
+    if (isLoading) return;
+    const container=document.getElementById('doc-container'), empty=document.getElementById('empty-state');
+    const start=(currentPage-1)*PAGE_SIZE, page=filtered.slice(start,start+PAGE_SIZE);
+    container.className = currentView==='grid' ? 'doc-grid' : 'doc-list';
+    if (!filtered.length) { container.innerHTML=''; empty.style.display='block'; document.getElementById('pagination').innerHTML=''; return; }
+    empty.style.display='none';
+    container.innerHTML = page.map(d => currentView==='grid' ? gridCard(d) : listCard(d)).join('');
+    // FIX #9: add keyboard accessibility to cards after render
+    container.querySelectorAll('.doc-card').forEach(card => {
+      card.setAttribute('tabindex','0');
+      card.setAttribute('role','button');
+      card.addEventListener('keydown', e => {
+        if (e.key==='Enter'||e.key===' ') { e.preventDefault(); card.click(); }
+      });
+    });
+  }
+
+  // FIX #4: gridCard and listCard use escHtml for all user-supplied text
+  function gridCard(d) {
+    const tc=TYPE_COLORS[d.type]||TYPE_COLORS['Resolution'], sc=STATUS_COLORS[d.status]||STATUS_COLORS['Active'];
+    const dateStr=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'--';
+    const excerpt=(d.summary||'').substring(0,115);
+    const brgy=(d.barangay||''), brgyDisp=brgy.length>35?brgy.substring(0,32)+'…':brgy;
+    return `<div class="doc-card" onclick="openDoc(${d.id})">
+      <div class="doc-type-bar" style="background:${tc.bar}"></div>
+      <div class="doc-body">
+        <div class="doc-header-row">
+          <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${escHtml(d.type)}</div>
+          <div class="doc-number"># ${escHtml(d.num||'')}</div>
+        </div>
+        <div class="doc-title">${escHtml(d.title||'')}</div>
+        <div class="doc-excerpt">${escHtml(excerpt)}${excerpt?'…':''}</div>
+        <div class="doc-meta-pills">
+          ${brgy?`<span class="doc-meta-pill">📍 ${escHtml(brgyDisp)}</span>`:''}
+          <span class="doc-meta-pill">🗂 ${escHtml(d.category||'General')}</span>
+        </div>
+        <div class="doc-footer">
+          <div class="doc-date">${escHtml(dateStr)}</div>
+          <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40">${escHtml(d.status)}</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function listCard(d) {
+    const tc=TYPE_COLORS[d.type]||TYPE_COLORS['Resolution'], sc=STATUS_COLORS[d.status]||STATUS_COLORS['Active'];
+    const dateStr=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'short',day:'numeric'}):'--';
+    return `<div class="doc-card" onclick="openDoc(${d.id})">
+      <div class="doc-body">
+        <div class="doc-header-row" style="flex-wrap:wrap;align-items:center">
+          <div class="doc-badge" style="color:${tc.badge};border-color:${tc.badge}">${escHtml(d.type.slice(0,3).toUpperCase())}</div>
+          <div class="doc-title" style="flex:1;min-width:200px;margin:0 0.75rem">${escHtml(d.title||'')}</div>
+          <div class="doc-date" style="flex-shrink:0">${escHtml(dateStr)}</div>
+          <div class="doc-status" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.color}40;margin-left:.5rem;flex-shrink:0">${escHtml(d.status)}</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderPagination() {
+    const total=Math.ceil(filtered.length/PAGE_SIZE), pag=document.getElementById('pagination');
+    if(total<=1){pag.innerHTML='';return;}
+    let html=`<button class="page-btn page-btn-wide" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
+    for(let i=1;i<=total;i++) html+=`<button class="page-btn${i===currentPage?' active':''}" onclick="goPage(${i})">${i}</button>`;
+    html+=`<button class="page-btn page-btn-wide" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''}>Next →</button>`;
+    pag.innerHTML=html;
+  }
+
+  function goPage(p) {
+    const total=Math.ceil(filtered.length/PAGE_SIZE);
+    if(p<1||p>total) return;
+    currentPage=p; renderDocs(); renderPagination();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function openDoc(id) {
+    const d=docs.find(x=>x.id===id); if(!d) return;
+    currentDoc=d;
+    const tc=TYPE_COLORS[d.type]||TYPE_COLORS['Resolution'], sc=STATUS_COLORS[d.status]||STATUS_COLORS['Active'];
+    const fmtDate=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'--';
+    document.getElementById('modal-top-bar').style.background=tc.bar;
+    document.getElementById('modal-doc-type').style.color=tc.badge;
+    document.getElementById('modal-doc-type').textContent=d.type.toUpperCase()+(d.category?' — '+d.category:'');
+    document.getElementById('modal-title').textContent=d.title;
+    document.getElementById('modal-meta').innerHTML=`
+      <div class="meta-item"><span class="meta-key">Document No.</span><span class="meta-val">${escHtml(d.num||'--')}</span></div>
+      <div class="meta-item"><span class="meta-key">Date Enacted</span><span class="meta-val">${escHtml(fmtDate)}</span></div>
+      <div class="meta-item"><span class="meta-key">Status</span><span class="meta-val" style="color:${sc.color}">${escHtml(d.status)}</span></div>
+      <div class="meta-item"><span class="meta-key">Sponsor / Author</span><span class="meta-val">${escHtml(d.sponsor||'--')}</span></div>
+      <div class="meta-item"><span class="meta-key">Affected Barangay(s)</span><span class="meta-val">${escHtml(d.barangay||'--')}</span></div>
+      <div class="meta-item"><span class="meta-key">Category</span><span class="meta-val">${escHtml(d.category||'--')}</span></div>`;
+    document.getElementById('modal-summary').innerHTML=d.summary?`<p>${escHtml(d.summary)}</p>`:'<p style="color:var(--muted);font-style:italic">No summary provided.</p>';
+    const ftSection=document.getElementById('modal-fulltext-section');
+    ftSection.innerHTML=d.fulltext?`<hr class="modal-divider"><div class="modal-section-head">Full Text</div><div class="modal-fulltext">${escHtml(d.fulltext)}</div>`:'';
+
+    // FIX #4: modal tags use data-tag + event listeners instead of inline onclick
+    const tagsEl = document.getElementById('modal-tags');
+    tagsEl.innerHTML = (d.tags||[]).map(t=>`<span class="modal-tag" data-tag="${escHtml(t)}">${escHtml(t)}</span>`).join('');
+    tagsEl.querySelectorAll('.modal-tag').forEach(el => {
+      el.addEventListener('click', () => { quickChip(el.dataset.tag,'keyword'); closeModal(); });
+    });
+
+    const pdfSection=document.getElementById('modal-pdf-section'), pdfViewer=document.getElementById('modal-pdf-viewer'), pdfFrame=document.getElementById('modal-pdf-frame'), pdfBtn=document.getElementById('modal-pdf-btn');
+    if(d.pdf_url){pdfSection.style.display='block';pdfViewer.style.display='none';pdfFrame.src='';pdfBtn.textContent='📄 View PDF';document.getElementById('modal-pdf-download').href=d.pdf_url;}
+    else{pdfSection.style.display='none';}
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+
+  function togglePdfViewer() {
+    const viewer=document.getElementById('modal-pdf-viewer'), frame=document.getElementById('modal-pdf-frame'), btn=document.getElementById('modal-pdf-btn');
+    if(viewer.style.display==='none'){frame.src=currentDoc.pdf_url;viewer.style.display='block';btn.textContent='📄 Hide PDF';}
+    else{viewer.style.display='none';frame.src='';btn.textContent='📄 View PDF';}
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow='';
+    document.getElementById('modal-pdf-viewer').style.display='none';
+    document.getElementById('modal-pdf-frame').src='';
+  }
+
+  function printDoc() {
+    if(!currentDoc) return;
+    const d=currentDoc, w=window.open('','_blank');
+    w.document.write(`<html><head><title>${escHtml(d.num)}</title><style>body{font-family:Georgia,serif;max-width:700px;margin:2rem auto;color:#0f0e0c;line-height:1.7}h1{font-size:1.1rem;margin-bottom:.5rem}.meta{font-size:.8rem;color:#6b5c3e;margin-bottom:1rem;border-bottom:1px solid #c4b48a;padding-bottom:.5rem}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:.9rem;line-height:1.75}@media print{@page{margin:2cm}}</style></head><body><div class="meta">${escHtml(d.type)} No. ${escHtml(d.num)} &middot; ${escHtml(d.date)} &middot; Status: ${escHtml(d.status)}${d.barangay?' &middot; '+escHtml(d.barangay):''}</div><h1>${escHtml(d.title)}</h1><p style="font-size:.88rem;color:#6b5c3e;margin-bottom:1rem">${escHtml(d.summary||'')}</p><pre>${escHtml(d.fulltext||'')}</pre></body></html>`);
+    w.document.close(); w.print();
+  }
+
+  function copyLink() {
+    if(!currentDoc) return;
+    navigator.clipboard.writeText(location.origin+location.pathname+'#doc-'+currentDoc.id).then(()=>toast('Link copied to clipboard'));
+  }
+
+  // FIX #1: deleteDoc — check response status; only mutate local state on confirmed DB success
+  async function deleteDoc() {
+    if(!currentDoc) return;
+    if(!confirm(`Delete "${currentDoc.title}"? This cannot be undone.`)) return;
+    const docToDelete = currentDoc;
+    try {
+      // Delete PDF from storage first (best-effort; don't abort doc delete if this fails)
+      if(docToDelete.pdf_url) {
+        try {
+          const fileName = docToDelete.pdf_url.split('/').pop();
+          await fetch(SUPABASE_URL+'/storage/v1/object/documents/'+fileName, {
+            method:'DELETE',
+            headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY }
+          });
+        } catch(e) { /* PDF delete failure is non-fatal */ }
+      }
+
+      // Delete the document record
+      const res = await fetch(SUPABASE_URL+'/rest/v1/documents?id=eq.'+docToDelete.id, {
+        method:'DELETE',
+        headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, Prefer:'return=representation' }
+      });
+
+      // FIX #1: only update UI if server confirmed deletion
+      if (!res.ok) {
+        const errBody = await res.text();
+        console.error('Delete failed:', res.status, errBody);
+        toast('Error: could not delete record (server error).');
+        return;
+      }
+
+      // Server confirmed — now safe to update local state
+      docs = docs.filter(x => x.id !== docToDelete.id);
+      filtered = filtered.filter(x => x.id !== docToDelete.id);
+      closeModal();
+      populateYearFilters();
+      populateBrgyFilter();
+      renderTagList();
+      renderStats();
+      applyFilters();
+      updateStorageUsage();
+      toast('Record deleted.');
+    } catch(e) {
+      toast('Network error — record was not deleted.');
     }
   }
 
-  const rec={type:document.getElementById('f-type').value,num,title,date,status:document.getElementById('f-status').value,category:document.getElementById('f-category').value.trim()||'General',sponsor:document.getElementById('f-sponsor').value.trim()||'--',barangay:document.getElementById('f-barangay').value.trim()||'',summary:document.getElementById('f-summary').value.trim(),fulltext:document.getElementById('f-fulltext').value.trim(),tags:document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean).join(','),pdf_url};
-  try{
-    if(editingId){
-      const updated=await sb.update('documents',editingId,rec);
-      const idx=docs.findIndex(x=>x.id===editingId);
-      docs[idx]=normalizeDoc(Array.isArray(updated)&&updated[0]?updated[0]:{...rec,id:editingId});
+  function editDoc() { if(!currentDoc) return; closeModal(); openForm(currentDoc.id); }
+
+  // FIX #6: openForm clears the PDF label text immediately before opening the drawer
+  function openForm(id=null) {
+    editingId=id;
+    document.getElementById('drawer-title').textContent=id?'Edit Record':'Add New Record';
+    // Clear PDF label first so stale text never shows
+    document.getElementById('pdf-file-name').textContent='';
+    document.getElementById('f-pdf').value='';
+    if(id){
+      const d=docs.find(x=>x.id===id);
+      document.getElementById('f-type').value=d.type; document.getElementById('f-num').value=d.num;
+      document.getElementById('f-title').value=d.title; document.getElementById('f-date').value=d.date;
+      document.getElementById('f-status').value=d.status; document.getElementById('f-category').value=d.category||'';
+      document.getElementById('f-sponsor').value=d.sponsor||''; document.getElementById('f-barangay').value=d.barangay||'';
+      document.getElementById('f-summary').value=d.summary||''; document.getElementById('f-fulltext').value=d.fulltext||'';
+      document.getElementById('f-tags').value=(d.tags||[]).join(', ');
+      if(d.pdf_url) document.getElementById('pdf-file-name').textContent='Current PDF attached';
     } else {
-      const inserted=await sb.insert('documents',rec);
-      if(Array.isArray(inserted)&&inserted[0]) docs.unshift(normalizeDoc(inserted[0]));
-      else { toast('Error saving record. Check database connection.'); saveBtn.textContent='Save Record'; saveBtn.disabled=false; return; }
+      ['f-num','f-title','f-date','f-summary','f-fulltext','f-tags','f-category','f-sponsor','f-barangay'].forEach(fid=>document.getElementById(fid).value='');
+      document.getElementById('f-type').value='Resolution'; document.getElementById('f-status').value='Active';
     }
-    filtered=[...docs]; closeForm(); populateYearFilters(); populateBrgyFilter(); renderTagList(); renderStats(); applyFilters(); updateStorageUsage();
-    toast(editingId?'Record updated successfully':'Record added successfully');
-  }catch(e){ toast('Error saving to database.'); }
-  saveBtn.textContent='Save Record'; saveBtn.disabled=false;
-}
+    document.getElementById('form-overlay').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
 
-document.getElementById('f-pdf').addEventListener('change',function(){document.getElementById('pdf-file-name').textContent=this.files[0]?this.files[0].name:'';});
+  function closeForm() {
+    document.getElementById('form-overlay').classList.remove('open');
+    document.body.style.overflow=''; editingId=null;
+  }
 
-async function updateStorageUsage() {
-  try{
-    const r=await fetch(SUPABASE_URL+'/storage/v1/object/list/documents',{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({prefix:'',limit:1000,offset:0})});
-    const files=await r.json(); if(!Array.isArray(files)) return;
-    const totalBytes=files.reduce((sum,f)=>sum+(f.metadata?.size||0),0), totalMB=totalBytes/(1024*1024), totalGB=totalMB/1024;
-    const pct=Math.min(totalGB/1*100,100);
-    const label=totalMB<1?(totalBytes/1024).toFixed(1)+' KB':totalMB<1024?totalMB.toFixed(1)+' MB':totalGB.toFixed(2)+' GB';
-    document.getElementById('storage-text').textContent=label;
-    document.getElementById('storage-bar').style.width=pct+'%';
-    document.getElementById('storage-bar').style.background=pct>80?'#8b2a2a':pct>60?'#8b6914':'var(--sepia)';
-  }catch(e){}
-}
+  async function saveRecord() {
+    const num=document.getElementById('f-num').value.trim(), title=document.getElementById('f-title').value.trim(), date=document.getElementById('f-date').value;
+    if(!num||!title||!date){toast('Please fill in required fields (Number, Title, Date)');return;}
+    const saveBtn=document.getElementById('save-btn'); saveBtn.textContent='Saving…'; saveBtn.disabled=true;
+    let pdf_url=editingId?(docs.find(x=>x.id===editingId)||{}).pdf_url||null:null;
+    const pdfFile=document.getElementById('f-pdf').files[0];
 
-function toast(msg) {
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
-}
+    // FIX #2: stricter PDF upload check — verify response has a usable path
+    if(pdfFile){
+      try{
+        const safeName=num.replace(/[^a-zA-Z0-9\-_]/g,'_')+'_'+Date.now()+'.pdf';
+        const up=await sb.uploadFile('documents',safeName,pdfFile);
+        const uploadedPath = up.Key || up.path || up.name;
+        if(uploadedPath) {
+          const fileName = uploadedPath.split('/').pop();
+          pdf_url = sb.fileUrl('documents', fileName);
+        } else {
+          console.warn('PDF upload response missing path:', up);
+          toast('PDF upload failed — record will be saved without PDF.');
+        }
+      }catch(e){
+        console.error('PDF upload error:', e);
+        toast('PDF upload error — record saved without PDF.');
+      }
+    }
 
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeForm();closeCustomizer();}});
+    const rec={type:document.getElementById('f-type').value,num,title,date,status:document.getElementById('f-status').value,category:document.getElementById('f-category').value.trim()||'General',sponsor:document.getElementById('f-sponsor').value.trim()||'--',barangay:document.getElementById('f-barangay').value.trim()||'',summary:document.getElementById('f-summary').value.trim(),fulltext:document.getElementById('f-fulltext').value.trim(),tags:document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean).join(','),pdf_url};
+    try{
+      if(editingId){
+        const updated=await sb.update('documents',editingId,rec);
+        const idx=docs.findIndex(x=>x.id===editingId);
+        docs[idx]=normalizeDoc(Array.isArray(updated)&&updated[0]?updated[0]:{...rec,id:editingId});
+      } else {
+        const inserted=await sb.insert('documents',rec);
+        if(Array.isArray(inserted)&&inserted[0]) docs.unshift(normalizeDoc(inserted[0]));
+        else { toast('Error saving record. Check database connection.'); saveBtn.textContent='Save Record'; saveBtn.disabled=false; return; }
+      }
+      filtered=[...docs]; closeForm(); populateYearFilters(); populateBrgyFilter(); renderTagList(); renderStats(); applyFilters(); updateStorageUsage();
+      toast(editingId?'Record updated successfully':'Record added successfully');
+    }catch(e){ toast('Error saving to database.'); }
+    saveBtn.textContent='Save Record'; saveBtn.disabled=false;
+  }
+
+  document.getElementById('f-pdf').addEventListener('change',function(){document.getElementById('pdf-file-name').textContent=this.files[0]?this.files[0].name:'';});
+
+  async function updateStorageUsage() {
+    try{
+      const r=await fetch(SUPABASE_URL+'/storage/v1/object/list/documents',{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({prefix:'',limit:1000,offset:0})});
+      const files=await r.json(); if(!Array.isArray(files)) return;
+      const totalBytes=files.reduce((sum,f)=>sum+(f.metadata?.size||0),0), totalMB=totalBytes/(1024*1024), totalGB=totalMB/1024;
+      const pct=Math.min(totalGB/1*100,100);
+      const label=totalMB<1?(totalBytes/1024).toFixed(1)+' KB':totalMB<1024?totalMB.toFixed(1)+' MB':totalGB.toFixed(2)+' GB';
+      document.getElementById('storage-text').textContent=label;
+      document.getElementById('storage-bar').style.width=pct+'%';
+      document.getElementById('storage-bar').style.background=pct>80?'#8b2a2a':pct>60?'#8b6914':'var(--sepia)';
+    }catch(e){}
+  }
+
+  function toast(msg) {
+    const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2800);
+  }
+
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeForm();closeCustomizer();}});
 
 
-// ══════════════════════════════════════════════
-//  COLOR CUSTOMIZER ENGINE
-// ══════════════════════════════════════════════
+  // ══════════════════════════════════════════════
+  //  COLOR CUSTOMIZER ENGINE
+  // ══════════════════════════════════════════════
 
-const DEFAULT_THEME = {
-  '--ink':       '#0f0e0c',
-  '--parchment': '#f5f0e8',
-  '--aged':      '#e8dfc8',
-  '--sepia':     '#8b6914',
-  '--gold':      '#c9943a',
-  '--rust':      '#8b3a1a',
-  '--sage':      '#3a5a4a',
-  '--cream':     '#faf7f0',
-  '--border':    '#c4b48a',
-  '--muted':     '#6b5c3e',
-};
+  const DEFAULT_THEME = {
+    '--ink':       '#0f0e0c',
+    '--parchment': '#f5f0e8',
+    '--aged':      '#e8dfc8',
+    '--sepia':     '#8b6914',
+    '--gold':      '#c9943a',
+    '--rust':      '#8b3a1a',
+    '--sage':      '#3a5a4a',
+    '--cream':     '#faf7f0',
+    '--border':    '#c4b48a',
+    '--muted':     '#6b5c3e',
+    '--hero-mid': '#2a2018',
+  };
 
-const VAR_META = {
-  '--ink':       { label:'Ink',       desc:'Header bg, dark buttons, card hover bg', group:'header' },
-  '--gold':      { label:'Gold',      desc:'Primary accent — borders, active tabs', group:'header' },
-  '--sepia':     { label:'Sepia',     desc:'Sidebar headings, section labels, stat values', group:'header' },
-  '--rust':      { label:'Rust',      desc:'Ordinance type color, required field marker', group:'header' },
-  '--sage':      { label:'Sage',      desc:'Resolution type color', group:'header' },
-  '--parchment': { label:'Parchment', desc:'Main page background, form inputs', group:'bg' },
-  '--cream':     { label:'Cream',     desc:'Card & sidebar background', group:'bg' },
-  '--aged':      { label:'Aged',      desc:'Hover states, meta pill backgrounds', group:'bg' },
-  '--border':    { label:'Border',    desc:'All UI borders, dividers', group:'text' },
-  '--muted':     { label:'Muted',     desc:'Secondary text, labels, metadata', group:'text' },
-};
+  const VAR_META = {
+    '--ink':       { label:'Ink',       desc:'Header bg, dark buttons, card hover bg', group:'header' },
+    '--gold':      { label:'Gold',      desc:'Primary accent — borders, active tabs', group:'header' },
+    '--sepia':     { label:'Sepia',     desc:'Sidebar headings, section labels, stat values', group:'header' },
+    '--rust':      { label:'Rust',      desc:'Ordinance type color, required field marker', group:'header' },
+    '--sage':      { label:'Sage',      desc:'Resolution type color', group:'header' },
+    '--parchment': { label:'Parchment', desc:'Main page background, form inputs', group:'bg' },
+    '--cream':     { label:'Cream',     desc:'Card & sidebar background', group:'bg' },
+    '--aged':      { label:'Aged',      desc:'Hover states, meta pill backgrounds', group:'bg' },
+    '--border':    { label:'Border',    desc:'All UI borders, dividers', group:'text' },
+    '--muted':     { label:'Muted',     desc:'Secondary text, labels, metadata', group:'text' },
+    '--hero-mid': { label:'Hero Mid', desc:'Search bar gradient midpoint color', group:'header' },
+  };
 
-const PRESETS = [
-  { name:'Classic Parchment', id:'classic', swatches:['#0f0e0c','#f5f0e8','#c9943a','#8b6914','#3a5a4a'], vars:{'--ink':'#0f0e0c','--parchment':'#f5f0e8','--aged':'#e8dfc8','--sepia':'#8b6914','--gold':'#c9943a','--rust':'#8b3a1a','--sage':'#3a5a4a','--cream':'#faf7f0','--border':'#c4b48a','--muted':'#6b5c3e'} },
-  { name:'Night Registry',    id:'night',   swatches:['#1a1a2e','#0d1117','#4a9eff','#2d6a9f','#1e4d6b'], vars:{'--ink':'#1a1a2e','--parchment':'#0d1117','--aged':'#161b22','--sepia':'#2d6a9f','--gold':'#4a9eff','--rust':'#e06c75','--sage':'#98c379','--cream':'#0a0e14','--border':'#30363d','--muted':'#8b949e'} },
-  { name:'Emerald Court',     id:'emerald', swatches:['#1a2e1a','#f0f7f0','#3a8a3a','#1e5a1e','#2d6b2d'], vars:{'--ink':'#1a2e1a','--parchment':'#f0f7f0','--aged':'#d8ecd8','--sepia':'#2d6b2d','--gold':'#3a8a3a','--rust':'#8b3a1a','--sage':'#1e5a1e','--cream':'#f5fbf5','--border':'#a8c8a8','--muted':'#4a6b4a'} },
-  { name:'Royal Navy',        id:'navy',    swatches:['#0a1628','#f0f4f8','#c8a96e','#1a3a6a','#2c5282'], vars:{'--ink':'#0a1628','--parchment':'#f0f4f8','--aged':'#dce4ef','--sepia':'#1a3a6a','--gold':'#c8a96e','--rust':'#9b2335','--sage':'#2c5282','--cream':'#f7f9fc','--border':'#b0c4de','--muted':'#4a6280'} },
-  { name:'Crimson Ledger',    id:'crimson', swatches:['#1c0a0a','#fdf6f6','#cc2936','#8b1a1a','#6b2d2d'], vars:{'--ink':'#1c0a0a','--parchment':'#fdf6f6','--aged':'#f5e0e0','--sepia':'#8b1a1a','--gold':'#cc2936','--rust':'#6b2d2d','--sage':'#2d5a2d','--cream':'#fff9f9','--border':'#d4a0a0','--muted':'#6b3c3c'} },
-  { name:'Manila Sand',       id:'manila',  swatches:['#2c1810','#fef9f0','#d4a853','#8b5e3c','#a0724a'], vars:{'--ink':'#2c1810','--parchment':'#fef9f0','--aged':'#f5e8d0','--sepia':'#8b5e3c','--gold':'#d4a853','--rust':'#a0472a','--sage':'#4a6a3a','--cream':'#fffcf5','--border':'#d4b896','--muted':'#7a5a40'} },
-  { name:'Slate & Silver',    id:'slate',   swatches:['#1e2530','#f4f6f8','#6ba3be','#3a5a6e','#4a7a8e'], vars:{'--ink':'#1e2530','--parchment':'#f4f6f8','--aged':'#dfe5ec','--sepia':'#3a5a6e','--gold':'#6ba3be','--rust':'#8b4a3a','--sage':'#3a6a5a','--cream':'#f8fafb','--border':'#b0bec8','--muted':'#5a6a7a'} },
-  { name:'Violet Archive',    id:'violet',  swatches:['#1a0a2e','#f8f4ff','#9b5de5','#5a1e8a','#7a3ab0'], vars:{'--ink':'#1a0a2e','--parchment':'#f8f4ff','--aged':'#ede0ff','--sepia':'#5a1e8a','--gold':'#9b5de5','--rust':'#c45c8a','--sage':'#3a5a8a','--cream':'#fbf8ff','--border':'#c8a8e8','--muted':'#6a4a8a'} },
-];
+  const PRESETS = [
+    { name:'Classic Parchment', id:'classic', swatches:['#0f0e0c','#f5f0e8','#c9943a','#8b6914','#3a5a4a','#2a2018'], vars:{'--ink':'#0f0e0c','--parchment':'#f5f0e8','--aged':'#e8dfc8','--sepia':'#8b6914','--gold':'#c9943a','--rust':'#8b3a1a','--sage':'#3a5a4a','--cream':'#faf7f0','--border':'#c4b48a','--muted':'#6b5c3e','--hero-mid':'#2a2018'} },
+    { name:'Night Registry',    id:'night',   swatches:['#1a1a2e','#0d1117','#4a9eff','#2d6a9f','#1e4d6b','#2a2018'], vars:{'--ink':'#1a1a2e','--parchment':'#0d1117','--aged':'#161b22','--sepia':'#2d6a9f','--gold':'#4a9eff','--rust':'#e06c75','--sage':'#98c379','--cream':'#0a0e14','--border':'#30363d','--muted':'#8b949e','--hero-mid':'#0d1520'} },
+    { name:'Emerald Court',     id:'emerald', swatches:['#1a2e1a','#f0f7f0','#3a8a3a','#1e5a1e','#2d6b2d','#2a2018'], vars:{'--ink':'#1a2e1a','--parchment':'#f0f7f0','--aged':'#d8ecd8','--sepia':'#2d6b2d','--gold':'#3a8a3a','--rust':'#8b3a1a','--sage':'#1e5a1e','--cream':'#f5fbf5','--border':'#a8c8a8','--muted':'#4a6b4a','--hero-mid':'#0f2010'} },
+    { name:'Royal Navy',        id:'navy',    swatches:['#0a1628','#f0f4f8','#c8a96e','#1a3a6a','#2c5282','#2a2018'], vars:{'--ink':'#0a1628','--parchment':'#f0f4f8','--aged':'#dce4ef','--sepia':'#1a3a6a','--gold':'#c8a96e','--rust':'#9b2335','--sage':'#2c5282','--cream':'#f7f9fc','--border':'#b0c4de','--muted':'#4a6280','--hero-mid':'#0a1e38'} },
+    { name:'Crimson Ledger',    id:'crimson', swatches:['#1c0a0a','#fdf6f6','#cc2936','#8b1a1a','#6b2d2d','#2a2018'], vars:{'--ink':'#1c0a0a','--parchment':'#fdf6f6','--aged':'#f5e0e0','--sepia':'#8b1a1a','--gold':'#cc2936','--rust':'#6b2d2d','--sage':'#2d5a2d','--cream':'#fff9f9','--border':'#d4a0a0','--muted':'#6b3c3c','--hero-mid':'#2a0a0a'} },
+    { name:'Manila Sand',       id:'manila',  swatches:['#2c1810','#fef9f0','#d4a853','#8b5e3c','#a0724a','#2a2018'], vars:{'--ink':'#2c1810','--parchment':'#fef9f0','--aged':'#f5e8d0','--sepia':'#8b5e3c','--gold':'#d4a853','--rust':'#a0472a','--sage':'#4a6a3a','--cream':'#fffcf5','--border':'#d4b896','--muted':'#7a5a40','--hero-mid':'#3a1e0a'} },
+    { name:'Slate & Silver',    id:'slate',   swatches:['#1e2530','#f4f6f8','#6ba3be','#3a5a6e','#4a7a8e','#2a2018'], vars:{'--ink':'#1e2530','--parchment':'#f4f6f8','--aged':'#dfe5ec','--sepia':'#3a5a6e','--gold':'#6ba3be','--rust':'#8b4a3a','--sage':'#3a6a5a','--cream':'#f8fafb','--border':'#b0bec8','--muted':'#5a6a7a','--hero-mid':'#141c28'} },
+    { name:'Violet Archive',    id:'violet',  swatches:['#1a0a2e','#f8f4ff','#9b5de5','#5a1e8a','#7a3ab0','#2a2018'], vars:{'--ink':'#1a0a2e','--parchment':'#f8f4ff','--aged':'#ede0ff','--sepia':'#5a1e8a','--gold':'#9b5de5','--rust':'#c45c8a','--sage':'#3a5a8a','--cream':'#fbf8ff','--border':'#c8a8e8','--muted':'#6a4a8a','--hero-mid':'#120820'} },
+  ];
 
-let currentTheme = { ...DEFAULT_THEME };
+  let currentTheme = { ...DEFAULT_THEME };
 
-function applyThemeToDOM(vars) {
-  const root = document.documentElement;
-  Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
-}
+  function applyThemeToDOM(vars) {
+    const root = document.documentElement;
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+  }
 
-function syncInputsFromTheme(vars) {
-  Object.entries(vars).forEach(([varName, hex]) => {
+  function syncInputsFromTheme(vars) {
+    Object.entries(vars).forEach(([varName, hex]) => {
+      const hexInput = document.getElementById('hex-'+varName.replace('--',''));
+      const colorInput = document.getElementById('col-'+varName.replace('--',''));
+      const swatchDiv = document.getElementById('sw-'+varName.replace('--',''));
+      if (hexInput) hexInput.value = hex.toUpperCase();
+      if (colorInput) colorInput.value = hexToColor(hex);
+      if (swatchDiv) swatchDiv.style.background = hex;
+    });
+    updatePreviewStrip(vars);
+  }
+
+  function hexToColor(hex) {
+    hex = hex.trim();
+    if (hex.startsWith('#') && hex.length === 7) return hex;
+    if (hex.startsWith('#') && hex.length === 4) {
+      return '#' + hex[1]+hex[1]+hex[2]+hex[2]+hex[3]+hex[3];
+    }
+    return hex;
+  }
+
+  function isValidHex(str) {
+    return /^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(str.trim());
+  }
+
+  function onColorPickerChange(varName, colorInput) {
+    const hex = colorInput.value;
+    currentTheme[varName] = hex;
+    applyThemeToDOM({ [varName]: hex });
     const hexInput = document.getElementById('hex-'+varName.replace('--',''));
-    const colorInput = document.getElementById('col-'+varName.replace('--',''));
     const swatchDiv = document.getElementById('sw-'+varName.replace('--',''));
     if (hexInput) hexInput.value = hex.toUpperCase();
-    if (colorInput) colorInput.value = hexToColor(hex);
     if (swatchDiv) swatchDiv.style.background = hex;
-  });
-  updatePreviewStrip(vars);
-}
-
-function hexToColor(hex) {
-  hex = hex.trim();
-  if (hex.startsWith('#') && hex.length === 7) return hex;
-  if (hex.startsWith('#') && hex.length === 4) {
-    return '#' + hex[1]+hex[1]+hex[2]+hex[2]+hex[3]+hex[3];
-  }
-  return hex;
-}
-
-function isValidHex(str) {
-  return /^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(str.trim());
-}
-
-function onColorPickerChange(varName, colorInput) {
-  const hex = colorInput.value;
-  currentTheme[varName] = hex;
-  applyThemeToDOM({ [varName]: hex });
-  const hexInput = document.getElementById('hex-'+varName.replace('--',''));
-  const swatchDiv = document.getElementById('sw-'+varName.replace('--',''));
-  if (hexInput) hexInput.value = hex.toUpperCase();
-  if (swatchDiv) swatchDiv.style.background = hex;
-  updatePreviewStrip(currentTheme);
-  clearPresetActive();
-  saveThemeToStorage();
-}
-
-function onHexInputChange(varName, hexInput) {
-  let val = hexInput.value.trim();
-  if (!val.startsWith('#')) val = '#' + val;
-  if (!isValidHex(val)) { hexInput.style.borderColor = '#c04040'; return; }
-  hexInput.style.borderColor = '';
-  hexInput.value = val.toUpperCase();
-  currentTheme[varName] = val;
-  applyThemeToDOM({ [varName]: val });
-  const colorInput = document.getElementById('col-'+varName.replace('--',''));
-  const swatchDiv = document.getElementById('sw-'+varName.replace('--',''));
-  if (colorInput) colorInput.value = hexToColor(val);
-  if (swatchDiv) swatchDiv.style.background = val;
-  updatePreviewStrip(currentTheme);
-  clearPresetActive();
-  saveThemeToStorage();
-}
-
-function updatePreviewStrip(vars) {
-  const strip = document.getElementById('preview-strip');
-  if (!strip) return;
-  const order = ['--ink','--parchment','--cream','--aged','--gold','--sepia','--rust','--sage','--border','--muted'];
-  const children = strip.querySelectorAll('[class^="preview-"]');
-  order.forEach((varName, i) => {
-    if (children[i]) children[i].style.background = vars[varName] || '';
-  });
-}
-
-function clearPresetActive() {
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-}
-
-function applyPreset(id) {
-  const preset = PRESETS.find(p => p.id === id);
-  if (!preset) return;
-  currentTheme = { ...preset.vars };
-  applyThemeToDOM(currentTheme);
-  syncInputsFromTheme(currentTheme);
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById('preset-'+id);
-  if (btn) btn.classList.add('active');
-  saveThemeToStorage();
-}
-
-function buildColorRow(varName) {
-  const meta = VAR_META[varName] || { label: varName, desc: '' };
-  const safeId = varName.replace('--','');
-  const currentVal = currentTheme[varName] || '#000000';
-  return `<div class="color-row">
-    <div class="color-row-info">
-      <span class="color-row-name">${meta.label}</span>
-      <span class="color-row-desc">${meta.desc}</span>
-    </div>
-    <div class="color-row-controls">
-      <input type="text" class="color-hex-input" id="hex-${safeId}"
-        value="${currentVal.toUpperCase()}"
-        maxlength="7"
-        onchange="onHexInputChange('${varName}', this)"
-        onblur="onHexInputChange('${varName}', this)">
-      <div class="color-swatch-btn" id="sw-${safeId}" style="background:${currentVal}">
-        <input type="color" id="col-${safeId}" value="${hexToColor(currentVal)}"
-          oninput="onColorPickerChange('${varName}', this)">
-      </div>
-    </div>
-  </div>`;
-}
-
-function buildCustomizerUI() {
-  const presetGrid = document.getElementById('preset-grid');
-  presetGrid.innerHTML = PRESETS.map(p =>
-    `<button class="preset-btn${p.id==='classic'?' active':''}" id="preset-${p.id}" onclick="applyPreset('${p.id}')">
-      <div class="preset-swatches">
-        ${p.swatches.map(c=>`<div class="preset-swatch" style="background:${c}"></div>`).join('')}
-      </div>
-      ${escHtml(p.name)}
-    </button>`
-  ).join('');
-
-  document.getElementById('cg-header').innerHTML = ['--ink','--gold','--sepia','--rust','--sage'].map(buildColorRow).join('');
-  document.getElementById('cg-bg').innerHTML      = ['--parchment','--cream','--aged'].map(buildColorRow).join('');
-  document.getElementById('cg-text').innerHTML    = ['--border','--muted'].map(buildColorRow).join('');
-}
-
-function toggleCustomizer() {
-  const overlay = document.getElementById('customizer-overlay');
-  const btn = document.getElementById('cust-toggle-btn');
-  if (overlay.classList.contains('open')) {
-    closeCustomizer();
-  } else {
-    overlay.classList.add('open');
-    btn.classList.add('open');
-    document.body.style.overflow = 'hidden';
     updatePreviewStrip(currentTheme);
+    clearPresetActive();
+    saveThemeToStorage();
   }
-}
 
-function closeCustomizer() {
-  document.getElementById('customizer-overlay').classList.remove('open');
-  document.getElementById('cust-toggle-btn').classList.remove('open');
-  document.body.style.overflow = '';
-}
+  function onHexInputChange(varName, hexInput) {
+    let val = hexInput.value.trim();
+    if (!val.startsWith('#')) val = '#' + val;
+    if (!isValidHex(val)) { hexInput.style.borderColor = '#c04040'; return; }
+    hexInput.style.borderColor = '';
+    hexInput.value = val.toUpperCase();
+    currentTheme[varName] = val;
+    applyThemeToDOM({ [varName]: val });
+    const colorInput = document.getElementById('col-'+varName.replace('--',''));
+    const swatchDiv = document.getElementById('sw-'+varName.replace('--',''));
+    if (colorInput) colorInput.value = hexToColor(val);
+    if (swatchDiv) swatchDiv.style.background = val;
+    updatePreviewStrip(currentTheme);
+    clearPresetActive();
+    saveThemeToStorage();
+  }
 
-function resetTheme() {
-  if (!confirm('Reset all colors to the original Classic Parchment theme?')) return;
-  currentTheme = { ...DEFAULT_THEME };
-  applyThemeToDOM(currentTheme);
-  syncInputsFromTheme(currentTheme);
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-  const classicBtn = document.getElementById('preset-classic');
-  if (classicBtn) classicBtn.classList.add('active');
-  saveThemeToStorage();
-  toast('Colors reset to default.');
-}
+  function updatePreviewStrip(vars) {
+    const strip = document.getElementById('preview-strip');
+    if (!strip) return;
+    const order = ['--ink','--parchment','--cream','--aged','--gold','--sepia','--rust','--sage','--border','--muted'];
+    const children = strip.querySelectorAll('[class^="preview-"]');
+    order.forEach((varName, i) => {
+      if (children[i]) children[i].style.background = vars[varName] || '';
+    });
+  }
 
-function exportTheme() {
-  const lines = [':root {'];
-  Object.entries(currentTheme).forEach(([k,v]) => lines.push(`  ${k}: ${v};`));
-  lines.push('}');
-  const blob = new Blob([lines.join('\n')], { type:'text/css' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href=url; a.download='mogpog-archive-theme.css'; a.click();
-  URL.revokeObjectURL(url);
-  toast('Theme exported as CSS file.');
-}
+  function clearPresetActive() {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  }
 
-function importTheme() {
-  const input = document.createElement('input');
-  input.type='file'; input.accept='.css,text/css';
-  input.onchange = e => {
-    const file = e.target.files[0]; if(!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      const css = ev.target.result;
-      const imported = {};
-      Object.keys(DEFAULT_THEME).forEach(varName => {
-        const regex = new RegExp(varName.replace('--','--')+'\\s*:\\s*(#[0-9a-fA-F]{3,6})');
-        const match = css.match(regex);
-        if(match) imported[varName] = match[1];
-      });
-      if(!Object.keys(imported).length){toast('No valid CSS variables found in file.');return;}
-      currentTheme = { ...DEFAULT_THEME, ...imported };
-      applyThemeToDOM(currentTheme);
-      syncInputsFromTheme(currentTheme);
-      clearPresetActive();
-      saveThemeToStorage();
-      toast(`Imported ${Object.keys(imported).length} color variables.`);
+  function applyPreset(id) {
+    const preset = PRESETS.find(p => p.id === id);
+    if (!preset) return;
+    currentTheme = { ...preset.vars };
+    applyThemeToDOM(currentTheme);
+    syncInputsFromTheme(currentTheme);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('preset-'+id);
+    if (btn) btn.classList.add('active');
+    saveThemeToStorage();
+  }
+
+  function buildColorRow(varName) {
+    const meta = VAR_META[varName] || { label: varName, desc: '' };
+    const safeId = varName.replace('--','');
+    const currentVal = currentTheme[varName] || '#000000';
+    return `<div class="color-row">
+      <div class="color-row-info">
+        <span class="color-row-name">${meta.label}</span>
+        <span class="color-row-desc">${meta.desc}</span>
+      </div>
+      <div class="color-row-controls">
+        <input type="text" class="color-hex-input" id="hex-${safeId}"
+          value="${currentVal.toUpperCase()}"
+          maxlength="7"
+          onchange="onHexInputChange('${varName}', this)"
+          onblur="onHexInputChange('${varName}', this)">
+        <div class="color-swatch-btn" id="sw-${safeId}" style="background:${currentVal}">
+          <input type="color" id="col-${safeId}" value="${hexToColor(currentVal)}"
+            oninput="onColorPickerChange('${varName}', this)">
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function buildCustomizerUI() {
+    const presetGrid = document.getElementById('preset-grid');
+    presetGrid.innerHTML = PRESETS.map(p =>
+      `<button class="preset-btn${p.id==='classic'?' active':''}" id="preset-${p.id}" onclick="applyPreset('${p.id}')">
+        <div class="preset-swatches">
+          ${p.swatches.map(c=>`<div class="preset-swatch" style="background:${c}"></div>`).join('')}
+        </div>
+        ${escHtml(p.name)}
+      </button>`
+    ).join('');
+
+    document.getElementById('cg-header').innerHTML = ['--ink','--gold','--sepia','--rust','--sage'].map(buildColorRow).join('');
+    document.getElementById('cg-bg').innerHTML      = ['--parchment','--cream','--aged'].map(buildColorRow).join('');
+    document.getElementById('cg-text').innerHTML    = ['--border','--muted'].map(buildColorRow).join('');
+    document.getElementById('cg-header').innerHTML = ['--ink','--gold','--sepia','--rust','--sage','--hero-mid'].map(buildColorRow).join('');
+  }
+
+  function toggleCustomizer() {
+    const overlay = document.getElementById('customizer-overlay');
+    const btn = document.getElementById('cust-toggle-btn');
+    if (overlay.classList.contains('open')) {
+      closeCustomizer();
+    } else {
+      overlay.classList.add('open');
+      btn.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      updatePreviewStrip(currentTheme);
+    }
+  }
+
+  function closeCustomizer() {
+    document.getElementById('customizer-overlay').classList.remove('open');
+    document.getElementById('cust-toggle-btn').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function resetTheme() {
+    if (!confirm('Reset all colors to the original Classic Parchment theme?')) return;
+    currentTheme = { ...DEFAULT_THEME };
+    applyThemeToDOM(currentTheme);
+    syncInputsFromTheme(currentTheme);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    const classicBtn = document.getElementById('preset-classic');
+    if (classicBtn) classicBtn.classList.add('active');
+    saveThemeToStorage();
+    toast('Colors reset to default.');
+  }
+
+  function exportTheme() {
+    const lines = [':root {'];
+    Object.entries(currentTheme).forEach(([k,v]) => lines.push(`  ${k}: ${v};`));
+    lines.push('}');
+    const blob = new Blob([lines.join('\n')], { type:'text/css' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download='mogpog-archive-theme.css'; a.click();
+    URL.revokeObjectURL(url);
+    toast('Theme exported as CSS file.');
+  }
+
+  function importTheme() {
+    const input = document.createElement('input');
+    input.type='file'; input.accept='.css,text/css';
+    input.onchange = e => {
+      const file = e.target.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const css = ev.target.result;
+        const imported = {};
+        Object.keys(DEFAULT_THEME).forEach(varName => {
+          const regex = new RegExp(varName.replace('--','--')+'\\s*:\\s*(#[0-9a-fA-F]{3,6})');
+          const match = css.match(regex);
+          if(match) imported[varName] = match[1];
+        });
+        if(!Object.keys(imported).length){toast('No valid CSS variables found in file.');return;}
+        currentTheme = { ...DEFAULT_THEME, ...imported };
+        applyThemeToDOM(currentTheme);
+        syncInputsFromTheme(currentTheme);
+        clearPresetActive();
+        saveThemeToStorage();
+        toast(`Imported ${Object.keys(imported).length} color variables.`);
+      };
+      reader.readAsText(file);
     };
-    reader.readAsText(file);
-  };
-  input.click();
-}
-
-
-// ══════════════════════════════════════════════
-//  CROSS-DEVICE THEME SYNC
-// ══════════════════════════════════════════════
-
-const THEME_SETTING_KEY = 'color_theme';
-const THEME_LOCAL_KEY   = 'mogpog-theme';
-
-function setThemeSyncStatus(status) {
-  const el = document.getElementById('theme-sync-status');
-  if (!el) return;
-  const map = {
-    idle:   { text:'● Synced across devices', color:'#3a8a3a' },
-    saving: { text:'↻ Saving…',               color:'#c9943a' },
-    saved:  { text:'✓ Saved to all devices',   color:'#3a8a3a' },
-    error:  { text:'⚠ Saved locally only',     color:'#c04040' },
-    loading:{ text:'↻ Loading saved theme…',   color:'#c9943a' },
-  };
-  const m = map[status] || map.idle;
-  el.textContent = m.text;
-  el.style.color  = m.color;
-}
-
-let _saveTimer = null;
-function debouncedRemoteSave(vars) {
-  clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(() => _doRemoteSave(vars), 800);
-}
-
-async function _doRemoteSave(vars) {
-  setThemeSyncStatus('saving');
-  try {
-    const valueStr = JSON.stringify(vars);
-    const patchRes = await fetch(
-      SUPABASE_URL+'/rest/v1/site_settings?key=eq.'+THEME_SETTING_KEY,
-      { method:'PATCH', headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' }, body:JSON.stringify({ value:valueStr }) }
-    );
-    const patched = await patchRes.json();
-    if (Array.isArray(patched) && patched.length === 0) {
-      await fetch(SUPABASE_URL+'/rest/v1/site_settings', {
-        method:'POST',
-        headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
-        body:JSON.stringify({ key:THEME_SETTING_KEY, value:valueStr })
-      });
-    }
-    setThemeSyncStatus('saved');
-    setTimeout(() => setThemeSyncStatus('idle'), 2500);
-  } catch(e) {
-    setThemeSyncStatus('error');
+    input.click();
   }
-}
 
-function saveThemeToStorage() {
-  try { localStorage.setItem(THEME_LOCAL_KEY, JSON.stringify(currentTheme)); } catch(e) {}
-  debouncedRemoteSave(currentTheme);
-}
 
-// FIX #8: load theme only once — removed duplicate inline localStorage read at boot
-async function loadSavedTheme() {
-  try {
-    const local = localStorage.getItem(THEME_LOCAL_KEY);
-    if (local) {
-      currentTheme = { ...DEFAULT_THEME, ...JSON.parse(local) };
-      applyThemeToDOM(currentTheme);
-    }
-  } catch(e) {}
+  // ══════════════════════════════════════════════
+  //  CROSS-DEVICE THEME SYNC
+  // ══════════════════════════════════════════════
 
-  setThemeSyncStatus('loading');
-  try {
-    const res = await fetch(
-      SUPABASE_URL+'/rest/v1/site_settings?key=eq.'+THEME_SETTING_KEY+'&select=value',
-      { headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY } }
-    );
-    const rows = await res.json();
-    if (Array.isArray(rows) && rows[0] && rows[0].value) {
-      currentTheme = { ...DEFAULT_THEME, ...JSON.parse(rows[0].value) };
-      applyThemeToDOM(currentTheme);
-      try { localStorage.setItem(THEME_LOCAL_KEY, JSON.stringify(currentTheme)); } catch(e) {}
-    }
-    setThemeSyncStatus('idle');
-    return true;
-  } catch(e) {
-    setThemeSyncStatus('error');
-    return false;
+  const THEME_SETTING_KEY = 'color_theme';
+  const THEME_LOCAL_KEY   = 'mogpog-theme';
+
+  function setThemeSyncStatus(status) {
+    const el = document.getElementById('theme-sync-status');
+    if (!el) return;
+    const map = {
+      idle:   { text:'● Synced across devices', color:'#3a8a3a' },
+      saving: { text:'↻ Saving…',               color:'#c9943a' },
+      saved:  { text:'✓ Saved to all devices',   color:'#3a8a3a' },
+      error:  { text:'⚠ Saved locally only',     color:'#c04040' },
+      loading:{ text:'↻ Loading saved theme…',   color:'#c9943a' },
+    };
+    const m = map[status] || map.idle;
+    el.textContent = m.text;
+    el.style.color  = m.color;
   }
-}
 
-// ── Boot ── FIX #8: single theme load path, no duplicate apply
-buildCustomizerUI();
-syncInputsFromTheme(currentTheme);
+  let _saveTimer = null;
+  function debouncedRemoteSave(vars) {
+    clearTimeout(_saveTimer);
+    _saveTimer = setTimeout(() => _doRemoteSave(vars), 800);
+  }
 
-loadSavedTheme().then(() => {
+  async function _doRemoteSave(vars) {
+    setThemeSyncStatus('saving');
+    try {
+      const valueStr = JSON.stringify(vars);
+      const patchRes = await fetch(
+        SUPABASE_URL+'/rest/v1/site_settings?key=eq.'+THEME_SETTING_KEY,
+        { method:'PATCH', headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' }, body:JSON.stringify({ value:valueStr }) }
+      );
+      const patched = await patchRes.json();
+      if (Array.isArray(patched) && patched.length === 0) {
+        await fetch(SUPABASE_URL+'/rest/v1/site_settings', {
+          method:'POST',
+          headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':'application/json', Prefer:'return=representation' },
+          body:JSON.stringify({ key:THEME_SETTING_KEY, value:valueStr })
+        });
+      }
+      setThemeSyncStatus('saved');
+      setTimeout(() => setThemeSyncStatus('idle'), 2500);
+    } catch(e) {
+      setThemeSyncStatus('error');
+    }
+  }
+
+  function saveThemeToStorage() {
+    try { localStorage.setItem(THEME_LOCAL_KEY, JSON.stringify(currentTheme)); } catch(e) {}
+    debouncedRemoteSave(currentTheme);
+  }
+
+  // FIX #8: load theme only once — removed duplicate inline localStorage read at boot
+  async function loadSavedTheme() {
+    try {
+      const local = localStorage.getItem(THEME_LOCAL_KEY);
+      if (local) {
+        currentTheme = { ...DEFAULT_THEME, ...JSON.parse(local) };
+        applyThemeToDOM(currentTheme);
+      }
+    } catch(e) {}
+
+    setThemeSyncStatus('loading');
+    try {
+      const res = await fetch(
+        SUPABASE_URL+'/rest/v1/site_settings?key=eq.'+THEME_SETTING_KEY+'&select=value',
+        { headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY } }
+      );
+      const rows = await res.json();
+      if (Array.isArray(rows) && rows[0] && rows[0].value) {
+        currentTheme = { ...DEFAULT_THEME, ...JSON.parse(rows[0].value) };
+        applyThemeToDOM(currentTheme);
+        try { localStorage.setItem(THEME_LOCAL_KEY, JSON.stringify(currentTheme)); } catch(e) {}
+      }
+      setThemeSyncStatus('idle');
+      return true;
+    } catch(e) {
+      setThemeSyncStatus('error');
+      return false;
+    }
+  }
+
+  // ── Boot ── FIX #8: single theme load path, no duplicate apply
+  buildCustomizerUI();
   syncInputsFromTheme(currentTheme);
-  PRESETS.forEach(p => {
-    const matches = Object.entries(p.vars).every(([k,v]) => currentTheme[k] === v);
-    const btn = document.getElementById('preset-'+p.id);
-    if (btn) btn.classList.toggle('active', matches);
-  });
-});
 
-init();
-</script>
-</body>
-</html>
+  loadSavedTheme().then(() => {
+    syncInputsFromTheme(currentTheme);
+    PRESETS.forEach(p => {
+      const matches = Object.entries(p.vars).every(([k,v]) => currentTheme[k] === v);
+      const btn = document.getElementById('preset-'+p.id);
+      if (btn) btn.classList.toggle('active', matches);
+    });
+  });
+
+  init();
+  </script>
+  </body>
+  </html>
