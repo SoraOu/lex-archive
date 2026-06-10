@@ -502,7 +502,6 @@
   .doc-title {
     font-family:'Playfair Display',serif; font-size:0.97rem; font-weight:700;
     line-height:1.35; margin-bottom:0.4rem;
-    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
   .doc-excerpt {
     font-size:0.82rem; line-height:1.6; color:var(--muted);
@@ -527,9 +526,9 @@
   .doc-list .doc-card::after { display:none; }
   .doc-list .doc-card:hover { transform:none; box-shadow:none; background:var(--aged); }
   .doc-list .doc-card .doc-type-bar { display:none; }
-  .doc-list .doc-body { padding:0.75rem 1.15rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .doc-list .doc-body { padding:0.75rem 1.15rem; display:flex; align-items:flex-start; gap:1rem; flex-wrap:wrap; }
   .doc-list .doc-header-row { margin:0; flex-shrink:0; }
-  .doc-list .doc-title { font-size:0.92rem; margin:0; flex:1; min-width:200px; display:block; -webkit-line-clamp:unset; }
+  .doc-list .doc-title { font-size:0.92rem; margin:0; flex:1; min-width:200px; display:block; white-space:normal; word-break:break-word; }
   .doc-list .doc-excerpt, .doc-list .doc-meta-pills { display:none; }
   .doc-list .doc-footer { border-top:none; padding:0; flex-shrink:0; }
 
