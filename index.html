@@ -749,6 +749,173 @@
     .search-field-select { min-width:110px; }
     #customizer-drawer { width:100%; }
   }
+
+  /* ─── Mobile Enhancements ─── */
+@media(max-width:900px){
+  /* Header */
+  .header-top {
+    grid-template-columns: auto 1fr auto;
+    padding: 0.85rem 1.25rem;
+  }
+  .header-right { display:flex; }
+  .customizer-toggle-btn { font-size:0.55rem; padding:0.35rem 0.6rem; }
+
+  /* Search hero */
+  .search-main-row { flex-wrap:wrap; }
+  .search-field-select {
+    min-width:100%; border-right:1px solid var(--gold);
+    border-bottom:none;
+  }
+  .search-main-input {
+    flex:1; border-right:none; border-bottom:none;
+    min-width:0;
+  }
+  .search-main-btn { width:100%; border-top:none; padding:0.75rem; }
+  .search-chips { gap:0.35rem; }
+  .adv-grid { grid-template-columns:1fr; }
+
+  /* Nav */
+  .nav-inner { gap:0; }
+  .nav-tab { padding:0.8rem 0.9rem; font-size:0.6rem; letter-spacing:0.1em; }
+  .nav-add { padding:0.5rem 0.75rem; font-size:0.58rem; }
+  .mobile-filter-btn {
+    display:flex !important;
+  }
+
+  /* Cards */
+  .doc-grid { grid-template-columns:1fr; }
+
+  /* Modal */
+  .modal-overlay { padding:0; align-items:flex-end; }
+  .modal {
+    max-width:100%; margin:0;
+    border-bottom-left-radius:0; border-bottom-right-radius:0;
+    max-height:90vh; overflow-y:auto;
+  }
+  .modal-inner { padding:1.25rem 1.25rem; }
+  .modal-title { font-size:1.2rem; padding-right:3rem; }
+  .modal-meta-grid { grid-template-columns:1fr; }
+  .modal-actions { gap:0.4rem; }
+  .modal-actions .btn { flex:1; text-align:center; font-size:0.58rem; padding:0.5rem 0.5rem; }
+
+  /* Content header */
+  .content-header { flex-direction:column; align-items:flex-start; gap:0.65rem; }
+}
+
+@media(max-width:640px){
+  /* Header */
+  .header-seal { width:44px; height:44px; font-size:1.2rem; }
+  .logo-title { font-size:1.15rem; }
+  .logo-sub { display:none; }
+  .customizer-toggle-btn { display:none; }
+
+  /* Search */
+  .search-hero { padding:0.85rem 1rem 1rem; }
+  .search-hero-label { display:none; }
+  .chips-label { display:none; }
+  .adv-toggle { margin-left:0; width:100%; text-align:center; }
+
+  /* Nav */
+  .nav-tab { padding:0.75rem 0.65rem; font-size:0.56rem; letter-spacing:0.06em; }
+  .nav-add { display:none; }
+
+  /* Main */
+  .main { padding:1rem; }
+
+  /* List view cards */
+  .doc-list .doc-body { padding:0.65rem 0.85rem; gap:0.5rem; }
+  .doc-list .doc-footer { display:none; }
+
+  /* Form drawer */
+  .form-row.two { grid-template-columns:1fr; }
+  #form-drawer { width:100%; }
+
+  /* Pagination */
+  .page-btn { width:26px; height:26px; font-size:0.58rem; }
+}
+
+/* ─── Mobile Filter Drawer ─── */
+.mobile-filter-btn {
+  display:none;
+  font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
+  letter-spacing:0.12em; text-transform:uppercase;
+  padding:0.55rem 0.85rem;
+  background:transparent; border:1px solid rgba(201,148,58,0.4);
+  color:rgba(201,148,58,0.7); cursor:pointer;
+  align-items:center; gap:0.4rem;
+  white-space:nowrap; flex-shrink:0;
+  transition:all 0.2s;
+}
+.mobile-filter-btn:hover { background:rgba(201,148,58,0.15); color:var(--gold); border-color:var(--gold); }
+
+#mobile-filter-overlay {
+  position:fixed; inset:0;
+  background:rgba(15,14,12,0.6);
+  z-index:1050; display:none;
+  align-items:flex-end; justify-content:center;
+  backdrop-filter:blur(2px);
+}
+#mobile-filter-overlay.open { display:flex; }
+
+#mobile-filter-drawer {
+  background:var(--cream); width:100%; max-height:85vh;
+  overflow-y:auto; border-top:3px solid var(--gold);
+  animation:mf-slide-up 0.22s ease;
+  display:flex; flex-direction:column;
+}
+@keyframes mf-slide-up {
+  from { transform:translateY(100%); }
+  to   { transform:translateY(0); }
+}
+
+.mf-head {
+  position:sticky; top:0; z-index:2;
+  background:var(--ink); color:var(--parchment);
+  padding:0.85rem 1.25rem;
+  border-bottom:2px solid var(--gold);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.mf-head-title {
+  font-family:'Playfair Display',serif;
+  font-size:1rem; font-weight:700; font-style:italic;
+}
+.mf-close {
+  background:none; border:1px solid rgba(201,148,58,0.4);
+  color:rgba(201,148,58,0.7); font-family:'IBM Plex Mono',monospace;
+  font-size:0.65rem; padding:0.25rem 0.65rem; cursor:pointer; transition:all 0.15s;
+}
+.mf-close:hover { background:rgba(201,148,58,0.2); color:var(--gold); }
+
+.mf-body { padding:1.1rem 1.25rem; flex:1; }
+.mf-section {
+  font-family:'IBM Plex Mono',monospace; font-size:0.56rem;
+  letter-spacing:0.25em; text-transform:uppercase; color:var(--sepia);
+  margin-bottom:0.65rem; margin-top:1rem;
+  display:flex; align-items:center; gap:0.5rem;
+}
+.mf-section:first-child { margin-top:0; }
+.mf-section::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.mf-foot {
+  position:sticky; bottom:0;
+  background:var(--cream); border-top:1px solid var(--border);
+  padding:0.85rem 1.25rem;
+  display:flex; gap:0.5rem;
+}
+.mf-apply-btn {
+  flex:1; font-family:'IBM Plex Mono',monospace; font-size:0.65rem;
+  letter-spacing:0.12em; text-transform:uppercase;
+  padding:0.65rem; background:var(--ink); color:var(--gold);
+  border:1px solid var(--ink); cursor:pointer; transition:all 0.15s;
+}
+.mf-apply-btn:hover { background:var(--sepia); }
+.mf-clear-btn {
+  font-family:'IBM Plex Mono',monospace; font-size:0.65rem;
+  letter-spacing:0.12em; text-transform:uppercase;
+  padding:0.65rem 1rem; background:transparent;
+  color:var(--muted); border:1px solid var(--border); cursor:pointer; transition:all 0.15s;
+}
+.mf-clear-btn:hover { background:var(--aged); color:var(--ink); }
   </style>
   </head>
   <body>
@@ -836,6 +1003,7 @@
       <div class="nav-tab" onclick="setTab('ordinance',this)">Ordinances</div>
       <div class="nav-tab" onclick="setTab('proclamation',this)">Proclamations</div>
       <div class="nav-tab" onclick="setTab('executive order',this)">Exec. Orders</div>
+      <button class="mobile-filter-btn" id="mobile-filter-btn" onclick="openMobileFilters()">⊟ Filters</button>
       <button class="nav-add" onclick="openForm()">+ Add Record</button>
     </div>
   </nav>
@@ -1933,6 +2101,147 @@
   });
 
   init();
+
+  // ─── Mobile Filter Drawer ───
+function openMobileFilters() {
+  // Sync year options into mobile drawer
+  const desktopYear = document.getElementById('year-filter');
+  const mfYear = document.getElementById('mf-year');
+  while (mfYear.options.length > 1) mfYear.remove(1);
+  [...desktopYear.options].slice(1).forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = o.value; opt.textContent = o.textContent;
+    mfYear.appendChild(opt);
+  });
+
+  // Sync barangay options into mobile drawer
+  const desktopBrgy = document.getElementById('brgy-filter');
+  const mfBrgy = document.getElementById('mf-barangay');
+  while (mfBrgy.options.length > 1) mfBrgy.remove(1);
+  [...desktopBrgy.options].slice(1).forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = o.value; opt.textContent = o.textContent;
+    mfBrgy.appendChild(opt);
+  });
+
+  // Sync current values from desktop filters
+  mfYear.value   = document.getElementById('year-filter').value;
+  mfBrgy.value   = document.getElementById('brgy-filter').value;
+  document.getElementById('mf-status').value = document.getElementById('status-filter').value;
+  document.getElementById('mf-sort').value   = document.getElementById('sort-filter').value;
+
+  // Sync category tag list
+  const cats = {};
+  docs.forEach(d => { if (d.category) cats[d.category] = (cats[d.category]||0)+1; });
+  const colors = ['#3a5a4a','#8b3a1a','#1a3a6a','#5a3a8a','#6a4a00','#2a5a5a','#5a2a2a','#3a4a2a','#8a4a2a'];
+  const mfTagList = document.getElementById('mf-tag-list');
+  const entries = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
+  if (!entries.length) {
+    mfTagList.innerHTML = '<div style="font-size:.8rem;color:var(--muted);font-style:italic">No categories yet</div>';
+  } else {
+    mfTagList.innerHTML = entries.map(([cat,count],i) =>
+      `<div class="tag-item${selectedCategory===cat?' selected':''}" data-cat="${escHtml(cat)}" tabindex="0" role="button">
+        <span class="tag-name"><span class="tag-dot" style="background:${colors[i%colors.length]}"></span>${escHtml(cat)}</span>
+        <span class="tag-count">${count}</span>
+      </div>`
+    ).join('');
+    mfTagList.querySelectorAll('.tag-item').forEach(el => {
+      el.addEventListener('click', () => {
+        selectedCategory = selectedCategory === el.dataset.cat ? '' : el.dataset.cat;
+        mfTagList.querySelectorAll('.tag-item').forEach(t => t.classList.toggle('selected', t.dataset.cat === selectedCategory));
+      });
+    });
+  }
+
+  document.getElementById('mobile-filter-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileFilters() {
+  document.getElementById('mobile-filter-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function applyMobileFilters() {
+  // Push mobile values into desktop filter selects
+  document.getElementById('year-filter').value   = document.getElementById('mf-year').value;
+  document.getElementById('status-filter').value = document.getElementById('mf-status').value;
+  document.getElementById('brgy-filter').value   = document.getElementById('mf-barangay').value;
+  document.getElementById('sort-filter').value   = document.getElementById('mf-sort').value;
+  closeMobileFilters();
+  renderTagList();
+  applyFilters();
+}
+
+function clearMobileFilters() {
+  document.getElementById('mf-year').value     = '';
+  document.getElementById('mf-status').value   = '';
+  document.getElementById('mf-barangay').value = '';
+  document.getElementById('mf-sort').value     = 'date-desc';
+  selectedCategory = '';
+  document.getElementById('mf-tag-list').querySelectorAll('.tag-item').forEach(t => t.classList.remove('selected'));
+}
+
+function syncMobileFilters() {
+  // Called on sort change so it reflects immediately
+}
+
+// Close mobile filter drawer on Escape (extend existing keydown listener)
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMobileFilters();
+});
   </script>
+  <!-- ─── Mobile Filter Drawer ─── -->
+<div id="mobile-filter-overlay" onclick="if(event.target===this)closeMobileFilters()">
+  <div id="mobile-filter-drawer">
+    <div class="mf-head">
+      <span class="mf-head-title">Filters &amp; Sort</span>
+      <button class="mf-close" onclick="closeMobileFilters()">✕ Close</button>
+    </div>
+    <div class="mf-body">
+      <div class="mf-section">Sort</div>
+      <div class="filter-group">
+        <label class="filter-label">Sort By</label>
+        <select class="filter-select" id="mf-sort" onchange="syncMobileFilters()">
+          <option value="date-desc">Newest First</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="alpha">Alphabetical</option>
+          <option value="number">By Number</option>
+        </select>
+      </div>
+
+      <div class="mf-section">Filter</div>
+      <div class="filter-group">
+        <label class="filter-label">Year Enacted</label>
+        <select class="filter-select" id="mf-year">
+          <option value="">All Years</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Status</label>
+        <select class="filter-select" id="mf-status">
+          <option value="">All Statuses</option>
+          <option>Active</option>
+          <option>Amended</option>
+          <option>Repealed</option>
+          <option>Pending</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Barangay</label>
+        <select class="filter-select" id="mf-barangay">
+          <option value="">All Barangays</option>
+        </select>
+      </div>
+
+      <div class="mf-section">Categories</div>
+      <div class="tag-list" id="mf-tag-list"></div>
+    </div>
+    <div class="mf-foot">
+      <button class="mf-clear-btn" onclick="clearMobileFilters()">Clear</button>
+      <button class="mf-apply-btn" onclick="applyMobileFilters()">Apply Filters</button>
+    </div>
+  </div>
+</div>
   </body>
   </html>
